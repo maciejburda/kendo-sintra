@@ -1,0 +1,27 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PageShell from '../components/PageShell.astro';
+import ContactBand from '../components/ContactBand.astro';
+
+export async function getStaticPaths() {
+  // gallery i news maja wlasne trasy z siatka zdjec / lista wpisow
+  const entries = await getCollection('pages', (e) =>
+    e.id.startsWith('en/') && !/\/(gallery)$/.test(e.id));
+  return entries.map((entry) => ({
+    params: { slug: entry.id.split('/').slice(1).join('/') },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const slug = entry.id.split('/').slice(1).join('/');
+---
+<Base lang="en" path={slug} title={entry.data.title} description={entry.data.description}
+      localBusiness={slug === 'contact'}>
+  <PageShell title={entry.data.title} eyebrow={entry.data.eyebrow}>
+    <Content />
+  </PageShell>
+  {slug === 'contact' && <ContactBand lang="en" />}
+</Base>

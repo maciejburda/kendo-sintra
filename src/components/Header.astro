@@ -1,0 +1,150 @@
+---
+import Emblem from './Emblem.astro';
+import { useTranslations, localePath, type Lang } from '../i18n/ui';
+import { club } from '../i18n/club';
+
+interface Props { lang: Lang; path?: string; }
+const { lang, path = '' } = Astro.props;
+const t = useTranslations(lang);
+
+const nav = [
+  { slug: 'what-is-kendo', label: t('nav.what-is-kendo') },
+  { slug: 'beginner-course', label: t('nav.beginner-course') },
+  { slug: 'schedule', label: t('nav.schedule') },
+  { slug: 'fees', label: t('nav.fees') },
+  { slug: 'gallery', label: t('nav.gallery') },
+  { slug: 'news', label: t('nav.news') },
+];
+const other: Lang = lang === 'en' ? 'pt' : 'en';
+---
+<a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:m-3 focus:bg-navy focus:px-4 focus:py-3 focus:text-16 focus:text-white">
+  {t('nav.skip')}
+</a>
+
+<header class="border-b border-n-100 bg-white">
+  <div class="mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-4 px-6 py-4 md:px-16">
+    <a href={localePath(lang)} class="flex items-center gap-4" aria-label={club.name}>
+      <Emblem size={76} class="block" />
+      <span class="flex flex-col gap-1">
+        <span class="jp text-12 font-bold tracking-[0.36em] text-red">{club.katakana}</span>
+        <span class="display text-25 leading-none text-navy">{club.name}</span>
+      </span>
+    </a>
+
+    <!-- Przycisk istnieje tylko gdy JS wlaczony (dodaje go skrypt na dole).
+         Bez JS nawigacja zostaje rozwinieta i dziala normalnie. -->
+    <button id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu"
+            class="tap hidden shrink-0 items-center gap-3 border border-n-300 px-4 text-14 font-bold uppercase tracking-[0.1em] text-navy">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <g class="icon-burger" stroke-width="2">
+          <path d="M2.5 5h19" /><path d="M2.5 12h19" /><path d="M2.5 19h19" />
+        </g>
+        <!-- Shinai rysowane jako WYPELNIENIA, nie kreski: przy grubej kresce
+             z okraglymi koncami rekojesc czyta sie jak pioro wiosla, a tsuba
+             ginie pod nia. Jeden ksztalt zdefiniowany pionowo, dwa obroty. -->
+        <!-- Skrzyzowane shinai. Kat 40 st. dobrany rachunkiem, nie na oko:
+             AABB sumy obu mieczy wychodzi 20.28 x 20.54, czyli proporcja 0.99 —
+             ikona wypelnia kwadratowy kadr rowno. Przy 32 st. bylo 17.9 x 21.7
+             (0.82), czyli waska i wysoka.
+             Rozstaw srodkow tsuby = 2*6.5*sin(40) = 8.36 przy szerokosci elipsy
+             5.5, wiec zostaje 2.9 przeswitu i tarcze sie nie zlewaja.
+             Srodek obrotu y=10.9, bo bryla jest niesymetryczna wzgledem punktu
+             skrzyzowania (rekojesc dluzsza od sztychu). -->
+        <g class="icon-shinai" fill="currentColor" stroke="none">
+          <g transform="translate(12 10.9) rotate(-40)">
+            <!-- sakigawa: skorzana nasadka na sztychu -->
+            <rect x="-1.25" y="-9.7" width="2.5" height="2.6" rx="1.2" />
+            <!-- trzon: rowna grubosc, bo shinai to bambus, nie zwezane ostrze -->
+            <rect x="-1.05" y="-8.4" width="2.1" height="14.4" rx="1" />
+            <!-- tsuba: elipsa, czyli tarcza widziana pod katem -->
+            <ellipse cx="0" cy="6.5" rx="2.75" ry="1.65" />
+            <!-- tsuka -->
+            <rect x="-1.4" y="7.7" width="2.8" height="4.8" rx=".55" />
+          </g>
+          <g transform="translate(12 10.9) rotate(40)">
+            <!-- sakigawa: skorzana nasadka na sztychu -->
+            <rect x="-1.25" y="-9.7" width="2.5" height="2.6" rx="1.2" />
+            <!-- trzon: rowna grubosc, bo shinai to bambus, nie zwezane ostrze -->
+            <rect x="-1.05" y="-8.4" width="2.1" height="14.4" rx="1" />
+            <!-- tsuba: elipsa, czyli tarcza widziana pod katem -->
+            <ellipse cx="0" cy="6.5" rx="2.75" ry="1.65" />
+            <!-- tsuka -->
+            <rect x="-1.4" y="7.7" width="2.8" height="4.8" rx=".55" />
+          </g>
+        </g>
+      </svg>
+      <span>{t('nav.menu')}</span>
+    </button>
+
+    <nav id="nav-menu" aria-label={t('nav.menu')} class="w-full lg:w-auto">
+      <ul class="flex flex-col gap-x-8 gap-y-1 text-16 font-semibold uppercase tracking-[0.115em] lg:flex-row lg:flex-wrap lg:items-center lg:gap-y-2">
+        {nav.map((item) => (
+          <li class="border-b border-n-100 lg:border-0">
+            <a href={localePath(lang, item.slug)}
+               class="tap w-full py-1 text-navy hover:text-red lg:w-auto lg:py-0"
+               aria-current={path === item.slug ? 'page' : undefined}>{item.label}</a>
+          </li>
+        ))}
+        <li class="flex items-center gap-3 pt-3 font-bold lg:border-l lg:border-n-100 lg:pl-5 lg:pt-0">
+          <span class="text-navy" aria-current="true">{lang.toUpperCase()}</span>
+          <a href={localePath(other, path)} class="tap text-n-500 hover:text-red" hreflang={other}>{other.toUpperCase()}</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  /* Zachowanie zwijane wlacza sie DOPIERO gdy skrypt oznaczy dokument jako js.
+     Bez JS obowiazuje tylko ukladanie w wiersz od lg w gore. */
+  :global(html.js) #nav-toggle { display: inline-flex; }
+  :global(html.js) #nav-menu[data-open='false'] { display: none; }
+  @media (min-width: 1024px) {
+    :global(html.js) #nav-toggle { display: none; }
+    :global(html.js) #nav-menu[data-open='false'] { display: block; }
+  }
+  /* Dwie grupy leza na sobie w tym samym viewBoxie; przelaczamy je kryciem
+     i obrotem, bo display nie da sie animowac. */
+  /* TYLKO dwie grupy nadrzedne. W SVG2 atrybut transform mapuje sie na wlasnosc
+     CSS transform, wiec selektor bez '>' lapal tez zagniezdzone grupy mieczy
+     i psul im srodek obrotu — miecze rozjezdzaly sie po skosie poza kadr. */
+  #nav-toggle svg > g {
+    transition: opacity .22s ease, transform .22s cubic-bezier(.2,.8,.3,1);
+    transform-origin: 12px 12px;
+  }
+  #nav-toggle .icon-burger { opacity: 1; transform: none; }
+  #nav-toggle .icon-shinai { opacity: 0; transform: rotate(-120deg) scale(.55); }
+  #nav-toggle[aria-expanded='true'] .icon-burger { opacity: 0; transform: rotate(120deg) scale(.55); }
+  #nav-toggle[aria-expanded='true'] .icon-shinai { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    #nav-toggle svg > g { transition: none; }
+    #nav-toggle .icon-shinai { transform: none; }
+    #nav-toggle[aria-expanded='true'] .icon-burger { transform: none; }
+  }
+</style>
+
+<script is:inline>
+  document.documentElement.classList.add('js');
+  (function () {
+    var btn = document.getElementById('nav-toggle');
+    var menu = document.getElementById('nav-menu');
+    if (!btn || !menu) return;
+    var mq = window.matchMedia('(min-width: 1024px)');
+    function set(open) {
+      btn.setAttribute('aria-expanded', String(open));
+      menu.setAttribute('data-open', String(open));
+    }
+    function sync() { set(mq.matches); }
+    sync();
+    mq.addEventListener('change', sync);
+    btn.addEventListener('click', function () {
+      set(btn.getAttribute('aria-expanded') !== 'true');
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true' && !mq.matches) {
+        set(false); btn.focus();
+      }
+    });
+  })();
+</script>

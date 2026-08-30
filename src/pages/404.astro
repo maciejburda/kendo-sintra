@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+import { useTranslations, localePath } from '../i18n/ui';
+const t = useTranslations('en');
+---
+<Base lang="en" path="" title="Page not found" description="This page does not exist.">
+  <div class="px-6 py-28 md:px-16">
+    <div class="mx-auto flex max-w-[1440px] flex-col items-start gap-6">
+      <p class="display text-82 text-red md:text-128">404</p>
+      <h1 class="display text-34 md:text-46">{t('404.title')}</h1>
+      <p class="max-w-[52ch] text-19 leading-relaxed text-n-700">{t('404.lead')}</p>
+      <a href={localePath('en')} class="tap bg-red px-8 py-4 text-16 font-bold uppercase tracking-[0.08em] text-white hover:bg-red-hover">{t('404.home')}</a>
+    </div>
+  </div>
+</Base>

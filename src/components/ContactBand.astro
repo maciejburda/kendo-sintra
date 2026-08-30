@@ -1,0 +1,148 @@
+---
+import Icon from './Icon.astro';
+import { useTranslations, localePath, type Lang } from '../i18n/ui';
+import { club } from '../i18n/club';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const field = 'w-full border border-n-300 bg-white px-4 py-4 text-16 text-navy placeholder:text-n-500';
+const label = 'text-12 font-bold uppercase tracking-[0.1em] text-navy';
+const live = Boolean(club.formEndpoint);
+---
+<section class="border-t border-n-100 bg-n-050 px-6 py-20 md:px-16">
+  <div class="mx-auto grid max-w-[1440px] gap-16 lg:grid-cols-2">
+
+    <div class="flex flex-col gap-7">
+      <div class="flex flex-col gap-3">
+        <p class="text-14 font-bold uppercase tracking-[0.18em] text-red">{t('contact.eyebrow')}</p>
+        <h2 class="display text-46">{t('contact.title')}</h2>
+        <p class="text-16 leading-relaxed text-n-700">{t('contact.lead')}</p>
+      </div>
+
+      <form class="flex flex-col gap-5" method="POST" action={club.formEndpoint || undefined}>
+        <div class="grid gap-5 sm:grid-cols-2">
+          <p class="flex flex-col gap-2">
+            <label class={label} for="name">{t('form.name')}</label>
+            <input class={field} id="name" name="name" type="text" required autocomplete="name" />
+          </p>
+          <p class="flex flex-col gap-2">
+            <label class={label} for="email">{t('form.email')}</label>
+            <input class={field} id="email" name="email" type="email" required autocomplete="email" />
+          </p>
+        </div>
+        <div class="grid gap-5 sm:grid-cols-2">
+          <p class="flex flex-col gap-2">
+            <label class={label} for="phone">
+              {t('form.phone')} <span class="font-medium normal-case tracking-normal text-n-500">{t('form.optional')}</span>
+            </label>
+            <input class={field} id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+351" />
+          </p>
+          <p class="flex flex-col gap-2">
+            <label class={label} for="interest">{t('form.interest')}</label>
+            <select class={field} id="interest" name="interest">
+              <option>{t('form.interest.course')}</option>
+              <option>{t('form.interest.adults')}</option>
+              <option>{t('form.interest.kids')}</option>
+              <option>{t('form.interest.visiting')}</option>
+            </select>
+          </p>
+        </div>
+        <p class="flex flex-col gap-2">
+          <label class={label} for="message">{t('form.message')}</label>
+          <textarea class={field} id="message" name="message" rows="4"></textarea>
+        </p>
+
+        <!-- Pulapka na boty. Zadnej CAPTCHy: nie zbiera danych i nie wyklucza nikogo. -->
+        <p class="hidden" aria-hidden="true">
+          <label for="company">Company</label>
+          <input id="company" name="_gotcha" type="text" tabindex="-1" autocomplete="off" />
+        </p>
+
+        <label class="flex min-h-[44px] items-start gap-3 py-2 text-14 leading-relaxed text-n-700">
+          <input type="checkbox" name="consent" required
+                 class="mt-0.5 h-6 w-6 shrink-0 appearance-none border-[1.5px] border-n-300 bg-white checked:bg-red" />
+          <span>
+            {t('form.consent')} <a href={localePath(lang, 'privacy')} class="font-bold">{t('form.privacy-link')}</a>.
+          </span>
+        </label>
+
+        <button type="submit" disabled={!live}
+                class="tap self-start bg-red px-10 py-4 text-16 font-bold uppercase tracking-[0.08em] text-white hover:bg-red-hover disabled:cursor-not-allowed disabled:opacity-60">
+          {t('cta.send')}
+        </button>
+        {!live && (
+          <p class="text-14 text-n-500">
+            <!-- Widoczne tylko dopoki endpoint nie jest ustawiony — patrz README. -->
+            Form endpoint not configured yet. In the meantime, write to
+            <a href={`mailto:${club.email}`} class="font-bold">{club.email}</a>.
+          </p>
+        )}
+      </form>
+    </div>
+
+    <div class="flex flex-col gap-9">
+      <div class="flex flex-col gap-4">
+        <h2 class="text-14 font-bold uppercase tracking-[0.18em] text-red">{t('contact.hours')}</h2>
+        <dl class="border-t border-n-100">
+          {club.hours.map((h) => (
+            <div class="flex justify-between border-b border-n-100 py-4 text-16">
+              <dt class="font-bold">{t(h.day as any)}</dt>
+              <dd class={h.open ? 'text-n-700' : 'text-n-500'}>{h.open ? `${h.open} — ${h.close}` : t('days.closed')}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        <!-- Schemat zastepuje embed: zywy iframe Map ustawia cookies Google
+             i przywraca banner zgody. Patrz README, sekcja "Mapa". -->
+        <div class="relative h-[240px] overflow-hidden border border-n-100">
+          <svg viewBox="0 0 660 240" preserveAspectRatio="xMidYMid slice" class="block h-full w-full" role="img" aria-label={`${club.street}, ${club.postalCode} ${club.city}`}>
+            <rect width="660" height="240" fill="#F5F6FA" />
+            <g stroke="#8B93B2" fill="none">
+              <path d="M-20 168 L680 132" stroke-width="17" opacity=".30" />
+              <path d="M-20 62 L680 44" stroke-width="8" opacity=".20" />
+              <path d="M148 -20 L120 260" stroke-width="8" opacity=".20" />
+              <path d="M470 -20 L505 260" stroke-width="8" opacity=".20" />
+              <path d="M-20 216 L680 200" stroke-width="6" opacity=".16" />
+            </g>
+            <g fill="#8B93B2" opacity=".16">
+              <rect x="182" y="72" width="86" height="42" /><rect x="300" y="66" width="64" height="48" />
+              <rect x="546" y="78" width="72" height="38" /><rect x="196" y="186" width="96" height="40" />
+              <rect x="392" y="182" width="78" height="44" />
+            </g>
+            <text x="24" y="126" font-family="Archivo, sans-serif" font-size="12" font-weight="700" letter-spacing="1.4" fill="#656D90">EN 9</text>
+            <circle cx="352" cy="140" r="31" fill="none" stroke="#C9202F" stroke-width="2" opacity=".34" />
+            <circle cx="352" cy="140" r="19" fill="#C9202F" /><circle cx="352" cy="140" r="6.5" fill="#FFFFFF" />
+          </svg>
+          <a href={club.maps} target="_blank" rel="noopener"
+             class="tap absolute bottom-3 right-3 border border-n-100 bg-white px-5 py-3 text-14 font-bold uppercase tracking-[0.06em] text-navy hover:text-red">{t('cta.maps')}</a>
+        </div>
+        <address class="not-italic text-16 leading-relaxed">
+          <span class="font-bold">{club.street}</span><br />
+          <span class="text-n-700">{club.postalCode} {club.city}, {club.countryName}</span>
+        </address>
+      </div>
+
+      <div class="flex flex-col gap-4 border-t border-n-100 pt-7">
+        <a href={`tel:${club.phoneHref}`} class="tap flex items-center gap-4 text-19 font-bold text-navy hover:text-red">
+          <Icon name="phone" size={21} class="text-red" />{club.phone}
+        </a>
+        <a href={`mailto:${club.email}`} class="tap flex items-center gap-4 text-19 font-bold text-navy hover:text-red">
+          <Icon name="mail" size={21} class="text-red" />{club.email}
+        </a>
+        <div class="flex gap-3 pt-1">
+          <a href={club.facebook} target="_blank" rel="me noopener"
+             class="tap items-center gap-3 bg-navy px-6 py-3 text-14 font-bold tracking-[0.06em] text-white hover:bg-red">
+            <Icon name="facebook" size={17} />Facebook
+          </a>
+          <a href={club.instagram} target="_blank" rel="me noopener"
+             class="tap items-center gap-3 bg-navy px-6 py-3 text-14 font-bold tracking-[0.06em] text-white hover:bg-red">
+            <Icon name="instagram" size={17} />Instagram
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

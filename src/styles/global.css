@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+/* Fonty self-hostowane — zero zapytan do Google, zero transferu IP odwiedzajacego */
+@import "@fontsource/anton/400.css";
+@import "@fontsource-variable/archivo/index.css";
+
+/* Zen Kaku Gothic New sluzy WYLACZNIE do czterech znakow katakany "シントラ".
+   Pelna paczka to 121 subsetow i 3.25 MB — bierzemy jeden subset, jedna grubosc
+   i domykamy unicode-range do bloku katakany, zeby przegladarka nigdy nie siegnela
+   po ten plik przy lacince. Licencja: SIL OFL, patrz src/assets/fonts/. */
+@font-face {
+  font-family: "Zen Kaku Gothic New";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../assets/fonts/zen-kaku-katakana-700.woff2") format("woff2");
+  unicode-range: U+30A0-30FF;
+}
+
+@theme {
+  /* --- Marka --- */
+  --color-navy: #212B60;
+  --color-red: #C9202F;
+  --color-red-hover: #9A1824;
+  /* Ta sama czerwien rozjasniona. WYLACZNIE typografia i ikony na granacie (3.52:1).
+     Czysta --color-red daje tam 2.36:1 i nie przechodzi WCAG AA. */
+  --color-red-on-navy: #E84B52;
+
+  /* --- Rampa neutralna na bieli (kontrast liczony wzgledem #FFFFFF) --- */
+  --color-n-050: #F5F6FA;  /* tlo sekcji                      */
+  --color-n-100: #E4E6EF;  /* linie dekoracyjne               */
+  --color-n-300: #8B93B2;  /* ramki kontrolek        3.04:1   */
+  --color-n-500: #656D90;  /* tekst wyciszony        5.07:1   */
+  --color-n-700: #4E5679;  /* tekst zasadniczy       7.16:1   */
+
+  /* --- Rampa neutralna na granacie --- */
+  --color-on-navy-100: #B9BFDA;  /* tekst jasny      7.30:1   */
+  --color-on-navy-300: #8F97BC;  /* tekst wyciszony  4.64:1   */
+  --color-on-navy-line: #3B4477; /* linie                     */
+
+  /* --- Kroje: kazdy z jednym zadaniem --- */
+  --font-display: "Anton", "Arial Black", sans-serif;
+  --font-sans: "Archivo Variable", "Archivo", "Helvetica Neue", Helvetica, sans-serif;
+  --font-jp: "Zen Kaku Gothic New", "Hiragino Sans", sans-serif;
+
+  /* --- Skala pisma: 10 stopni --- */
+  --text-12: 12px;   --text-14: 14px;  --text-16: 16px;  --text-19: 19px;
+  --text-25: 25px;   --text-34: 34px;  --text-46: 46px;  --text-62: 62px;
+  --text-82: 82px;   --text-128: 128px;
+}
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-navy);
+    background: #FFFFFF;
+  }
+  a { color: var(--color-red); text-decoration: none; }
+  a:hover { color: var(--color-red-hover); }
+  /* Widoczny focus — na obu podlozach */
+  :where(a, button, input, select, textarea, [tabindex]):focus-visible {
+    outline: 3px solid var(--color-red);
+    outline-offset: 3px;
+  }
+  .on-navy :where(a, button, input, select, textarea, [tabindex]):focus-visible {
+    outline-color: var(--color-red-on-navy);
+  }
+}
+
+@layer utilities {
+  .jp { font-family: var(--font-jp); }
+  .display { font-family: var(--font-display); text-transform: uppercase; line-height: 1; }
+  /* Kazdy cel dotykowy min. 44px — regula z przegladu UX */
+  .tap { min-height: 44px; display: inline-flex; align-items: center; }
+}

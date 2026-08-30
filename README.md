@@ -1,0 +1,180 @@
+# kendosintra.pt — v2
+
+Statyczna strona Kendo Club Sintra. Astro + Tailwind, budowana do czystego HTML
+i hostowana na GitHub Pages. Zero cookies, zero zapytań do zewnętrznych domen.
+Jedyny JavaScript to ~810 B inline na zwijane menu — i to jako progressive
+enhancement: bez JS nawigacja pozostaje rozwinięta i w pełni działa.
+
+## Wymagania
+
+Node **20.3+** (obecnie zbudowane na 20.20.2). W CI używamy 22 — patrz
+`.github/workflows/deploy.yml` i sekcję [Wersja Astro](#wersja-astro-do-decyzji).
+
+```bash
+npm install
+npm run dev      # http://localhost:4321
+npm run build    # -> dist/
+npm run preview  # podgląd zbudowanej wersji
+```
+
+## Struktura
+
+```
+src/
+  content/pages/{en,pt}/*.md   treść stron — TU SIĘ EDYTUJE
+  content/news/{en,pt}/*.md    aktualności
+  assets/photos/*.jpg          galeria (każdy plik trafia do niej automatycznie)
+  assets/fonts/                subset katakany, SIL OFL
+  i18n/ui.ts                   wszystkie teksty interfejsu, EN + PT
+  i18n/club.ts                 adres, telefon, godziny, cennik — JEDNO źródło prawdy
+  styles/global.css            tokeny koloru i skala pisma
+  components/                  Header, Footer, Hero, ContactBand, Emblem, Icon
+  pages/                       trasy (EN na /, PT na /pt/)
+```
+
+**Zmiana godzin, cennika czy telefonu:** wyłącznie `src/i18n/club.ts`. Wartości
+lecą stamtąd do stopki, pasa kontaktowego, siatki faktów i danych JSON-LD dla
+Google. Nie ma ich nigdzie indziej.
+
+## System wizualny
+
+Wynika z logo klubu i z przeglądu dostępności. Nie zmieniaj wartości bez
+sprawdzenia kontrastu — powody są zapisane niżej.
+
+### Kolory
+
+| Token | Hex | Do czego |
+|---|---|---|
+| `navy` | `#212B60` | granat marki, nagłówki, ciemne sekcje |
+| `red` | `#C9202F` | czerwień marki: na bieli i jako plama z białym tekstem |
+| `red-on-navy` | `#E84B52` | **wyłącznie** typografia i ikony na granacie |
+| `n-050 … n-700` | `#F5F6FA` `#E4E6EF` `#8B93B2` `#656D90` `#4E5679` | rampa na bieli |
+| `on-navy-100/300/line` | `#B9BFDA` `#8F97BC` `#3B4477` | rampa na granacie |
+
+**Dlaczego dwie czerwienie.** `#C9202F` na granacie daje kontrast 2.36:1 i nie
+przechodzi WCAG AA nawet w rozmiarze display. `#E84B52` to ta sama czerwień
+rozjaśniona do 3.52:1. Nigdy nie używaj `red` jako tekstu na granacie.
+
+**Dlaczego `n-300` i `on-navy-300` wyglądają podobnie.** Bo są skalibrowane pod
+różne podłoża. `#8B93B2` na granacie daje 4.38:1, czyli tuż pod progiem — dlatego
+istnieją obie. To nie jest duplikat do posprzątania.
+
+### Typografia
+
+Skala: `12 14 16 19 25 34 46 62 82 128` — klasy `text-12` … `text-128`.
+
+- **Anton** — wyłącznie display (klasa `.display`)
+- **Archivo** — interfejs i cały tekst ciągły
+- **Zen Kaku Gothic New** — wyłącznie katakana シントラ (klasa `.jp`)
+
+Fonty są self-hostowane. Zen Kaku ograniczyliśmy do jednego subsetu i jednej
+grubości — pełna paczka to 121 subsetów i 3.25 MB dla czterech znaków.
+
+## Trzy rzeczy do podłączenia
+
+### 1. Formularz
+
+`src/i18n/club.ts` → `formEndpoint`. Dopóki jest pusty, przycisk jest nieaktywny
+i pokazuje się mail zastępczy.
+
+**Formularz natywny nie może być Google Formem.** Google Form osadza się wyłącznie
+iframem, a ten ustawia cookies Google i przywraca obowiązek bannera zgody —
+czyli dokładnie to, czego pozbyliśmy się analityką bezcookie'ową. Opcje:
+
+- **Formspree** — free 50/mies., wpisujesz endpoint i działa. Mail leci na adres klubu.
+- **Google Form** — wtedy zamiast formularza daj przycisk otwierający `forms.gle/...`
+  w nowej karcie. Klub widzi zgłoszenia w Sheets, strona zostaje cookie-free.
+
+Formularz ma honeypot (`_gotcha`), nie CAPTCHĘ — CAPTCHA wyklucza część ludzi
+i sama w sobie jest transferem danych do Google.
+
+### 2. Mapa
+
+`src/components/ContactBand.astro` — obecnie schemat rysowany wektorowo plus
+link „Open in Google Maps". Ten sam problem co wyżej: żywy iframe Map ustawia
+cookies. Bez cookies: statyczny obrazek mapy (Mapbox/Geoapify mają darmowe
+plany na static images) albo click-to-load pod placeholderem.
+
+### 3. Analityka
+
+Nie ma żadnej. Rekomendacja: **Cloudflare Web Analytics** — darmowa, bez cookies,
+jeden `<script>` w `src/layouts/Base.astro`. Alternatywy: GoatCounter, Umami.
+Po podłączeniu uzupełnij nazwę w `src/content/pages/en/privacy.md`.
+
+## Zdjęcia
+
+`src/assets/photos/` zawiera **5 zdjęć zastępczych** pobranych z CDN-u v1 — to
+przetworzone derywaty, nie oryginały.
+
+**Do zrobienia:** pobrać komplet ~70 zdjęć z file managera one.com (oryginały,
+nie URL-e `impro.usercontent.one`), przeskalować do maks. 2400px / q85 i wrzucić
+do `src/assets/photos/`. Astro sam wygeneruje AVIF/WebP w czterech szerokościach.
+
+Alt-teksty w galerii są obecnie generowane z nazw plików. Przy komplecie trzeba
+je opisać ręcznie — to warunek dostępności, nie kosmetyka.
+
+## Deploy
+
+1. Repo na GitHubie musi być **publiczne** (Pages z repo prywatnego wymaga płatnego planu).
+2. Settings → Pages → Source: **GitHub Actions**.
+3. Push na `main` uruchamia `.github/workflows/deploy.yml`.
+4. Sprawdź na `https://<user>.github.io/<repo>` zanim ruszysz DNS.
+
+### DNS (rejestracja zostaje w one.com)
+
+| Typ | Nazwa | Wartość |
+|---|---|---|
+| A | `@` | `185.199.108.153` `185.199.109.153` `185.199.110.153` `185.199.111.153` |
+| CNAME | `www` | `<user>.github.io` |
+
+Plik `public/CNAME` już zawiera `kendosintra.pt`. Po propagacji włącz
+**Enforce HTTPS** (certyfikat potrafi się wystawiać do 24 h). Jeśli przeniesiesz
+DNS do Cloudflare — **proxy wyłączone (szara chmurka)**, inaczej GitHub nie
+wystawi certyfikatu.
+
+Hosting one.com anuluj **dopiero** po potwierdzeniu, że wszystko działa.
+
+### Stare URL-e
+
+`/home/gallery`, `/home/fees`, `/home/beginner-s-course`, `/home/what-is-kendo`
+dostają zaślepki z `meta refresh` + `rel=canonical` (GitHub Pages nie ma
+przekierowań serwerowych). Są wyłączone z sitemapy. Nie kasuj ich — trzymają
+pozycje i linki z Facebooka.
+
+Po cutoverze: Search Console → zgłoś `https://kendosintra.pt/sitemap-index.xml`
+i obserwuj stare adresy przez ~2 tygodnie.
+
+## Wersja Astro — do decyzji
+
+Zbudowane na **Astro 5.18.2**, bo Twój Node to 20.20.2.
+
+Aktualny major to **Astro 7.2.9 i wymaga Node ≥22.12**. Astro 5 ma osiem otwartych
+advisory (XSS w `define:vars`, spread attributes, view transitions; SSRF w
+prerenderowanej stronie błędu). Przy stronie w pełni statycznej, bez wysp
+i bez danych od użytkownika, **żadne z nich nie jest tu realnie eksploatowalne** —
+ale ta gałąź nie dostanie już poprawek.
+
+Rekomendacja: `brew install node@22`, potem `npm i astro@latest`. Migracja 5→7
+to głównie zmiany w konfiguracji; treść, komponenty i style zostają.
+
+CI już używa Node 22, więc build w GitHub Actions jest niezależny od Twojej maszyny.
+
+## Do uzupełnienia przez klub
+
+Szukaj `TODO (klub)` w `src/content/`:
+
+- [ ] Biografia sensei Rogiera van Bijnena (`about.md`)
+- [ ] Rok założenia, federacja, liczba członków (`about.md`)
+- [ ] Minimalny wiek dzieci, zasady treningu próbnego (`faq.md`)
+- [ ] Kalendarz seminariów, zawodów i egzaminów (`schedule.md`)
+- [ ] Przerwy świąteczne i wakacyjne (`schedule.md`)
+- [ ] **Polityka prywatności** (`privacy.md`) — to jest szkielet, nie dokument
+      prawny. Wymaga przejrzenia przez osobę odpowiedzialną za RODO. Osobna
+      luka: zgody na wizerunek dzieci, których zdjęcia publikujecie.
+- [ ] Dokładne współrzędne dojo (`src/i18n/club.ts`, pole `geo`)
+- [ ] Logo z wordmarkiem w krzywych — mamy tylko symbol. Nagłówek składa nazwę
+      typografią, więc to nie blokuje, ale przyda się do materiałów drukowanych.
+
+Strony PT mają `draft: true` tam, gdzie tłumaczenie jest moje, a nie klubu —
+do przejrzenia przez native speakera. Wyjątek: `beginner-course.md`, którego
+wersja portugalska pochodzi wprost z v1.

@@ -1,0 +1,106 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Hero from './Hero.astro';
+import ContactBand from './ContactBand.astro';
+import Icon from './Icon.astro';
+import facingOff from '../assets/photos/facing-off.jpg';
+import strike from '../assets/photos/strike.jpg';
+import sparring from '../assets/photos/sparring-four.jpg';
+import { useTranslations, localePath, type Lang } from '../i18n/ui';
+import { club } from '../i18n/club';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const locale = lang === 'pt' ? 'pt-PT' : 'en-GB';
+
+const news = (await getCollection('news', (e) => e.id.startsWith(`${lang}/`)))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 2);
+
+const courseDate = new Date(club.course.startISO)
+  .toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric' }).toUpperCase();
+
+const strip = [
+  { img: facingOff, alt: lang === 'pt' ? 'Dois kendoka frente a frente' : 'Two kendoka facing each other' },
+  { img: strike, alt: lang === 'pt' ? 'Golpe em treino' : 'A strike in training' },
+  { img: sparring, alt: lang === 'pt' ? 'Combate com armadura' : 'Sparring in bogu' },
+];
+
+const facts = [
+  { n: '6', label: t('facts.sensei'), note: t('facts.sensei.note') },
+  { n: '2×', label: t('facts.week'), note: t('facts.week.note') },
+  { n: String(club.fees.adults), label: t('facts.fee'), note: t('facts.fee.note') },
+  { n: 'EN', label: t('facts.lang'), note: t('facts.lang.note') },
+];
+---
+<Hero lang={lang} />
+
+<div class="grid gap-1.5 sm:grid-cols-3">
+  {strip.map((s) => (
+    <Image src={s.img} alt={s.alt} widths={[480, 720]} sizes="(max-width:640px) 100vw, 33vw" class="h-[330px] w-full object-cover" />
+  ))}
+</div>
+
+<section class="bg-red px-6 py-16 text-white md:px-16">
+  <div class="mx-auto grid max-w-[1440px] items-center gap-14 lg:grid-cols-[1.15fr_1fr]">
+    <div class="flex flex-col gap-5">
+      <p class="text-14 font-bold uppercase tracking-[0.24em]">{t('course.title')}</p>
+      <p class="display text-46 leading-[0.94] sm:text-82">{courseDate}</p>
+      <p class="max-w-[500px] text-19 leading-relaxed">{t('course.lead')}</p>
+    </div>
+    <dl class="bg-white text-navy">
+      <div class="flex items-baseline justify-between border-b border-n-100 px-8 py-6">
+        <dt class="text-16 font-bold">{t('course.total')}</dt>
+        <dd class="display text-34">{club.course.total} {club.fees.currency}</dd>
+      </div>
+      <div class="flex items-baseline justify-between border-b border-n-100 px-8 py-6">
+        <dt class="text-16 font-bold">{t('course.duration')}</dt><dd class="text-19">{t('course.duration.value')}</dd>
+      </div>
+      <div class="flex items-baseline justify-between border-b border-n-100 px-8 py-6">
+        <dt class="text-16 font-bold">{t('course.shinai')}</dt><dd class="text-19">{t('course.shinai.value')}</dd>
+      </div>
+      <a href={localePath(lang, 'beginner-course')}
+         class="tap w-full justify-center bg-navy px-6 py-6 text-16 font-bold uppercase tracking-[0.08em] text-white hover:bg-red-hover">{t('cta.signup')}</a>
+    </dl>
+  </div>
+</section>
+
+<div class="grid gap-px bg-n-100 sm:grid-cols-2 lg:grid-cols-4">
+  {facts.map((f) => (
+    <div class="flex flex-col gap-2.5 bg-white px-8 py-12">
+      <p class="display text-46 leading-none text-red">{f.n}</p>
+      <p class="text-16 font-bold">{f.label}</p>
+      <p class="text-14 leading-relaxed text-n-700">{f.note}</p>
+    </div>
+  ))}
+</div>
+
+<section class="px-6 py-20 md:px-16">
+  <div class="mx-auto max-w-[1440px]">
+    <div class="mb-9 flex flex-wrap items-center justify-between gap-4">
+      <h2 class="display text-46">{t('news.title')}</h2>
+      <a href={localePath(lang, 'news')} class="tap gap-2 text-14 font-bold uppercase tracking-[0.1em] text-red">
+        {t('cta.all-news')} <Icon name="arrow" size={16} />
+      </a>
+    </div>
+    <div class="grid gap-8 md:grid-cols-2">
+      {news.map((item) => (
+        <article class="flex flex-col gap-3 border-t-4 border-red pt-6">
+          <p class="text-14 font-bold uppercase tracking-[0.1em] text-n-500">
+            <time datetime={item.data.date.toISOString()}>
+              {item.data.date.toLocaleDateString(locale, { month: 'long', year: 'numeric' })}
+            </time>{item.data.category && ` · ${item.data.category}`}
+          </p>
+          <h3 class="text-25 font-bold leading-snug">
+            <a href={localePath(lang, `news/${item.id.split('/').pop()}`)} class="text-navy hover:text-red">{item.data.title}</a>
+          </h3>
+          <p class="text-16 leading-relaxed text-n-700">{item.data.description}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<ContactBand lang={lang} />

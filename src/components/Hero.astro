@@ -1,0 +1,54 @@
+---
+import { Image } from 'astro:assets';
+import Emblem from './Emblem.astro';
+import dojoWide from '../assets/photos/dojo-wide.jpg';
+import { useTranslations, localePath, type Lang } from '../i18n/ui';
+import { club } from '../i18n/club';
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const courseDate = new Date(club.course.startISO).toLocaleDateString(
+  lang === 'pt' ? 'pt-PT' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<section class="on-navy relative h-[790px] max-h-[88vh] min-h-[560px] overflow-hidden bg-navy">
+  <!-- Duotone: zdjecie sprowadzone do szarosci i przefarbowane tlem, zeby czytalo sie
+       jak czesc plaszczyzny, a nie jak podkladka pod tekst. -->
+  <Image src={dojoWide} alt="" widths={[900, 1400, 1920]} sizes="100vw" loading="eager" fetchpriority="high"
+         class="absolute inset-0 h-full w-full object-cover object-[center_45%] opacity-55 [filter:grayscale(1)_contrast(1.16)_brightness(0.55)]" />
+  <div class="absolute inset-0" style="background:linear-gradient(100deg,#212B60 0%,rgba(33,43,96,.96) 26%,rgba(33,43,96,.74) 52%,rgba(33,43,96,.52) 78%,rgba(33,43,96,.66) 100%)"></div>
+  <div class="absolute inset-0" style="background:linear-gradient(to bottom,rgba(33,43,96,.38) 0%,rgba(33,43,96,0) 22%,rgba(33,43,96,0) 72%,rgba(33,43,96,.9) 100%)"></div>
+
+  <!-- Godlo wchodzi za prawa krawedz. Granatowy pierscien rowna sie tlu sekcji,
+       wiec krest unosi sie bez twardej obwodki. -->
+  <Emblem size={660} class="pointer-events-none absolute top-1/2 right-[-132px] hidden -translate-y-1/2 lg:block" />
+
+  <div class="absolute left-0 top-0 h-full w-[14px] bg-red"></div>
+
+  <div class="relative mx-auto flex h-full max-w-[1440px] flex-col justify-center gap-6 px-6 pl-8 md:px-16 md:pl-24">
+    <div class="flex items-center gap-6">
+      <span class="h-[3px] w-12 shrink-0 bg-red-on-navy md:w-[72px]"></span>
+      <span class="jp text-34 font-bold leading-none tracking-[0.3em] text-red-on-navy md:text-62">{club.katakana}</span>
+    </div>
+
+    <h1 class="display text-46 leading-[0.88] text-white sm:text-82 lg:text-128">
+      Kendo<br />Club<br />Sintra
+    </h1>
+
+    <p class="max-w-[480px] text-19 leading-relaxed text-on-navy-100">{t('hero.tagline')}</p>
+
+    <p class="flex items-center gap-3">
+      <span class="h-[10px] w-[10px] shrink-0 bg-red-on-navy"></span>
+      <span class="text-16 font-semibold uppercase tracking-[0.1em] text-white">
+        {t('hero.next-course')} — {courseDate}
+      </span>
+    </p>
+
+    <div class="flex flex-wrap gap-4 pt-1">
+      <a href={localePath(lang, 'contact')}
+         class="tap bg-red px-8 py-4 text-16 font-bold uppercase tracking-[0.08em] text-white hover:bg-red-hover">{t('cta.signup')}</a>
+      <a href={localePath(lang, 'schedule')}
+         class="tap border-2 border-white px-8 py-4 text-16 font-bold uppercase tracking-[0.08em] text-white hover:bg-white hover:text-navy">{t('cta.watch')}</a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,24 @@
+---
+/** Typografia tresci z Markdown. Stopnie i kolory wylacznie z tokenow. */
+---
+<div class="prose-kendo"><slot /></div>
+<style is:global>
+  .prose-kendo { max-width: 68ch; font-size: var(--text-19); line-height: 1.7; color: var(--color-n-700); }
+  .prose-kendo > * + * { margin-top: 1.1em; }
+  .prose-kendo h2 {
+    font-family: var(--font-display); text-transform: uppercase; line-height: 1;
+    font-size: var(--text-34); color: var(--color-navy); margin-top: 2em;
+  }
+  .prose-kendo h3 { font-size: var(--text-25); font-weight: 700; color: var(--color-navy); margin-top: 1.6em; }
+  .prose-kendo strong { color: var(--color-navy); font-weight: 700; }
+  .prose-kendo ul { list-style: none; padding: 0; }
+  .prose-kendo li { position: relative; padding-left: 1.6em; margin-top: .6em; }
+  .prose-kendo li::before {
+    content: ""; position: absolute; left: 0; top: .62em;
+    width: .6em; height: 2px; background: var(--color-red);
+  }
+  .prose-kendo table { width: 100%; border-collapse: collapse; }
+  .prose-kendo th, .prose-kendo td { text-align: left; padding: .85em 0; border-bottom: 1px solid var(--color-n-100); }
+  .prose-kendo td:last-child, .prose-kendo th:last-child { text-align: right; }
+  .prose-kendo a { font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+</style>

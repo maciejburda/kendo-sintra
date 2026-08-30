@@ -1,0 +1,51 @@
+---
+import Icon from './Icon.astro';
+import { useTranslations, localePath, type Lang } from '../i18n/ui';
+import { club } from '../i18n/club';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const year = new Date().getFullYear();
+---
+<footer class="on-navy bg-navy px-6 py-14 text-white md:px-16">
+  <div class="mx-auto max-w-[1440px]">
+    <div class="flex flex-wrap justify-between gap-12 border-b border-on-navy-line pb-10">
+      <div class="flex max-w-[380px] flex-col gap-4">
+        <span class="jp text-25 font-bold tracking-[0.26em]">{club.katakana}</span>
+        <span class="display text-34">{club.name}</span>
+        <p class="text-16 leading-relaxed text-on-navy-100">
+          {club.street}<br />{club.postalCode} {club.city}, {club.countryName}
+        </p>
+      </div>
+
+      <div class="flex flex-wrap gap-x-16 gap-y-8 text-16">
+        <div class="flex flex-col gap-3 text-on-navy-100">
+          <span class="pb-1 text-12 font-bold uppercase tracking-[0.16em] text-white">{t('footer.club')}</span>
+          <a class="tap text-on-navy-100 hover:text-white" href={localePath(lang, 'about')}>{lang === 'pt' ? 'Sobre o clube' : 'About the club'}</a>
+          <a class="tap text-on-navy-100 hover:text-white" href={localePath(lang, 'what-is-kendo')}>{t('nav.what-is-kendo')}</a>
+          <a class="tap text-on-navy-100 hover:text-white" href={localePath(lang, 'faq')}>{t('nav.faq')}</a>
+          <a class="tap text-on-navy-100 hover:text-white" href={localePath(lang, 'privacy')}>{t('nav.privacy')}</a>
+        </div>
+
+        <div class="flex flex-col gap-3">
+          <span class="pb-1 text-12 font-bold uppercase tracking-[0.16em] text-white">{t('footer.contact')}</span>
+          <a class="tap flex items-center gap-3 font-semibold text-white hover:text-on-navy-100" href={`tel:${club.phoneHref}`}>
+            <Icon name="phone" size={16} class="text-red-on-navy" />{club.phone}
+          </a>
+          <a class="tap flex items-center gap-3 font-semibold text-white hover:text-on-navy-100" href={`mailto:${club.email}`}>
+            <Icon name="mail" size={16} class="text-red-on-navy" />{club.email}
+          </a>
+          <span class="flex items-center gap-4 pt-1">
+            <a class="tap text-on-navy-100 hover:text-white" href={club.facebook} rel="me noopener" target="_blank" aria-label="Facebook"><Icon name="facebook" size={19} /></a>
+            <a class="tap text-on-navy-100 hover:text-white" href={club.instagram} rel="me noopener" target="_blank" aria-label="Instagram"><Icon name="instagram" size={19} /></a>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap justify-between gap-3 pt-6 text-14 text-on-navy-300">
+      <span>© {year} {club.name}. {t('footer.rights')}.</span>
+      <a class="text-on-navy-300 hover:text-white" href={localePath(lang, 'privacy')}>{t('nav.privacy')}</a>
+    </div>
+  </div>
+</footer>
