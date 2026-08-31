@@ -1,0 +1,84 @@
+<!doctype html>
+<!--
+  Generator obrazka OG (1200x630) dla udostepnien na Facebooku i w innych
+  social mediach. Fonty i zdjecie sa rysowane na canvasie, bo sharp sklada SVG
+  przez librsvg, ktory czyta tylko fonty systemowe — woff2 z @fontsource by sie
+  nie zaladowal i marka by sie nie odtworzyla.
+
+  Jak przegenerowac:
+    1. cp tools/og-generator.html public/_og.html
+    2. cp src/assets/photos/aip-12.jpg public/_og-src.jpg
+    3. mkdir -p public/_f && skopiuj woff2:
+         node_modules/@fontsource/anton/files/anton-latin-400-normal.woff2      -> public/_f/anton.woff2
+         node_modules/@fontsource-variable/archivo/files/archivo-latin-wght-normal.woff2 -> public/_f/archivo.woff2
+         src/assets/fonts/zen-kaku-katakana-700.woff2                          -> public/_f/zen.woff2
+    4. utworz public/_og-fonts.css z @font-face wskazujacymi na /_f/*.woff2
+    5. npm run build && npm run preview, otworz /_og.html
+    6. w konsoli:  (await window.OG_READY)  -> data URL, zapisz jako public/og.jpg
+    7. usun pliki tymczasowe z public/
+--><meta charset="utf-8"><title>generator OG</title>
+<link rel="stylesheet" href="/_og-fonts.css">
+<style>body{margin:0;background:#333}canvas{display:block;width:600px}</style>
+<canvas id="c" width="1200" height="630"></canvas>
+<script>
+window.OG_READY = (async () => {
+  const img = new Image();
+  img.src = '/_og-src.jpg';
+  await img.decode();
+  await document.fonts.ready;
+  await document.fonts.load('400 100px Anton');
+  await document.fonts.load('700 34px "Zen Kaku Gothic New"');
+  await document.fonts.load('600 26px Archivo');
+
+  const c = document.getElementById('c'), x = c.getContext('2d');
+  const W = 1200, H = 630, NAVY = '#212B60';
+
+  // zdjecie: kadr wypelniajacy, przesuniete w prawo zeby tekst mial czyste tlo
+  const s = Math.max(W / img.width, H / img.height);
+  const dw = img.width * s, dh = img.height * s;
+  x.drawImage(img, W - dw * 0.62, (H - dh) / 2 + dh * 0.06, dw, dh);
+
+  // duotone: szarosci -> przyciemnienie -> granat
+  const d = x.getImageData(0, 0, W, H), p = d.data;
+  for (let i = 0; i < p.length; i += 4) {
+    const g = (0.299 * p[i] + 0.587 * p[i+1] + 0.114 * p[i+2]) * 0.55;
+    p[i] = g; p[i+1] = g; p[i+2] = g;
+  }
+  x.putImageData(d, 0, 0);
+  let gr = x.createLinearGradient(0, 0, W, 0);
+  gr.addColorStop(0, 'rgba(33,43,96,1)');   gr.addColorStop(.30, 'rgba(33,43,96,.96)');
+  gr.addColorStop(.58, 'rgba(33,43,96,.74)'); gr.addColorStop(1, 'rgba(33,43,96,.6)');
+  x.fillStyle = gr; x.fillRect(0, 0, W, H);
+
+  // czerwony pasek przy krawedzi, jak w hero
+  x.fillStyle = '#C9202F'; x.fillRect(0, 0, 14, H);
+
+  // katakana
+  x.fillStyle = '#E84B52';
+  x.font = '700 34px "Zen Kaku Gothic New", sans-serif';
+  const kana = 'シントラ', tr = 14;
+  let kx = 74;
+  x.fillRect(kx, 96, 46, 3);
+  kx += 66;
+  for (const ch of kana) { x.fillText(ch, kx, 108); kx += x.measureText(ch).width + tr; }
+
+  // wordmark
+  x.fillStyle = '#FFFFFF';
+  x.font = '400 104px Anton, sans-serif';
+  x.fillText('KENDO', 72, 236);
+  x.fillText('CLUB SINTRA', 72, 332);
+
+  // podtytul
+  x.fillStyle = '#B9BFDA';
+  x.font = '400 26px Archivo, sans-serif';
+  x.fillText('The Japanese art of the sword, practised in Sintra.', 74, 394);
+
+  // pasek z data kursu
+  x.fillStyle = '#C9202F'; x.fillRect(72, 452, 560, 74);
+  x.fillStyle = '#FFFFFF';
+  x.font = '600 25px Archivo, sans-serif';
+  x.fillText('BEGINNER COURSE — 16 SEPTEMBER 2026', 98, 498);
+
+  return c.toDataURL('image/jpeg', 0.82);
+})();
+</script>

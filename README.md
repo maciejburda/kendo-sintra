@@ -141,6 +141,19 @@ const SHOW_IDENTIFIABLE_MINORS = true;   // false ukrywa te 11 zdjęć
 
 Domyślnie `true`, żeby nie zmieniać stanu zastanego bez Waszej decyzji.
 
+## Obrazek OG
+
+`public/og.jpg` (1200×630) to karta pokazywana przy udostępnieniu strony na
+Facebooku i w innych social mediach. Bez niego link pokazuje pustą kartę, a
+Facebook jest głównym kanałem klubu.
+
+Generator: `tools/og-generator.html` — instrukcja przegenerowania jest
+w komentarzu na górze pliku. Rysuje na canvasie w przeglądarce, bo sharp
+składa SVG przez librsvg, który czyta wyłącznie fonty systemowe; woff2
+z `@fontsource` by się nie załadował i typografia marki by się nie odtworzyła.
+
+**Przegeneruj po zmianie daty kursu** — data jest wypalona w obrazku.
+
 ## Deploy
 
 Repo: **https://github.com/maciejburda/kendo-sintra** (publiczne — Pages z repo
