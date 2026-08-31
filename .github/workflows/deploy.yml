@@ -5,12 +5,23 @@ on:
     branches: [main]
   workflow_dispatch:
 
+# ---------------------------------------------------------------------------
+# PRZEŁĄCZNIK CUTOVERU
+#
+# 'false' — buduje pod adres podglądowy maciejburda.github.io/kendo-sintra.
+#           Strony mają noindex, żeby nie konkurowały z kendosintra.pt.
+#
+# 'true'  — buduje pod własną domenę: dokłada plik CNAME i zdejmuje prefiks.
+#           Przełącz DOPIERO gdy rekordy A wskazują na GitHuba (patrz README).
+# ---------------------------------------------------------------------------
+env:
+  PRODUCTION: 'false'
+
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Nie przerywamy trwajacego deployu — kolejny czeka w kolejce.
 concurrency:
   group: pages
   cancel-in-progress: false
@@ -25,6 +36,18 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+
+      - name: Ustaw tryb budowania
+        run: |
+          if [ "$PRODUCTION" = "true" ]; then
+            cp deploy/CNAME public/CNAME
+            echo "ASTRO_BASE=/" >> "$GITHUB_ENV"
+            echo "::notice::Build produkcyjny — domena $(cat deploy/CNAME)"
+          else
+            echo "ASTRO_BASE=/${GITHUB_REPOSITORY#*/}/" >> "$GITHUB_ENV"
+            echo "::notice::Build podglądowy — prefiks /${GITHUB_REPOSITORY#*/}/, strony z noindex"
+          fi
+
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:

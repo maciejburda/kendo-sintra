@@ -4,6 +4,9 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   site: 'https://kendosintra.pt',
+  // Puste do produkcji na wlasnej domenie. Adres podgladowy na GitHubie to
+  // maciejburda.github.io/kendo-sintra, wiec tam potrzebny jest prefiks.
+  base: process.env.ASTRO_BASE || '/',
   trailingSlash: 'ignore',
   i18n: {
     defaultLocale: 'en',

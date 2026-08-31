@@ -17,6 +17,11 @@ interface Props {
 const { lang, title, description, path = '', localBusiness = false } = Astro.props;
 
 const site = Astro.site ?? new URL('https://kendosintra.pt');
+// Podglad na *.github.io ma prefiks w BASE_URL. Nie wolno go zaindeksowac,
+// bo konkurowalby w wynikach z docelowa domena jako duplikat.
+const isPreview = (import.meta.env.BASE_URL ?? '/') !== '/';
+/** Sciezka do pliku z public/ — swiadoma prefiksu wdrozenia. */
+const asset = (f: string) => `${import.meta.env.BASE_URL}${f}`.replace(/\/{2,}/g, '/');
 const canonical = new URL(localePath(lang, path), site).href;
 const alternates = (['en', 'pt'] as Lang[]).map((l) => ({
   lang: l === 'en' ? 'en-GB' : 'pt-PT',
@@ -53,6 +58,7 @@ const jsonLd = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    {isPreview && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
     {alternates.map((a) => <link rel="alternate" hreflang={a.lang} href={a.href} />)}
     <link rel="alternate" hreflang="x-default" href={new URL(localePath('en', path), site).href} />
@@ -65,8 +71,8 @@ const jsonLd = {
     <meta property="og:locale" content={lang === 'pt' ? 'pt_PT' : 'en_GB'} />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="icon" href={asset("favicon.svg")} type="image/svg+xml" />
+    <link rel="sitemap" href={asset("sitemap-index.xml")} />
     {localBusiness && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
   </head>
   <body>

@@ -115,24 +115,44 @@ je opisać ręcznie — to warunek dostępności, nie kosmetyka.
 
 ## Deploy
 
-1. Repo na GitHubie musi być **publiczne** (Pages z repo prywatnego wymaga płatnego planu).
-2. Settings → Pages → Source: **GitHub Actions**.
-3. Push na `main` uruchamia `.github/workflows/deploy.yml`.
-4. Sprawdź na `https://<user>.github.io/<repo>` zanim ruszysz DNS.
+Repo: **https://github.com/maciejburda/kendo-sintra** (publiczne — Pages z repo
+prywatnego wymaga płatnego planu). Push na `main` uruchamia
+`.github/workflows/deploy.yml`.
 
-### DNS (rejestracja zostaje w one.com)
+### Dwa tryby budowania
 
-| Typ | Nazwa | Wartość |
+Workflow ma na górze przełącznik `PRODUCTION`:
+
+| `PRODUCTION` | Adres | Zachowanie |
 |---|---|---|
-| A | `@` | `185.199.108.153` `185.199.109.153` `185.199.110.153` `185.199.111.153` |
-| CNAME | `www` | `<user>.github.io` |
+| `'false'` (teraz) | `maciejburda.github.io/kendo-sintra/` | prefiks `/kendo-sintra/`, wszystkie strony z `noindex` |
+| `'true'` | `kendosintra.pt` | dokłada `CNAME`, zdejmuje prefiks, indeksowanie włączone |
 
-Plik `public/CNAME` już zawiera `kendosintra.pt`. Po propagacji włącz
-**Enforce HTTPS** (certyfikat potrafi się wystawiać do 24 h). Jeśli przeniesiesz
-DNS do Cloudflare — **proxy wyłączone (szara chmurka)**, inaczej GitHub nie
-wystawi certyfikatu.
+Podgląd ma `noindex` celowo — bez tego konkurowałby w Google z docelową domeną
+jako duplikat treści.
 
-Hosting one.com anuluj **dopiero** po potwierdzeniu, że wszystko działa.
+Strona jest świadoma prefiksu: `localePath()` i helper `asset()` doklejają
+`import.meta.env.BASE_URL`, więc działa pod dowolnym katalogiem bez zmian w kodzie.
+
+### Cutover na własną domenę
+
+1. W one.com ustaw rekordy DNS:
+
+   | Typ | Nazwa | Wartość |
+   |---|---|---|
+   | A | `@` | `185.199.108.153` `185.199.109.153` `185.199.110.153` `185.199.111.153` |
+   | CNAME | `www` | `maciejburda.github.io` |
+
+2. Poczekaj na propagację (`dig kendosintra.pt +short`).
+3. W `.github/workflows/deploy.yml` zmień `PRODUCTION: 'false'` na `'true'`, wypchnij.
+4. Settings → Pages → włącz **Enforce HTTPS** (certyfikat bywa wystawiany do 24 h).
+5. Search Console: zgłoś `https://kendosintra.pt/sitemap-index.xml`.
+6. Hosting one.com anuluj **dopiero** po potwierdzeniu, że wszystko działa.
+
+Plik `deploy/CNAME` leży poza `public/` celowo — trafia tam dopiero przy
+budowie produkcyjnej. Gdyby siedział w `public/`, GitHub przekierowałby adres
+podglądowy na domenę, na którą DNS jeszcze nie wskazuje, i strona zniknęłaby
+przed cutoverem.
 
 ### Stare URL-e
 
@@ -140,9 +160,6 @@ Hosting one.com anuluj **dopiero** po potwierdzeniu, że wszystko działa.
 dostają zaślepki z `meta refresh` + `rel=canonical` (GitHub Pages nie ma
 przekierowań serwerowych). Są wyłączone z sitemapy. Nie kasuj ich — trzymają
 pozycje i linki z Facebooka.
-
-Po cutoverze: Search Console → zgłoś `https://kendosintra.pt/sitemap-index.xml`
-i obserwuj stare adresy przez ~2 tygodnie.
 
 ## Wersja Astro — do decyzji
 
