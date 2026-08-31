@@ -34,8 +34,9 @@ const other: Lang = lang === 'en' ? 'pt' : 'en';
     <!-- Przycisk istnieje tylko gdy JS wlaczony (dodaje go skrypt na dole).
          Bez JS nawigacja zostaje rozwinieta i dziala normalnie. -->
     <button id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu"
-            class="tap hidden shrink-0 items-center gap-3 border border-n-300 px-4 text-14 font-bold uppercase tracking-[0.1em] text-navy">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            aria-label={t('nav.menu')}
+            class="hidden h-[54px] w-[54px] shrink-0 items-center justify-center border border-n-300 text-navy hover:border-navy hover:bg-navy hover:text-white">
+      <svg width="34" height="34" viewBox="1.8 1.6 20.4 20.8" fill="none" stroke="currentColor"
            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <g class="icon-burger" stroke-width="2">
           <path d="M2.5 5h19" /><path d="M2.5 12h19" /><path d="M2.5 19h19" />
@@ -74,7 +75,6 @@ const other: Lang = lang === 'en' ? 'pt' : 'en';
           </g>
         </g>
       </svg>
-      <span>{t('nav.menu')}</span>
     </button>
 
     <nav id="nav-menu" aria-label={t('nav.menu')}
