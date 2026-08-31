@@ -10,8 +10,12 @@ Beginners are welcome to come and watch any training evening — you do not need
 
 ## Seminars and competitions
 
-<!-- TODO (klub): kalendarz na sezon — seminaria, zawody, terminy egzaminow
-     na stopnie. To jedna z sekcji, o ktore prosiles; potrzebuje dat od klubu. -->
+National competitions and gradings are organised by the
+[Federação Portuguesa de Kendo, Iaido e Jodo](https://kendo.pt/).
+
+<!-- TODO (klub): ktore z tych wydarzen klub faktycznie obsadza i kiedy sa
+     wewnetrzne seminaria. Kalendarz federacji jest publiczny, ale wybor
+     klubu juz nie — tego nie zgadne. -->
 
 ## Closures
 

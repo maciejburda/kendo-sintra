@@ -11,8 +11,14 @@ Os iniciantes são bem-vindos a assistir a qualquer noite de treino — não é 
 
 ## Seminários e competições
 
+As competições nacionais e os exames de graduação são organizados pela
+[Federação Portuguesa de Kendo, Iaido e Jodo](https://kendo.pt/).
+
 <!-- TODO (klub): patrz wersja EN. -->
 
 ## Interrupções
+
+As competições nacionais e os exames de graduação são organizados pela
+[Federação Portuguesa de Kendo, Iaido e Jodo](https://kendo.pt/).
 
 <!-- TODO (klub): patrz wersja EN. -->

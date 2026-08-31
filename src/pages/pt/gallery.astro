@@ -3,21 +3,25 @@ import { getEntry, render } from 'astro:content';
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import PageShell from '../../components/PageShell.astro';
+import { photos } from '../../data/gallery';
 
 const lang = 'pt' as const;
 const entry = await getEntry('pages', lang + '/gallery')!;
 const { Content } = await render(entry);
 
-// Kazde zdjecie z src/assets/photos trafia do galerii automatycznie —
-// dorzucenie pliku wystarczy, nie trzeba dotykac kodu.
-const files = import.meta.glob<{ default: ImageMetadata }>(
-  '../assets/photos/*.{jpg,jpeg,png,webp,avif}', { eager: true });
-const photos = Object.entries(files)
-  .sort(([a], [b]) => a.localeCompare(b))
-  .map(([path, mod]) => ({
-    src: mod.default,
-    alt: path.split('/').pop()!.replace(/\.[a-z]+$/, '').replace(/-/g, ' '),
-  }));
+/**
+ * Publikowac zdjecia, na ktorych widac rozpoznawalne twarze nieletnich?
+ * true  = stan jak w v1 (te zdjecia sa juz publiczne na kendosintra.pt)
+ * false = ukrywa 11 zdjec oznaczonych faces:true w src/data/gallery.ts
+ * Patrz README, sekcja "Wizerunek".
+ */
+const SHOW_IDENTIFIABLE_MINORS = true;
+
+const files = import.meta.glob<{ default: ImageMetadata }>('../../assets/photos/*.jpg', { eager: true });
+const items = photos
+  .filter((p) => SHOW_IDENTIFIABLE_MINORS || !p.faces)
+  .map((p) => ({ meta: files[`../../assets/photos/${p.file}`]?.default, alt: p[lang] }))
+  .filter((p) => p.meta);
 ---
 <Base lang={lang} path="gallery" title={entry.data.title} description={entry.data.description}>
   <PageShell title={entry.data.title} eyebrow={entry.data.eyebrow}>
@@ -25,13 +29,17 @@ const photos = Object.entries(files)
   </PageShell>
   <div class="px-6 pb-20 md:px-16">
     <div class="mx-auto grid max-w-[1440px] gap-1.5 sm:grid-cols-2 lg:grid-cols-3">
-      {photos.map((p) => (
-        <Image src={p.src} alt={p.alt} widths={[480, 800, 1200]}
+      {items.map((p) => (
+        <Image src={p.meta} alt={p.alt} widths={[480, 800, 1200]}
                sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw"
                loading="lazy" class="aspect-[3/2] w-full object-cover" />
       ))}
     </div>
-    <!-- TODO: alt-teksty sa generowane z nazw plikow. Przy komplecie ~70 zdjec
-         z one.com trzeba je opisac recznie — patrz README, sekcja "Zdjecia". -->
+    <p class="mx-auto mt-8 max-w-[1440px] text-14 leading-relaxed text-n-500">
+      {items.length} {lang === 'pt' ? 'fotografias' : 'photographs'}.{' '}
+      {lang === 'pt'
+        ? 'A sessão de dezembro de 2025 é de AiP Photography; as restantes foram tiradas nos treinos e competições do clube.'
+        : 'The December 2025 shoot is by AiP Photography; the rest were taken at club training and competitions.'}
+    </p>
   </div>
 </Base>

@@ -15,7 +15,13 @@ As nossas aulas são conduzidas por Rogier van Bijnen, sensei 6º dan dos Paíse
 
 Treinamos duas vezes por semana na Quinta da Beloura, em Sintra, num pavilhão desportivo completo. Treinam connosco adultos e crianças, desde principiantes absolutos a kendoka graduados.
 
-<!-- TODO (klub): ano de fundação, filiação na federação, número de membros. -->
+## Filiação
+
+Somos clube filiado na **Federação Portuguesa de Kendo, Iaido e Jodo (FPKIJ)**,
+o organismo nacional que representa o kendo em Portugal, por sua vez reconhecido
+pela European Kendo Federation. A federação lista-nos em [kendo.pt](https://kendo.pt/clubes/).
+
+<!-- TODO (klub): ano de fundação e número de membros — patrz wersja EN. -->
 
 ## Graduações e competição
 

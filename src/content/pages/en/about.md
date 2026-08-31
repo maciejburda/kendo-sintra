@@ -16,8 +16,15 @@ Our classes are led by Rogier van Bijnen, a 6th dan sensei from the Netherlands 
 
 We train twice a week at Quinta da Beloura in Sintra, in a full-size sports hall. Both adults and children train with us, from complete beginners through to graded kendoka.
 
-<!-- TODO (klub): rok zalozenia klubu, przynaleznosc do federacji
-     (Federação Portuguesa de Kendo / EKF?), liczba czlonkow. -->
+## Affiliation
+
+We are a member club of the **Federação Portuguesa de Kendo, Iaido e Jodo (FPKIJ)**,
+the national body representing kendo in Portugal, which is in turn recognised by the
+European Kendo Federation. The federation lists us at [kendo.pt](https://kendo.pt/clubes/).
+
+<!-- TODO (klub): rok zalozenia i liczba czlonkow — tego nie ma nigdzie publicznie.
+     Uwaga: federacja wpisala klub jako "Kendo Clube de Sintra", a strona uzywa
+     "Kendo Club Sintra". Warto ujednolicic albo swiadomie zostawic roznice. -->
 
 ## Grades and competition
 

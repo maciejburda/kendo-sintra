@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Emblem from './Emblem.astro';
-import dojoWide from '../assets/photos/dojo-wide.jpg';
+import heroHall from '../assets/photos/aip-12.jpg';
 import { useTranslations, localePath, type Lang } from '../i18n/ui';
 import { club } from '../i18n/club';
 
@@ -14,7 +14,7 @@ const courseDate = new Date(club.course.startISO).toLocaleDateString(
 <section class="on-navy relative h-[790px] max-h-[88vh] min-h-[560px] overflow-hidden bg-navy">
   <!-- Duotone: zdjecie sprowadzone do szarosci i przefarbowane tlem, zeby czytalo sie
        jak czesc plaszczyzny, a nie jak podkladka pod tekst. -->
-  <Image src={dojoWide} alt="" widths={[900, 1400, 1920]} sizes="100vw" loading="eager" fetchpriority="high"
+  <Image src={heroHall} alt="" widths={[900, 1400, 1920]} sizes="100vw" loading="eager" fetchpriority="high"
          class="absolute inset-0 h-full w-full object-cover object-[center_45%] opacity-55 [filter:grayscale(1)_contrast(1.16)_brightness(0.55)]" />
   <div class="absolute inset-0" style="background:linear-gradient(100deg,#212B60 0%,rgba(33,43,96,.96) 26%,rgba(33,43,96,.74) 52%,rgba(33,43,96,.52) 78%,rgba(33,43,96,.66) 100%)"></div>
   <div class="absolute inset-0" style="background:linear-gradient(to bottom,rgba(33,43,96,.38) 0%,rgba(33,43,96,0) 22%,rgba(33,43,96,0) 72%,rgba(33,43,96,.9) 100%)"></div>

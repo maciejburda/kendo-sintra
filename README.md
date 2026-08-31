@@ -103,15 +103,43 @@ Po podłączeniu uzupełnij nazwę w `src/content/pages/en/privacy.md`.
 
 ## Zdjęcia
 
-`src/assets/photos/` zawiera **5 zdjęć zastępczych** pobranych z CDN-u v1 — to
-przetworzone derywaty, nie oryginały.
+`src/assets/photos/` zawiera **68 zdjęć** ściągniętych z CDN-u v1 w 2000px:
 
-**Do zrobienia:** pobrać komplet ~70 zdjęć z file managera one.com (oryginały,
-nie URL-e `impro.usercontent.one`), przeskalować do maks. 2400px / q85 i wrzucić
-do `src/assets/photos/`. Astro sam wygeneruje AVIF/WebP w czterech szerokościach.
+- **24** z sesji AiP Photography (10.12.2025) — wszyscy w bogu, twarze za maskami
+- **44** z zawodów (kwiecień 2025) — dzieci i dorośli
 
-Alt-teksty w galerii są obecnie generowane z nazw plików. Przy komplecie trzeba
-je opisać ręcznie — to warunek dostępności, nie kosmetyka.
+To **nie są oryginały** — file manager one.com wymaga logowania, więc pobrałem
+najwyższą rozdzielczość, jaką CDN oddaje bez upscalingu. Jeśli masz dostęp do
+oryginałów, podmiana to skopiowanie plików pod tymi samymi nazwami.
+
+Alt-teksty są w `src/data/gallery.ts`, pisane ręcznie i dwujęzycznie. Nie są
+generowane z nazw plików — czytnik ekranu odczytałby wtedy „aip 09".
+
+### Wizerunek — do decyzji klubu
+
+**11 z 68 zdjęć pokazuje rozpoznawalne twarze osób nieletnich poza maską.**
+Są oznaczone `faces: true` w `src/data/gallery.ts`:
+
+```
+dojo-2103, dojo-2103-1, dojo-2105-3, dojo-2110-2, dojo-2111,
+dojo-2111-1, dojo-2115, dojo-2116, dojo-2118-1, dojo-2119
+```
+
+Te zdjęcia **są już publiczne na kendosintra.pt**, więc v2 niczego nowego nie
+ujawnia — ale dochodzą dwie rzeczy, których w v1 nie było:
+
+1. Repozytorium jest publiczne, a **historia gita jest trwała**. Usunięcie
+   zdjęcia ze strony jest łatwe; wyczyszczenie go z historii commitów nie.
+2. RODO wymaga zgody rodziców na publikację wizerunku nieletniego. Nie wiem,
+   czy klub takie zgody zebrał.
+
+Przełącznik jest w `src/pages/gallery.astro`:
+
+```ts
+const SHOW_IDENTIFIABLE_MINORS = true;   // false ukrywa te 11 zdjęć
+```
+
+Domyślnie `true`, żeby nie zmieniać stanu zastanego bez Waszej decyzji.
 
 ## Deploy
 
