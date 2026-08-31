@@ -21,7 +21,16 @@ const courseDate = new Date(club.course.startISO).toLocaleDateString(
 
   <!-- Godlo wchodzi za prawa krawedz. Granatowy pierscien rowna sie tlu sekcji,
        wiec krest unosi sie bez twardej obwodki. -->
-  <Emblem size={660} class="pointer-events-none absolute top-1/2 right-[-132px] hidden -translate-y-1/2 lg:block" />
+  <!-- Godlo wtopione w plaszczyzne maska gradientowa zamiast lezenia na niej
+       twarda naklejka. Szerokosc zalezna od okna, bo staly rozmiar na wezszym
+       ekranie zajmowal proporcjonalnie wiecej. Gestosc maski przesunieta
+       w prawo, zeby krawedz od strony tekstu rozplywala sie pierwsza. -->
+  <div class="pointer-events-none absolute right-[-4%] top-1/2 hidden w-[clamp(300px,30vw,500px)] -translate-y-1/2 lg:block"
+       style="opacity:.8;
+              -webkit-mask-image:radial-gradient(ellipse 72% 72% at 64% 50%, #000 26%, rgba(0,0,0,.38) 58%, transparent 88%);
+              mask-image:radial-gradient(ellipse 72% 72% at 64% 50%, #000 26%, rgba(0,0,0,.38) 58%, transparent 88%)">
+    <Emblem size={500} class="block h-auto w-full" />
+  </div>
 
   <div class="absolute left-0 top-0 h-full w-[14px] bg-red"></div>
 
