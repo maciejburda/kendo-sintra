@@ -27,5 +27,13 @@ export const club = {
     { day: 'days.thu-sun', open: null, close: null },
   ],
   fees: { adults: 20, kids: 10, visiting: 10, currency: 'EUR' },
-  course: { startISO: '2026-09-16', total: 60, months: 3 },
+  course: {
+    startISO: '2026-09-16',
+    total: 60,
+    months: 3,
+    /** Dzien tygodnia kursu dla poczatkujacych. Godzin celowo brak — klub
+        trenuje w srody 19:00-21:00, ale nie potwierdzil, czy kurs idzie
+        w tym samym oknie. */
+    day: 'Wednesday',
+  },
 } as const;

@@ -19,7 +19,7 @@ const { Content } = await render(entry);
 const slug = entry.id.split('/').slice(1).join('/');
 ---
 <Base lang="en" path={slug} title={entry.data.title} description={entry.data.description}
-      localBusiness={slug === 'contact'}>
+      localBusiness={slug === 'contact'} course={slug === 'beginner-course'}>
   <PageShell title={entry.data.title} eyebrow={entry.data.eyebrow}>
     <Content />
   </PageShell>

@@ -8,7 +8,7 @@ Está pronto para dar o seu primeiro passo no mundo do Kendo? O nosso Curso de K
 
 ## Detalhes do curso
 
-**Duração e custo.** O curso tem a duração de três meses, com o custo total de 60 EUR (20 EUR por mês), e decorre uma vez por semana.
+**Duração e custo.** O curso tem a duração de três meses, com o custo total de 60 EUR (20 EUR por mês), e decorre uma vez por semana, às **quartas-feiras à noite**.
 
 **Instrutor.** As aulas são conduzidas pelo Sensei 6º Dan Rogier van Bijnen, dos Países Baixos, antigo membro da equipa nacional de Kendo da Holanda. Tradução para português está disponível para garantir que todos acompanhem as lições.
 

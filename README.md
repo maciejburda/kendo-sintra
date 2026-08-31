@@ -152,6 +152,24 @@ const SHOW_IDENTIFIABLE_MINORS = true;   // false ukrywa te 11 zdjęć
 
 Domyślnie `true`, żeby nie zmieniać stanu zastanego bez Waszej decyzji.
 
+## Dane strukturalne
+
+`src/data/schema.ts` — dwa schematy JSON-LD:
+
+- **SportsActivityLocation** (strona główna, kontakt) — adres, godziny, geo, socjale
+- **Course** (strona główna, strona kursu) — data startu, cena, instruktor,
+  link do zapisów, harmonogram tygodniowy w środy
+
+Dzięki temu Google może pokazać datę i cenę kursu bezpośrednio w wynikach.
+
+**Czego tam celowo nie ma:** godzin kursu. Klub trenuje w środy 19:00–21:00,
+ale nie potwierdził, czy kurs dla początkujących idzie w tym samym oknie.
+Zgadywanie trafiłoby do danych strukturalnych jako twierdzenie. Jeśli godziny
+są te same, dopisz `startTime`/`endTime` w `courseSchedule`.
+
+`endDate` jest wyliczana z podanych „trzech miesięcy" — arytmetyka na
+deklarowanym fakcie, nie zmyślenie.
+
 ## Galeria i powiększanie
 
 `src/components/GalleryGrid.astro` — siatka plus powiększenie na natywnym
