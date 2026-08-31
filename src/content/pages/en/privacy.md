@@ -19,9 +19,9 @@ Email: kendosintra@gmail.com
 
 ## What we collect
 
-We only collect what you send us yourself through the contact form on this site: your **name**, **email address**, an optional **phone number**, what you are interested in, and your **message**.
+This website itself collects nothing. It sets **no cookies** and uses no advertising or profiling tools.
 
-We do not collect anything else. This website sets **no cookies**, and we do not use advertising or profiling tools.
+Sign-ups are handled by a **Google Form**, hosted by Google. If you fill it in, you send us your **name**, **email address**, what you are interested in, whether you are over 18, and optionally a **phone number** and further details. For applicants under 18 we also ask for a **parent or guardian's name and phone number**.
 
 ## Why we use it
 
@@ -33,7 +33,9 @@ To reply to your enquiry and, if you sign up, to organise your participation in 
 
 ## Who else sees it
 
-Form submissions are delivered to the club's email address through [TODO: nazwa dostawcy formularza — patrz README, sekcja "Formularz"], which processes the data on our behalf. Nobody else receives it, and we never sell or share it.
+The sign-up form runs on **Google Forms** and the answers are stored in **Google Sheets**. Google acts as our processor and its own privacy terms apply to the form page itself. Nobody else receives your data, and we never sell or share it.
+
+[TODO: potwierdzić, czy klub akceptuje transfer danych do Google jako procesora, i czy to wystarczy przy danych nieletnich. To jedyny zewnętrzny odbiorca danych w całym serwisie.]
 
 ## Analytics
 

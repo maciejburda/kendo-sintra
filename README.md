@@ -72,21 +72,25 @@ grubości — pełna paczka to 121 subsetów i 3.25 MB dla czterech znaków.
 
 ## Trzy rzeczy do podłączenia
 
-### 1. Formularz
+### 1. Formularz zapisu
 
-`src/i18n/club.ts` → `formEndpoint`. Dopóki jest pusty, przycisk jest nieaktywny
-i pokazuje się mail zastępczy.
+`src/i18n/club.ts` → `signupForm`. Wklej krótki link `https://forms.gle/...`
+i zapisy ruszają. To jedyne miejsce do zmiany.
 
-**Formularz natywny nie może być Google Formem.** Google Form osadza się wyłącznie
-iframem, a ten ustawia cookies Google i przywraca obowiązek bannera zgody —
-czyli dokładnie to, czego pozbyliśmy się analityką bezcookie'ową. Opcje:
+Dopóki pole jest puste, w pasie kontaktowym pokazuje się karta z informacją
+i przyciskiem `mailto:` z gotowym tematem — nie martwy formularz.
 
-- **Formspree** — free 50/mies., wpisujesz endpoint i działa. Mail leci na adres klubu.
-- **Google Form** — wtedy zamiast formularza daj przycisk otwierający `forms.gle/...`
-  w nowej karcie. Klub widzi zgłoszenia w Sheets, strona zostaje cookie-free.
+**Dlaczego przycisk wychodzący, a nie formularz na stronie.** Google Form da
+się osadzić wyłącznie w iframe, a ten ustawia cookies Google i przywraca
+obowiązek bannera zgody — czyli dokładnie to, czego pozbyliśmy się analityką
+bezcookie'ową. Przycisk otwiera formularz w nowej karcie i strona zostaje
+w 100% wolna od cookies. Pod przyciskiem jest to napisane wprost.
 
-Formularz ma honeypot (`_gotcha`), nie CAPTCHĘ — CAPTCHA wyklucza część ludzi
-i sama w sobie jest transferem danych do Google.
+Pola do założenia formularza: **`docs/google-form.md`**.
+
+Gdybyście kiedyś woleli formularz natywnie na stronie, wymaga to backendu
+w rodzaju Formspree — wtedy wraca wersja z `<form>`, którą można odtworzyć
+z historii gita (commit `contact-band-form-map`).
 
 ### 2. Mapa
 

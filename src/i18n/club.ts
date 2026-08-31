@@ -14,8 +14,12 @@ export const club = {
   maps: 'https://www.google.com/maps/search/?api=1&query=Estrada+Nacional+No+9+Quinta+da+Beloura+II+2710-697+Sintra+Portugal',
   facebook: 'https://www.facebook.com/people/TASIS-Kendo-Club/61565495708778',
   instagram: 'https://www.instagram.com/kendoclubsintra',
-  /** Formularz — patrz README, sekcja "Formularz". Puste = przycisk nieaktywny. */
-  formEndpoint: '',
+  /**
+   * Link do formularza zapisu w Google Forms (krotki https://forms.gle/...).
+   * Puste = na stronie pokazuje sie zastepczy kontakt mailowy zamiast przycisku.
+   * To JEDYNE miejsce, ktore trzeba zmienic, zeby zapisy ruszyly.
+   */
+  signupForm: '',
   hours: [
     { day: 'days.mon', open: '19:00', close: '21:00' },
     { day: 'days.tue', open: null, close: null },

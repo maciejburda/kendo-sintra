@@ -6,9 +6,8 @@ import { club } from '../i18n/club';
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
-const field = 'w-full border border-n-300 bg-white px-4 py-4 text-16 text-navy placeholder:text-n-500';
-const label = 'text-12 font-bold uppercase tracking-[0.1em] text-navy';
-const live = Boolean(club.formEndpoint);
+const signup = club.signupForm;
+const subject = lang === 'pt' ? 'Inscrição — curso para iniciantes' : 'Sign-up — beginner course';
 ---
 <section class="border-t border-n-100 bg-n-050 px-6 py-20 md:px-16">
   <div class="mx-auto grid max-w-[1440px] gap-16 lg:grid-cols-2">
@@ -17,68 +16,45 @@ const live = Boolean(club.formEndpoint);
       <div class="flex flex-col gap-3">
         <p class="text-14 font-bold uppercase tracking-[0.18em] text-red">{t('contact.eyebrow')}</p>
         <h2 class="display text-46">{t('contact.title')}</h2>
-        <p class="text-16 leading-relaxed text-n-700">{t('contact.lead')}</p>
+        <p class="text-16 leading-relaxed text-n-700">{t('signup.lead')}</p>
       </div>
 
-      <form class="flex flex-col gap-5" method="POST" action={club.formEndpoint || undefined}>
-        <div class="grid gap-5 sm:grid-cols-2">
-          <p class="flex flex-col gap-2">
-            <label class={label} for="name">{t('form.name')}</label>
-            <input class={field} id="name" name="name" type="text" required autocomplete="name" />
-          </p>
-          <p class="flex flex-col gap-2">
-            <label class={label} for="email">{t('form.email')}</label>
-            <input class={field} id="email" name="email" type="email" required autocomplete="email" />
-          </p>
+      <dl class="grid gap-px border border-n-100 bg-n-100 sm:grid-cols-3">
+        <div class="flex flex-col gap-1 bg-white px-5 py-4">
+          <dt class="text-12 font-bold uppercase tracking-[0.1em] text-n-500">{t('course.total')}</dt>
+          <dd class="display text-25">{club.course.total} {club.fees.currency}</dd>
         </div>
-        <div class="grid gap-5 sm:grid-cols-2">
-          <p class="flex flex-col gap-2">
-            <label class={label} for="phone">
-              {t('form.phone')} <span class="font-medium normal-case tracking-normal text-n-500">{t('form.optional')}</span>
-            </label>
-            <input class={field} id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+351" />
-          </p>
-          <p class="flex flex-col gap-2">
-            <label class={label} for="interest">{t('form.interest')}</label>
-            <select class={field} id="interest" name="interest">
-              <option>{t('form.interest.course')}</option>
-              <option>{t('form.interest.adults')}</option>
-              <option>{t('form.interest.kids')}</option>
-              <option>{t('form.interest.visiting')}</option>
-            </select>
-          </p>
+        <div class="flex flex-col gap-1 bg-white px-5 py-4">
+          <dt class="text-12 font-bold uppercase tracking-[0.1em] text-n-500">{t('course.duration')}</dt>
+          <dd class="text-16 font-bold">{t('course.duration.value')}</dd>
         </div>
-        <p class="flex flex-col gap-2">
-          <label class={label} for="message">{t('form.message')}</label>
-          <textarea class={field} id="message" name="message" rows="4"></textarea>
-        </p>
+        <div class="flex flex-col gap-1 bg-white px-5 py-4">
+          <dt class="text-12 font-bold uppercase tracking-[0.1em] text-n-500">{t('course.shinai')}</dt>
+          <dd class="text-16 font-bold">{t('course.shinai.value')}</dd>
+        </div>
+      </dl>
 
-        <!-- Pulapka na boty. Zadnej CAPTCHy: nie zbiera danych i nie wyklucza nikogo. -->
-        <p class="hidden" aria-hidden="true">
-          <label for="company">Company</label>
-          <input id="company" name="_gotcha" type="text" tabindex="-1" autocomplete="off" />
-        </p>
+      {signup ? (
+        <div class="flex flex-col gap-3">
+          <a href={signup} target="_blank" rel="noopener"
+             class="tap self-start bg-red px-10 py-5 text-16 font-bold uppercase tracking-[0.08em] text-white hover:bg-red-hover">
+            {t('signup.cta')}
+          </a>
+          {/* Formularz otwiera sie u Google, wiec mowimy to wprost — strona sama
+              nie ustawia zadnych cookies i nie chcemy tego zacierac. */}
+          <p class="text-14 text-n-500">{t('signup.newtab')}</p>
+        </div>
+      ) : (
+        <div class="flex flex-col gap-3 border-l-4 border-red bg-white px-6 py-5">
+          <p class="text-16 leading-relaxed text-n-700">{t('signup.pending')}</p>
+          <a href={`mailto:${club.email}?subject=${encodeURIComponent(subject)}`}
+             class="tap self-start bg-navy px-8 py-4 text-16 font-bold uppercase tracking-[0.08em] text-white hover:bg-red">
+            {t('signup.write')}
+          </a>
+        </div>
+      )}
 
-        <label class="flex min-h-[44px] items-start gap-3 py-2 text-14 leading-relaxed text-n-700">
-          <input type="checkbox" name="consent" required
-                 class="mt-0.5 h-6 w-6 shrink-0 appearance-none border-[1.5px] border-n-300 bg-white checked:bg-red" />
-          <span>
-            {t('form.consent')} <a href={localePath(lang, 'privacy')} class="font-bold">{t('form.privacy-link')}</a>.
-          </span>
-        </label>
-
-        <button type="submit" disabled={!live}
-                class="tap self-start bg-red px-10 py-4 text-16 font-bold uppercase tracking-[0.08em] text-white hover:bg-red-hover disabled:cursor-not-allowed disabled:opacity-60">
-          {t('cta.send')}
-        </button>
-        {!live && (
-          <p class="text-14 text-n-500">
-            <!-- Widoczne tylko dopoki endpoint nie jest ustawiony — patrz README. -->
-            Form endpoint not configured yet. In the meantime, write to
-            <a href={`mailto:${club.email}`} class="font-bold">{club.email}</a>.
-          </p>
-        )}
-      </form>
+      <p class="text-16 leading-relaxed text-n-700">{t('signup.or')}</p>
     </div>
 
     <div class="flex flex-col gap-9">
