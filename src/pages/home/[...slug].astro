@@ -15,6 +15,8 @@ export async function getStaticPaths() {
   return Object.entries(map).map(([slug, to]) => ({ params: { slug }, props: { to } }));
 }
 const { to } = Astro.props;
+// Prefiks wdrozenia, zeby zaslepka dzialala takze pod adresem podgladowym.
+const href = `${import.meta.env.BASE_URL}${to.replace(/^\//, '')}`.replace(/\/{2,}/g, '/');
 const target = new URL(to, Astro.site ?? 'https://kendosintra.pt').href;
 ---
 <!doctype html>
@@ -24,10 +26,10 @@ const target = new URL(to, Astro.site ?? 'https://kendosintra.pt').href;
     <title>Moved</title>
     <link rel="canonical" href={target} />
     <meta name="robots" content="noindex, follow" />
-    <meta http-equiv="refresh" content={`0; url=${to}`} />
+    <meta http-equiv="refresh" content={`0; url=${href}`} />
   </head>
   <body>
-    <p>This page has moved to <a href={to}>{target}</a>.</p>
-    <script is:inline define:vars={{ to }}>location.replace(to);</script>
+    <p>This page has moved to <a href={href}>{target}</a>.</p>
+    <script is:inline define:vars={{ href }}>location.replace(href);</script>
   </body>
 </html>
