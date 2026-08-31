@@ -29,7 +29,7 @@ const target = new URL(to, Astro.site ?? 'https://kendosintra.pt').href;
     <meta http-equiv="refresh" content={`0; url=${href}`} />
   </head>
   <body>
-    <p>This page has moved to <a href={href}>{target}</a>.</p>
+    <p><a href={href}>{target}</a></p>
     <script is:inline define:vars={{ href }}>location.replace(href);</script>
   </body>
 </html>

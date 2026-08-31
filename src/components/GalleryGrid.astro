@@ -59,7 +59,7 @@ const items = await Promise.all(
   </div>
 </div>
 
-<dialog id="lb" class="on-navy" aria-label={t('nav.gallery')}>
+<dialog id="lb" class="on-navy" aria-label={t('nav.gallery')} data-of={t('gallery.of')}>
   <figure>
     <img id="lb-img" alt="" />
     <figcaption aria-live="polite">
@@ -121,7 +121,7 @@ const items = await Promise.all(
     var cap = document.getElementById('lb-cap');
     var count = document.getElementById('lb-count');
     var i = 0, opener = null;
-    var sep = document.documentElement.lang === 'pt-PT' ? 'de' : 'of';
+    var sep = lb.dataset.of;  // z i18n, nie z lang dokumentu
 
     function preload(n) {
       var a = links[(n + links.length) % links.length];

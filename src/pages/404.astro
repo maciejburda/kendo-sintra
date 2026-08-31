@@ -1,15 +1,52 @@
 ---
 import Base from '../layouts/Base.astro';
-import { useTranslations, localePath } from '../i18n/ui';
-const t = useTranslations('en');
+import { ui, localePath } from '../i18n/ui';
+
+/**
+ * GitHub Pages serwuje jeden 404.html dla calej domeny, wiec strona musi
+ * obsluzyc oba jezyki naraz. Bez JS widac obie wersje jedna pod druga;
+ * skrypt chowa nieodpowiednia na podstawie sciezki. Ten sam wzorzec
+ * progressive enhancement co menu, galeria i mapa.
+ */
+const langs = [
+  { code: 'en' as const, lang: 'en-GB' },
+  { code: 'pt' as const, lang: 'pt-PT' },
+];
 ---
 <Base lang="en" path="" title="Page not found" description="This page does not exist.">
-  <div class="px-6 py-28 md:px-16">
-    <div class="mx-auto flex max-w-[1440px] flex-col items-start gap-6">
-      <p class="display text-82 text-red md:text-128">404</p>
-      <h1 class="display text-34 md:text-46">{t('404.title')}</h1>
-      <p class="max-w-[52ch] text-19 leading-relaxed text-n-700">{t('404.lead')}</p>
-      <a href={localePath('en')} class="tap bg-red px-8 py-4 text-16 font-bold uppercase tracking-[0.08em] text-white hover:bg-red-hover">{t('404.home')}</a>
+  <div class="px-6 py-24 md:px-16">
+    <div class="mx-auto flex max-w-[1440px] flex-col items-start gap-8">
+      <p class="display text-82 leading-none text-red md:text-128">404</p>
+
+      {langs.map(({ code, lang }) => (
+        <div class="lang-block flex flex-col items-start gap-4 border-t border-n-100 pt-7" data-lang={code} lang={lang}>
+          <h1 class="display text-34 md:text-46">{ui[code]['404.title']}</h1>
+          <p class="max-w-[54ch] text-19 leading-relaxed text-n-700">{ui[code]['404.lead']}</p>
+          <div class="flex flex-wrap gap-3">
+            <a href={localePath(code)}
+               class="tap bg-red px-8 py-4 text-16 font-bold uppercase tracking-[0.08em] text-white hover:bg-red-hover">
+              {ui[code]['404.home']}
+            </a>
+            <a href={localePath(code, 'contact')}
+               class="tap border-2 border-navy px-8 py-4 text-16 font-bold uppercase tracking-[0.08em] text-navy hover:bg-navy hover:text-white">
+              {ui[code]['nav.contact']}
+            </a>
+          </div>
+        </div>
+      ))}
     </div>
   </div>
+
+  <script is:inline>
+    (function () {
+      var pt = location.pathname.indexOf('/pt/') === 0 || location.pathname === '/pt';
+      var keep = pt ? 'pt' : 'en';
+      var blocks = document.querySelectorAll('.lang-block');
+      if (blocks.length < 2) return;
+      for (var i = 0; i < blocks.length; i++) {
+        if (blocks[i].dataset.lang !== keep) blocks[i].remove();
+      }
+      document.documentElement.lang = pt ? 'pt-PT' : 'en-GB';
+    })();
+  </script>
 </Base>

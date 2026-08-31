@@ -1,5 +1,4 @@
 ---
-import Icon from './Icon.astro';
 import { useTranslations, localePath, type Lang } from '../i18n/ui';
 import { club } from '../i18n/club';
 
@@ -78,35 +77,12 @@ const subject = lang === 'pt' ? 'Inscrição — curso para iniciantes' : 'Sign-
                   referrerpolicy="no-referrer-when-downgrade"
                   class="absolute inset-0 h-full w-full border-0"></iframe>
         </div>
-        <p class="text-14 leading-relaxed text-n-500">
-          {t('map.note')}{' '}
-          <a href={club.maps} target="_blank" rel="noopener" class="font-bold">{t('cta.maps')}</a>.
-        </p>
-
         <address class="not-italic text-16 leading-relaxed">
           <span class="font-bold">{club.street}</span><br />
           <span class="text-n-700">{club.postalCode} {club.city}, {club.countryName}</span>
         </address>
       </div>
 
-      <div class="flex flex-col gap-4 border-t border-n-100 pt-7">
-        <a href={`tel:${club.phoneHref}`} class="tap flex items-center gap-4 text-19 font-bold text-navy hover:text-red">
-          <Icon name="phone" size={21} class="text-red" />{club.phone}
-        </a>
-        <a href={`mailto:${club.email}`} class="tap flex items-center gap-4 text-19 font-bold text-navy hover:text-red">
-          <Icon name="mail" size={21} class="text-red" />{club.email}
-        </a>
-        <div class="flex gap-3 pt-1">
-          <a href={club.facebook} target="_blank" rel="me noopener"
-             class="tap items-center gap-3 bg-navy px-6 py-3 text-14 font-bold tracking-[0.06em] text-white hover:bg-red">
-            <Icon name="facebook" size={17} />Facebook
-          </a>
-          <a href={club.instagram} target="_blank" rel="me noopener"
-             class="tap items-center gap-3 bg-navy px-6 py-3 text-14 font-bold tracking-[0.06em] text-white hover:bg-red">
-            <Icon name="instagram" size={17} />Instagram
-          </a>
-        </div>
-      </div>
     </div>
   </div>
 </section>

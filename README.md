@@ -105,7 +105,9 @@ z historii gita (commit `contact-band-form-map`).
 ### 2. Mapa
 
 Osadzona mapa Google (`club.mapsEmbed`, embed bez klucza API), **ładowana
-od razu** przy wejściu na stronę główną i `/contact`.
+od razu** przy wejściu na stronę główną i `/contact`. Celuje we **własną
+wizytówkę klubu** w Mapach — szukanie po samym adresie trafiało w TASIS
+Portugal International School.
 
 To decyzja klubu, podjęta świadomie. Konsekwencja: iframe Map ustawia cookies
 Google przy każdym wejściu, więc strona nie jest już wolna od cookies — patrz
@@ -113,9 +115,6 @@ niżej.
 
 Wersję click-to-load (schemat + przycisk, cookies dopiero po kliknięciu) można
 odtworzyć z historii gita, commit `37d230b`.
-
-Adres geokoduje się na TASIS Portugal International School, co zgadza się
-z nazwą klubu na Facebooku.
 
 ### 3. Analityka
 
@@ -127,6 +126,9 @@ Po podłączeniu uzupełnij nazwę w `src/content/pages/en/privacy.md`.
 
 Strona **nie ustawia własnych cookies** i nie ma analityki. Ale osadzona mapa
 Google ustawia cookies Google na stronie głównej i na `/contact`.
+
+Informacja o tym **nie jest już wyświetlana przy mapie** (decyzja klubu) —
+została wyłącznie w polityce prywatności.
 
 Pod ePrivacy i RODO oznacza to, że **prawdopodobnie potrzebny jest banner
 zgody** — cookies zewnętrznego dostawcy nie są „niezbędne" do działania
