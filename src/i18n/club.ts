@@ -19,7 +19,7 @@ export const club = {
    * Puste = na stronie pokazuje sie zastepczy kontakt mailowy zamiast przycisku.
    * To JEDYNE miejsce, ktore trzeba zmienic, zeby zapisy ruszyly.
    */
-  signupForm: '',
+  signupForm: 'https://forms.gle/qmuZEBKorTBT4AMP7',
   hours: [
     { day: 'days.mon', open: '19:00', close: '21:00' },
     { day: 'days.tue', open: null, close: null },

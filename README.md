@@ -74,11 +74,18 @@ grubości — pełna paczka to 121 subsetów i 3.25 MB dla czterech znaków.
 
 ### 1. Formularz zapisu
 
-`src/i18n/club.ts` → `signupForm`. Wklej krótki link `https://forms.gle/...`
-i zapisy ruszają. To jedyne miejsce do zmiany.
+`src/i18n/club.ts` → `signupForm`. Podpięty, zapisy działają. To jedyne
+miejsce do zmiany, gdyby link się zmienił.
 
 Dopóki pole jest puste, w pasie kontaktowym pokazuje się karta z informacją
 i przyciskiem `mailto:` z gotowym tematem — nie martwy formularz.
+
+> **Stan formularza (prototyp).** Podpięty formularz ma na razie tylko pole
+> `Full Name`, wbudowane pole e-mail Google i jedno nieopisane pytanie z opcją
+> `Option 1` oznaczone jako wymagane. Brakuje rozdzielenia dorośli / poniżej
+> 18 lat, kontaktu do opiekuna i zgody na przetwarzanie danych. Do uzupełnienia
+> przed cutoverem na własną domenę — pola są w `docs/google-form.md`.
+> Uwaga: „Zbieraj adresy e-mail" jest włączone, co wymusza logowanie do Google.
 
 **Dlaczego przycisk wychodzący, a nie formularz na stronie.** Google Form da
 się osadzić wyłącznie w iframe, a ten ustawia cookies Google i przywraca
