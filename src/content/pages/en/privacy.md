@@ -19,7 +19,12 @@ Email: kendosintra@gmail.com
 
 ## What we collect
 
-This website itself collects nothing. It sets **no cookies** and uses no advertising or profiling tools.
+This website itself collects nothing about you and uses no advertising or profiling tools.
+
+It does, however, embed a **Google Map** on the home page and the contact page. That map is loaded from Google when the page opens, and **Google may set cookies in your browser** as a result. We do not control those cookies and we cannot read them.
+
+[TODO: to jest jedyne zrodlo cookies w serwisie. Wymaga decyzji, czy klub
+dokłada banner zgody — patrz README, sekcja "Cookies i zgoda".]
 
 Sign-ups are handled by a **Google Form**, hosted by Google. If you fill it in, you send us your **name**, **email address**, what you are interested in, whether you are over 18, and optionally a **phone number** and further details. For applicants under 18 we also ask for a **parent or guardian's name and phone number**.
 

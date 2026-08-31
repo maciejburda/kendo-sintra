@@ -1,7 +1,11 @@
 # kendosintra.pt — v2
 
 Statyczna strona Kendo Club Sintra. Astro + Tailwind, budowana do czystego HTML
-i hostowana na GitHub Pages. Zero cookies, zero zapytań do zewnętrznych domen.
+i hostowana na GitHub Pages.
+
+> ⚠️ **Strona osadza mapę Google, więc ustawia cookies Google** na stronie
+> głównej i na `/contact`. Skutek: prawdopodobnie potrzebny jest banner zgody —
+> patrz sekcja [Cookies i zgoda](#cookies-i-zgoda).
 Jedyny JavaScript to ~810 B inline na zwijane menu — i to jako progressive
 enhancement: bez JS nawigacja pozostaje rozwinięta i w pełni działa.
 
@@ -88,10 +92,9 @@ i przyciskiem `mailto:` z gotowym tematem — nie martwy formularz.
 > Uwaga: „Zbieraj adresy e-mail" jest włączone, co wymusza logowanie do Google.
 
 **Dlaczego przycisk wychodzący, a nie formularz na stronie.** Google Form da
-się osadzić wyłącznie w iframe, a ten ustawia cookies Google i przywraca
-obowiązek bannera zgody — czyli dokładnie to, czego pozbyliśmy się analityką
-bezcookie'ową. Przycisk otwiera formularz w nowej karcie i strona zostaje
-w 100% wolna od cookies. Pod przyciskiem jest to napisane wprost.
+się osadzić wyłącznie w iframe. Przycisk otwiera formularz w nowej karcie,
+więc dane trafiają do Google dopiero wtedy, gdy ktoś świadomie klika. Pod
+przyciskiem jest to napisane wprost.
 
 Pola do założenia formularza: **`docs/google-form.md`**.
 
@@ -101,18 +104,15 @@ z historii gita (commit `contact-band-form-map`).
 
 ### 2. Mapa
 
-Prawdziwa mapa Google, ale **click-to-load**: `src/components/ContactBand.astro`.
-Przed kliknięciem widać schemat wektorowy i przycisk; po kliknięciu wchodzi
-iframe z `club.mapsEmbed` (embed bez klucza API).
+Osadzona mapa Google (`club.mapsEmbed`, embed bez klucza API), **ładowana
+od razu** przy wejściu na stronę główną i `/contact`.
 
-**Dlaczego nie od razu.** Iframe Map ustawia cookies Google przy każdym
-wejściu na stronę, co przywróciłoby obowiązek bannera zgody — czyli to, czego
-pozbyliśmy się analityką bezcookie'ową. Po kliknięciu jest to świadoma decyzja
-odwiedzającego, a nie coś, co dzieje się za jego plecami. Pod mapą napisane
-wprost, co się stanie.
+To decyzja klubu, podjęta świadomie. Konsekwencja: iframe Map ustawia cookies
+Google przy każdym wejściu, więc strona nie jest już wolna od cookies — patrz
+niżej.
 
-Bez JavaScriptu przycisk się nie pojawia, ale link „Open in Google Maps"
-działa zawsze — ta sama zasada co przy menu i galerii.
+Wersję click-to-load (schemat + przycisk, cookies dopiero po kliknięciu) można
+odtworzyć z historii gita, commit `37d230b`.
 
 Adres geokoduje się na TASIS Portugal International School, co zgadza się
 z nazwą klubu na Facebooku.
@@ -122,6 +122,27 @@ z nazwą klubu na Facebooku.
 Nie ma żadnej. Rekomendacja: **Cloudflare Web Analytics** — darmowa, bez cookies,
 jeden `<script>` w `src/layouts/Base.astro`. Alternatywy: GoatCounter, Umami.
 Po podłączeniu uzupełnij nazwę w `src/content/pages/en/privacy.md`.
+
+## Cookies i zgoda
+
+Strona **nie ustawia własnych cookies** i nie ma analityki. Ale osadzona mapa
+Google ustawia cookies Google na stronie głównej i na `/contact`.
+
+Pod ePrivacy i RODO oznacza to, że **prawdopodobnie potrzebny jest banner
+zgody** — cookies zewnętrznego dostawcy nie są „niezbędne" do działania
+serwisu. To ta sama kategoria, którą obsługiwał Termly w v1.
+
+Trzy drogi, w kolejności od najmniej pracy:
+
+1. **Click-to-load na mapie** — cookies dopiero po świadomym kliknięciu,
+   banner niepotrzebny. Do odtworzenia z commita `37d230b`.
+2. **Banner zgody** blokujący mapę do czasu akceptacji (np. Klaro, Orestbida —
+   oba self-hostowane i bez cookies same w sobie).
+3. **Zaakceptować ryzyko** i zostawić jak jest.
+
+Decyzja należy do osoby odpowiedzialnej w klubie za RODO. Do rozstrzygnięcia
+**przed cutoverem na własną domenę** — dziś adres podglądowy ma `noindex`
+i nikt na niego nie trafia.
 
 ## Zdjęcia
 
