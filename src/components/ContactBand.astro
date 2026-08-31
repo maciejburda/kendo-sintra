@@ -57,6 +57,12 @@ const subject = lang === 'pt' ? 'Inscrição — curso para iniciantes' : 'Sign-
     </div>
 
     <div class="flex flex-col gap-9">
+      <div class="flex flex-col gap-3 border-l-4 border-red bg-white px-6 py-5">
+        <p class="text-16 font-bold text-navy">{t('venue.temp')}</p>
+        <p class="text-16 leading-relaxed text-n-700">{t('venue.temp.body')}</p>
+        <p class="text-14 leading-relaxed text-n-500">{t('venue.temp.after')}</p>
+      </div>
+
       <div class="flex flex-col gap-4">
         <h2 class="text-14 font-bold uppercase tracking-[0.18em] text-red">{t('contact.hours')}</h2>
         <dl class="border-t border-n-100">
@@ -73,13 +79,14 @@ const subject = lang === 'pt' ? 'Inscrição — curso para iniciantes' : 'Sign-
         <!-- Schemat zastepuje embed: zywy iframe Map ustawia cookies Google
              i przywraca banner zgody. Patrz README, sekcja "Mapa". -->
         <div class="relative h-[280px] overflow-hidden border border-n-100">
-          <iframe src={club.mapsEmbed} title={t('map.title')} loading="lazy"
+          <iframe src={club.venue.mapsEmbed} title={t('map.title')} loading="lazy"
                   referrerpolicy="no-referrer-when-downgrade"
                   class="absolute inset-0 h-full w-full border-0"></iframe>
         </div>
         <address class="not-italic text-16 leading-relaxed">
-          <span class="font-bold">{club.street}</span><br />
-          <span class="text-n-700">{club.postalCode} {club.city}, {club.countryName}</span>
+          <span class="font-bold">{club.venue.name}</span><br />
+          <span class="text-n-700">{club.venue.street}</span><br />
+          <span class="text-n-700">{club.venue.postalCode} {club.venue.city}, {club.countryName}</span>
         </address>
       </div>
 

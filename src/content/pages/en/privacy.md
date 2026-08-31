@@ -21,7 +21,13 @@ Email: kendosintra@gmail.com
 
 This website itself collects nothing about you and uses no advertising or profiling tools.
 
-It does, however, embed a **Google Map** on the home page and the contact page. That map is loaded from Google when the page opens, and **Google may set cookies in your browser** as a result. We do not control those cookies and we cannot read them.
+It does, however, load three things from other companies when a page opens, and each of them **may set cookies in your browser**:
+
+- a **Google Map** on the home page and the contact page,
+- a **Facebook feed** showing our latest posts,
+- **Google Analytics**, described below.
+
+We do not control those cookies and we cannot read them.
 
 [TODO: to jest jedyne zrodlo cookies w serwisie. Wymaga decyzji, czy klub
 dokłada banner zgody — patrz README, sekcja "Cookies i zgoda".]
@@ -44,9 +50,10 @@ The sign-up form runs on **Google Forms** and the answers are stored in **Google
 
 ## Analytics
 
-We measure how many people visit the site using a cookieless analytics tool, which records page views without cookies and without identifying individual visitors.
+We use **Google Analytics 4** to see how many people visit the site and which pages they read. Google Analytics **sets cookies** in your browser and processes the data on Google's servers.
 
-[TODO: nazwa narzędzia — patrz README, sekcja "Analityka"]
+[TODO: to jest trzecie źródło cookies na stronie, obok mapy Google i feedu
+z Facebooka. Wymaga decyzji o bannerze zgody — v1 miał w tym celu Termly.]
 
 ## Your rights
 

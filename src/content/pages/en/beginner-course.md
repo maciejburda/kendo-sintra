@@ -8,6 +8,11 @@ Are you ready to take your first step into the world of Kendo? Our Beginner Kend
 
 ## Course details
 
+> **We are currently training at CAISL.** Quinta da Beloura II is unavailable
+> until the end of the year, so all sessions take place at
+> **CAISL, Carlucci American International School of Lisbon**,
+> Rua António dos Reis 95, Linhó, 2710-301 Sintra.
+
 **When.** Wednesdays, starting at **19:00**. Beginners have the first half hour to themselves; more experienced members join at 19:30 and training runs to 21:00.
 
 **Duration & cost.** The course lasts three months, once per week, at a total cost of 60 EUR (20 EUR per month).

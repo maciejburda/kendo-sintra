@@ -8,6 +8,11 @@ Está pronto para dar o seu primeiro passo no mundo do Kendo? O nosso Curso de K
 
 ## Detalhes do curso
 
+> **Estamos a treinar no CAISL.** A Quinta da Beloura II está indisponível até
+> ao final do ano, pelo que todas as sessões decorrem no
+> **CAISL, Carlucci American International School of Lisbon**,
+> Rua António dos Reis 95, Linhó, 2710-301 Sintra.
+
 **Quando.** Às quartas-feiras, com início às **19:00**. Os iniciantes têm a primeira meia hora só para si; os praticantes mais experientes juntam-se às 19:30 e o treino decorre até às 21:00.
 
 **Duração e custo.** O curso tem a duração de três meses, com o custo total de 60 EUR (20 EUR por mês), e decorre uma vez por semana.

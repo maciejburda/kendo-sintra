@@ -4,6 +4,11 @@ description: Kendo Club Sintra trains Monday and Wednesday, 19:00 to 21:00, at Q
 eyebrow: When we train
 ---
 
+> **We are currently training at CAISL.** Quinta da Beloura II is unavailable
+> until the end of the year, so all sessions take place at
+> **CAISL, Carlucci American International School of Lisbon**,
+> Rua António dos Reis 95, Linhó, 2710-301 Sintra.
+
 We train **twice a week**, on Monday and Wednesday evenings from 19:00 to 21:00, at Quinta da Beloura in Sintra.
 
 On **Wednesdays the session is split**: beginners start at 19:00 and have the first half hour to themselves, then more experienced members join at 19:30. If you are new to Kendo, Wednesday at 19:00 is the evening to come.

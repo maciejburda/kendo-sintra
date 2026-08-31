@@ -118,33 +118,11 @@ odtworzyć z historii gita, commit `37d230b`.
 
 ### 3. Analityka
 
-Nie ma żadnej. Rekomendacja: **Cloudflare Web Analytics** — darmowa, bez cookies,
-jeden `<script>` w `src/layouts/Base.astro`. Alternatywy: GoatCounter, Umami.
-Po podłączeniu uzupełnij nazwę w `src/content/pages/en/privacy.md`.
+**Google Analytics 4, `G-PWJYVVVPNS`** — przeniesione z v1, `club.ga4`.
+Wstrzykiwane tylko w buildzie produkcyjnym; na adresie podglądowym jest
+wyłączone, żeby nie zaśmiecać statystyk ruchem testowym.
 
-## Cookies i zgoda
-
-Strona **nie ustawia własnych cookies** i nie ma analityki. Ale osadzona mapa
-Google ustawia cookies Google na stronie głównej i na `/contact`.
-
-Informacja o tym **nie jest już wyświetlana przy mapie** (decyzja klubu) —
-została wyłącznie w polityce prywatności.
-
-Pod ePrivacy i RODO oznacza to, że **prawdopodobnie potrzebny jest banner
-zgody** — cookies zewnętrznego dostawcy nie są „niezbędne" do działania
-serwisu. To ta sama kategoria, którą obsługiwał Termly w v1.
-
-Trzy drogi, w kolejności od najmniej pracy:
-
-1. **Click-to-load na mapie** — cookies dopiero po świadomym kliknięciu,
-   banner niepotrzebny. Do odtworzenia z commita `37d230b`.
-2. **Banner zgody** blokujący mapę do czasu akceptacji (np. Klaro, Orestbida —
-   oba self-hostowane i bez cookies same w sobie).
-3. **Zaakceptować ryzyko** i zostawić jak jest.
-
-Decyzja należy do osoby odpowiedzialnej w klubie za RODO. Do rozstrzygnięcia
-**przed cutoverem na własną domenę** — dziś adres podglądowy ma `noindex`
-i nikt na niego nie trafia.
+GA **ustawia cookies** (`_ga`, `_ga_*`). Puste `club.ga4` wyłącza analitykę.
 
 ## Zdjęcia
 

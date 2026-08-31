@@ -60,6 +60,12 @@ const fullTitle = path === '' ? `${club.name} — ${lang === 'pt' ? 'Kendo em Si
 
     <link rel="icon" href={asset("favicon.svg")} type="image/svg+xml" />
     <link rel="sitemap" href={asset("sitemap-index.xml")} />
+    {club.ga4 && !isPreview && (
+      <>
+        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${club.ga4}`}></script>
+        <script is:inline set:html={`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${club.ga4}');`}></script>
+      </>
+    )}
     {localBusiness && <script type="application/ld+json" set:html={JSON.stringify(clubSchema(site))} />}
     {course && <script type="application/ld+json" set:html={JSON.stringify(courseSchema(lang, site, localePath(lang, 'beginner-course')))} />}
   </head>

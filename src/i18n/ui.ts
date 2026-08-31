@@ -82,6 +82,9 @@ export const ui = {
     'contact.eyebrow': 'Get in touch',
     'contact.title': 'Sign up or ask',
     'contact.hours': 'Training hours',
+    'venue.temp': 'We are training at CAISL',
+    'venue.temp.body': 'Quinta da Beloura II is unavailable until the end of the year, so all training — including the beginner course — takes place at CAISL, Carlucci American International School of Lisbon.',
+    'venue.temp.after': 'We move back to Quinta da Beloura II at the end of the year.',
 
     'days.mon': 'Monday', 'days.tue': 'Tuesday', 'days.wed': 'Wednesday',
     'days.thu-sun': 'Thursday — Sunday', 'days.closed': 'Closed',
@@ -146,6 +149,9 @@ export const ui = {
     'contact.eyebrow': 'Fale connosco',
     'contact.title': 'Inscreva-se ou pergunte',
     'contact.hours': 'Horário de treino',
+    'venue.temp': 'Estamos a treinar no CAISL',
+    'venue.temp.body': 'A Quinta da Beloura II está indisponível até ao final do ano, pelo que todos os treinos — incluindo o curso para iniciantes — decorrem no CAISL, Carlucci American International School of Lisbon.',
+    'venue.temp.after': 'Regressamos à Quinta da Beloura II no final do ano.',
 
     'days.mon': 'Segunda-feira', 'days.tue': 'Terça-feira', 'days.wed': 'Quarta-feira',
     'days.thu-sun': 'Quinta-feira — Domingo', 'days.closed': 'Encerrado',

@@ -3,9 +3,9 @@ import type { Lang } from '../i18n/ui';
 
 const address = {
   '@type': 'PostalAddress',
-  streetAddress: club.street,
-  postalCode: club.postalCode,
-  addressLocality: club.city,
+  streetAddress: club.venue.street,
+  postalCode: club.venue.postalCode,
+  addressLocality: club.venue.city,
   addressCountry: club.country,
 } as const;
 
@@ -20,7 +20,7 @@ export function clubSchema(site: URL) {
     email: club.email,
     telephone: club.phone,
     address,
-    geo: { '@type': 'GeoCoordinates', latitude: club.geo.lat, longitude: club.geo.lon },
+    geo: { '@type': 'GeoCoordinates', latitude: club.venue.geo.lat, longitude: club.venue.geo.lon },
     sameAs: [club.facebook, club.instagram],
     openingHoursSpecification: [
       { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Wednesday'], opens: '19:00', closes: '21:00' },
@@ -74,7 +74,7 @@ export function courseSchema(lang: Lang, site: URL, coursePath: string) {
       startDate: club.course.startISO,
       endDate: iso(end),
       courseWorkload: `P${club.course.months}M`,
-      location: { '@type': 'Place', name: club.name, address },
+      location: { '@type': 'Place', name: club.venue.name, address },
       instructor: { '@type': 'Person', name: 'Rogier van Bijnen', jobTitle: 'Sensei, 6th dan' },
       courseSchedule: {
         '@type': 'Schedule',

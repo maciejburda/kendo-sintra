@@ -14,7 +14,7 @@ const year = new Date().getFullYear();
         <span class="jp text-25 font-bold tracking-[0.26em]">{club.katakana}</span>
         <span class="display text-34">{club.name}</span>
         <p class="text-16 leading-relaxed text-on-navy-100">
-          {club.street}<br />{club.postalCode} {club.city}, {club.countryName}
+          {club.venue.short} — {club.venue.street}<br />{club.venue.postalCode} {club.venue.city}, {club.countryName}
         </p>
       </div>
 
