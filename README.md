@@ -101,10 +101,21 @@ z historii gita (commit `contact-band-form-map`).
 
 ### 2. Mapa
 
-`src/components/ContactBand.astro` — obecnie schemat rysowany wektorowo plus
-link „Open in Google Maps". Ten sam problem co wyżej: żywy iframe Map ustawia
-cookies. Bez cookies: statyczny obrazek mapy (Mapbox/Geoapify mają darmowe
-plany na static images) albo click-to-load pod placeholderem.
+Prawdziwa mapa Google, ale **click-to-load**: `src/components/ContactBand.astro`.
+Przed kliknięciem widać schemat wektorowy i przycisk; po kliknięciu wchodzi
+iframe z `club.mapsEmbed` (embed bez klucza API).
+
+**Dlaczego nie od razu.** Iframe Map ustawia cookies Google przy każdym
+wejściu na stronę, co przywróciłoby obowiązek bannera zgody — czyli to, czego
+pozbyliśmy się analityką bezcookie'ową. Po kliknięciu jest to świadoma decyzja
+odwiedzającego, a nie coś, co dzieje się za jego plecami. Pod mapą napisane
+wprost, co się stanie.
+
+Bez JavaScriptu przycisk się nie pojawia, ale link „Open in Google Maps"
+działa zawsze — ta sama zasada co przy menu i galerii.
+
+Adres geokoduje się na TASIS Portugal International School, co zgadza się
+z nazwą klubu na Facebooku.
 
 ### 3. Analityka
 

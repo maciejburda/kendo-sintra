@@ -12,6 +12,8 @@ export const club = {
   countryName: 'Portugal',
   geo: { lat: 38.7526, lon: -9.3253 }, // TODO: potwierdzic dokladne wspolrzedne dojo
   maps: 'https://www.google.com/maps/search/?api=1&query=Estrada+Nacional+No+9+Quinta+da+Beloura+II+2710-697+Sintra+Portugal',
+  /** Embed bez klucza API. Ladowany dopiero po kliknieciu — patrz README. */
+  mapsEmbed: 'https://maps.google.com/maps?q=Estrada+Nacional+No+9,+Quinta+da+Beloura+II,+2710-697+Sintra,+Portugal&z=16&output=embed',
   facebook: 'https://www.facebook.com/people/TASIS-Kendo-Club/61565495708778',
   instagram: 'https://www.instagram.com/kendoclubsintra',
   /**

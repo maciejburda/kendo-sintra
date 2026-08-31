@@ -73,28 +73,40 @@ const subject = lang === 'pt' ? 'Inscrição — curso para iniciantes' : 'Sign-
       <div class="flex flex-col gap-4">
         <!-- Schemat zastepuje embed: zywy iframe Map ustawia cookies Google
              i przywraca banner zgody. Patrz README, sekcja "Mapa". -->
-        <div class="relative h-[240px] overflow-hidden border border-n-100">
-          <svg viewBox="0 0 660 240" preserveAspectRatio="xMidYMid slice" class="block h-full w-full" role="img" aria-label={`${club.street}, ${club.postalCode} ${club.city}`}>
-            <rect width="660" height="240" fill="#F5F6FA" />
+        <div id="map-slot" class="relative h-[280px] overflow-hidden border border-n-100"
+             data-src={club.mapsEmbed} data-title={t('map.title')}>
+          {/* Podglad schematyczny. Prawdziwa mapa Google wchodzi dopiero po
+              kliknieciu, bo jej iframe ustawia cookies Google przy kazdym
+              wejsciu i przywrocilby obowiazek bannera zgody. */}
+          <svg viewBox="0 0 660 280" preserveAspectRatio="xMidYMid slice" class="block h-full w-full" aria-hidden="true">
+            <rect width="660" height="280" fill="#F5F6FA" />
             <g stroke="#8B93B2" fill="none">
-              <path d="M-20 168 L680 132" stroke-width="17" opacity=".30" />
-              <path d="M-20 62 L680 44" stroke-width="8" opacity=".20" />
-              <path d="M148 -20 L120 260" stroke-width="8" opacity=".20" />
-              <path d="M470 -20 L505 260" stroke-width="8" opacity=".20" />
-              <path d="M-20 216 L680 200" stroke-width="6" opacity=".16" />
+              <path d="M-20 190 L680 150" stroke-width="17" opacity=".30" />
+              <path d="M-20 70 L680 50" stroke-width="8" opacity=".20" />
+              <path d="M148 -20 L120 300" stroke-width="8" opacity=".20" />
+              <path d="M470 -20 L505 300" stroke-width="8" opacity=".20" />
+              <path d="M-20 246 L680 228" stroke-width="6" opacity=".16" />
             </g>
             <g fill="#8B93B2" opacity=".16">
-              <rect x="182" y="72" width="86" height="42" /><rect x="300" y="66" width="64" height="48" />
-              <rect x="546" y="78" width="72" height="38" /><rect x="196" y="186" width="96" height="40" />
-              <rect x="392" y="182" width="78" height="44" />
+              <rect x="182" y="82" width="86" height="42" /><rect x="300" y="76" width="64" height="48" />
+              <rect x="546" y="88" width="72" height="38" /><rect x="196" y="212" width="96" height="40" />
+              <rect x="392" y="208" width="78" height="44" />
             </g>
-            <text x="24" y="126" font-family="Archivo, sans-serif" font-size="12" font-weight="700" letter-spacing="1.4" fill="#656D90">EN 9</text>
-            <circle cx="352" cy="140" r="31" fill="none" stroke="#C9202F" stroke-width="2" opacity=".34" />
-            <circle cx="352" cy="140" r="19" fill="#C9202F" /><circle cx="352" cy="140" r="6.5" fill="#FFFFFF" />
+            <circle cx="352" cy="160" r="31" fill="none" stroke="#C9202F" stroke-width="2" opacity=".34" />
+            <circle cx="352" cy="160" r="19" fill="#C9202F" /><circle cx="352" cy="160" r="6.5" fill="#FFFFFF" />
           </svg>
-          <a href={club.maps} target="_blank" rel="noopener"
-             class="tap absolute bottom-3 right-3 border border-n-100 bg-white px-5 py-3 text-14 font-bold uppercase tracking-[0.06em] text-navy hover:text-red">{t('cta.maps')}</a>
+
+          <div id="map-cta" class="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-navy/78 px-6 text-center">
+            <button id="map-load" type="button"
+                    class="tap bg-white px-7 py-4 text-14 font-bold uppercase tracking-[0.08em] text-navy hover:bg-red hover:text-white">
+              {t('map.load')}
+            </button>
+            <a href={club.maps} target="_blank" rel="noopener"
+               class="tap text-14 font-bold text-white underline underline-offset-4 hover:text-on-navy-100">{t('cta.maps')}</a>
+          </div>
         </div>
+        <p class="text-14 leading-relaxed text-n-500">{t('map.note')}</p>
+
         <address class="not-italic text-16 leading-relaxed">
           <span class="font-bold">{club.street}</span><br />
           <span class="text-n-700">{club.postalCode} {club.city}, {club.countryName}</span>
@@ -122,3 +134,23 @@ const subject = lang === 'pt' ? 'Inscrição — curso para iniciantes' : 'Sign-
     </div>
   </div>
 </section>
+
+<script is:inline>
+  (function () {
+    var slot = document.getElementById('map-slot');
+    var btn = document.getElementById('map-load');
+    if (!slot || !btn) return;
+    btn.addEventListener('click', function () {
+      var f = document.createElement('iframe');
+      f.src = slot.dataset.src;
+      f.title = slot.dataset.title;
+      f.loading = 'lazy';
+      f.referrerPolicy = 'no-referrer-when-downgrade';
+      f.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:0';
+      slot.appendChild(f);
+      var cta = document.getElementById('map-cta');
+      if (cta) cta.remove();
+      f.focus();
+    }, { once: true });
+  })();
+</script>
