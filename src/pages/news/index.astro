@@ -1,29 +1,33 @@
 ---
+import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import PageShell from '../../components/PageShell.astro';
-import FacebookFeed from '../../components/FacebookFeed.astro';
-import Icon from '../../components/Icon.astro';
-import { useTranslations } from '../../i18n/ui';
-import { club } from '../../i18n/club';
-
+import { useTranslations, localePath } from '../../i18n/ui';
 const lang = 'en' as const;
 const t = useTranslations(lang);
+const locale = lang === 'pt' ? 'pt-PT' : 'en-GB';
+const items = (await getCollection('news', (e) => e.id.startsWith(lang + '/')))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 <Base lang={lang} path="news" title={t('news.title')}
-      description={lang === 'pt'
-        ? 'Notícias do Kendo Club Sintra — competições, graduações e seminários, directamente da nossa página de Facebook.'
-        : 'News from Kendo Club Sintra — competitions, gradings and seminars, straight from our Facebook page.'}>
-  <PageShell title={t('news.title')} />
-  <div class="px-6 pb-20 md:px-16">
-    <div class="mx-auto grid max-w-[1440px] items-start gap-12 lg:grid-cols-[1fr_500px]">
-      <div class="flex flex-col gap-5">
-        <p class="max-w-[46ch] text-19 leading-relaxed text-n-700">{t('news.fb')}</p>
-        <a href={club.facebook} target="_blank" rel="noopener"
-           class="tap self-start items-center gap-3 bg-navy px-7 py-4 text-16 font-bold text-white hover:bg-red">
-          <Icon name="facebook" size={18} />Facebook
-        </a>
+      description={lang === 'pt' ? 'Notícias do Kendo Club Sintra — competições, graduações e seminários.' : 'News from Kendo Club Sintra — competitions, gradings and seminars.'}>
+  <div class="px-6 py-16 md:px-16 md:py-24">
+    <div class="mx-auto max-w-[1440px]">
+      <h1 class="display mb-10 border-b border-n-100 pb-9 text-46 md:text-62">{t('news.title')}</h1>
+      <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+        {items.map((item) => (
+          <article class="flex flex-col gap-3 border-t-4 border-red pt-6">
+            <p class="text-14 font-bold uppercase tracking-[0.1em] text-n-500">
+              <time datetime={item.data.date.toISOString()}>
+                {item.data.date.toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric' })}
+              </time>{item.data.category && ` · ${item.data.category}`}
+            </p>
+            <h2 class="text-25 font-bold leading-snug">
+              <a class="text-navy hover:text-red" href={localePath(lang, `news/${item.id.split('/').pop()}`)}>{item.data.title}</a>
+            </h2>
+            <p class="text-16 leading-relaxed text-n-700">{item.data.description}</p>
+          </article>
+        ))}
       </div>
-      <FacebookFeed lang={lang} height={780} />
     </div>
   </div>
 </Base>

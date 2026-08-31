@@ -207,27 +207,23 @@ zaawansowani dołączają o 19:30, koniec 21:00.
 `endDate` jest wyliczana z podanych „trzech miesięcy" — arytmetyka na
 deklarowanym fakcie, nie zmyślenie.
 
-## Aktualności — feed z Facebooka
+## Aktualności
 
-`src/components/FacebookFeed.astro`. Sekcja na stronie głównej i cała strona
-`/news` pokazują wtyczkę Page Plugin z Waszego profilu.
+Wpisy w `src/content/news/{en,pt}/*.md`. Dwie najnowsze na stronie głównej,
+komplet na `/news`, każdy ma własną stronę `/news/<slug>`.
 
-Wtyczka ma **twardy limit 500 px szerokości** i nie przepływa sama, dlatego
-skrypt mierzy kontener i buduje `src` z policzoną szerokością (180–500),
-przeliczając ją przy zmianie rozmiaru okna. Stąd też układ dwukolumnowy:
-kontekst po lewej, feed po prawej — inaczej na desktopie zostawałaby wąska
-kolumna w pustce.
+Nowy wpis to nowy plik z frontmatterem `title`, `description`, `date`
+i opcjonalnym `category`. Sortowanie po dacie, malejąco.
 
-Bez JavaScriptu widać link do profilu; wtyczka i tak nie zadziała bez skryptu.
+**Próbowaliśmy wtyczki Facebooka i wycofaliśmy się z niej** (commity `701e6a3`
+i wstecz). Powody: wygląda jak obcy element, bo iframe'a nie da się zestylować;
+zostawiała dużą pustkę pod nagłówkiem przez sztywną wysokość; treść w iframe
+nie jest indeksowana jako Wasza, więc wpisy przestawały budować pozycję domeny.
+Do tego dochodziła zależność od Meta i trzecie źródło cookies.
 
-**Czym za to płacicie:** treść w iframe **nie jest indeksowana jako Wasza**.
-Wpisy o Konotori Cup i egzaminach 1. kyu były wcześniej treścią na własnej
-domenie i budowały jej pozycję — teraz są własnością Facebooka. Dochodzi
-zależność od Meta, która w przeszłości wycofywała funkcje tej wtyczki.
-
-Poprzednia wersja (Markdown w `src/content/news/`, własne trasy `/news/[slug]`,
-pełna kontrola nad wyglądem i SEO) jest do odtworzenia z historii gita —
-commit `ca6f8f2`.
+Wersja w Markdown jest wolniejsza w obsłudze — wpis trzeba napisać, a nie tylko
+wrzucić na FB — ale jest szybka, w typografii serwisu, indeksowana i niczyja
+poza Waszą.
 
 ## Galeria i powiększanie
 
