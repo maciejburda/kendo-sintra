@@ -32,10 +32,8 @@ export function clubSchema(site: URL) {
 /**
  * Kurs dla poczatkujacych. Pozwala Google pokazac date i cene w wynikach.
  *
- * Dzien tygodnia potwierdzony przez klub (sroda). Godzin celowo brak:
- * treningi sa w srody 19:00-21:00, ale nie wiadomo, czy kurs dla
- * poczatkujacych idzie w tym samym oknie, a zgadywanie trafiloby do
- * danych strukturalnych jako fakt.
+ * Dzien i godziny potwierdzone przez klub: sroda, poczatkujacy od 19:00,
+ * zaawansowani dolaczaja o 19:30, koniec 21:00.
  *
  * endDate jest wyliczana z podanych "trzech miesiecy" — to arytmetyka
  * na deklarowanym fakcie, nie zmyslenie.
@@ -82,6 +80,8 @@ export function courseSchema(lang: Lang, site: URL, coursePath: string) {
         '@type': 'Schedule',
         repeatFrequency: 'P1W',
         byDay: `https://schema.org/${club.course.day}`,
+        startTime: club.course.startTime,
+        endTime: club.course.endTime,
         startDate: club.course.startISO,
         endDate: iso(end),
         scheduleTimezone: 'Europe/Lisbon',

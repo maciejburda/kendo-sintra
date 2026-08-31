@@ -194,10 +194,8 @@ Domyślnie `true`, żeby nie zmieniać stanu zastanego bez Waszej decyzji.
 
 Dzięki temu Google może pokazać datę i cenę kursu bezpośrednio w wynikach.
 
-**Czego tam celowo nie ma:** godzin kursu. Klub trenuje w środy 19:00–21:00,
-ale nie potwierdził, czy kurs dla początkujących idzie w tym samym oknie.
-Zgadywanie trafiłoby do danych strukturalnych jako twierdzenie. Jeśli godziny
-są te same, dopisz `startTime`/`endTime` w `courseSchedule`.
+Dzień i godziny są potwierdzone przez klub: środa, początkujący od 19:00,
+zaawansowani dołączają o 19:30, koniec 21:00.
 
 `endDate` jest wyliczana z podanych „trzech miesięcy" — arytmetyka na
 deklarowanym fakcie, nie zmyślenie.

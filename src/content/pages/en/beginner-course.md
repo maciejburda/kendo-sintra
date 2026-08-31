@@ -8,7 +8,9 @@ Are you ready to take your first step into the world of Kendo? Our Beginner Kend
 
 ## Course details
 
-**Duration & cost.** The course lasts three months, once per week on **Wednesday evenings**, at a total cost of 60 EUR (20 EUR per month).
+**When.** Wednesdays, starting at **19:00**. Beginners have the first half hour to themselves; more experienced members join at 19:30 and training runs to 21:00.
+
+**Duration & cost.** The course lasts three months, once per week, at a total cost of 60 EUR (20 EUR per month).
 
 **Instructor.** Classes are led in English (with Japanese commands) by 6th Dan Sensei Rogier van Bijnen from the Netherlands, a former member of the Dutch national Kendo team. Translation to Portuguese is available to ensure everyone can follow the lessons.
 

@@ -33,9 +33,12 @@ export const club = {
     startISO: '2026-09-16',
     total: 60,
     months: 3,
-    /** Dzien tygodnia kursu dla poczatkujacych. Godzin celowo brak — klub
-        trenuje w srody 19:00-21:00, ale nie potwierdzil, czy kurs idzie
-        w tym samym oknie. */
+    /** Sroda: poczatkujacy od 19:00, zaawansowani dolaczaja o 19:30.
+        Potwierdzone przez klub. */
     day: 'Wednesday',
+    startTime: '19:00',
+    endTime: '21:00',
+    /** Godzina, o ktorej do sesji dolaczaja zaawansowani. */
+    advancedJoin: '19:30',
   },
 } as const;
