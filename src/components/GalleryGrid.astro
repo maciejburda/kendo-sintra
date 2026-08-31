@@ -62,9 +62,11 @@ const items = await Promise.all(
 <dialog id="lb" class="on-navy" aria-label={t('nav.gallery')}>
   <figure>
     <img id="lb-img" alt="" />
-    <figcaption>
-      <span id="lb-cap"></span>
-      <span id="lb-count" aria-live="polite"></span>
+    <figcaption aria-live="polite">
+      {/* Opis zostaje w DOM, tylko schowany wizualnie — przy przeskakiwaniu
+          strzalkami czytnik ekranu musi powiedziec, co sie zmienilo. */}
+      <span id="lb-cap" class="sr-only"></span>
+      <span id="lb-count"></span>
     </figcaption>
   </figure>
   <button id="lb-prev" type="button" aria-label={t('gallery.prev')}>
@@ -88,10 +90,12 @@ const items = await Promise.all(
   #lb figure { margin: 0; height: 100%; display: flex; flex-direction: column;
                align-items: center; justify-content: center; gap: 18px; padding: 56px 16px 24px; box-sizing: border-box; }
   #lb img { max-width: min(1600px, 94vw); max-height: 78dvh; width: auto; height: auto; object-fit: contain; }
-  #lb figcaption { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center;
-                   gap: 14px; max-width: 74ch; text-align: center; font-size: var(--text-16);
-                   line-height: 1.5; color: var(--color-on-navy-100); }
-  #lb-count { font-weight: 700; color: var(--color-red-on-navy); white-space: nowrap; }
+  #lb figcaption { text-align: center; }
+  #lb-count { font-size: var(--text-16); font-weight: 700; letter-spacing: .08em;
+              font-variant-numeric: tabular-nums; color: var(--color-on-navy-100); }
+  /* ukrycie wizualne bez wyjmowania z drzewa dostepnosci */
+  #lb .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+                 overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
   #lb button { position: absolute; display: inline-flex; align-items: center; justify-content: center;
                min-width: 52px; min-height: 52px; border: 0; background: rgba(255,255,255,.08);
                color: #fff; cursor: pointer; }

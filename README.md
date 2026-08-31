@@ -154,6 +154,9 @@ czytników ekranu i `::backdrop`. Skrypt dokłada tylko nawigację.
 - zawijanie na obu końcach; sąsiednie zdjęcia są wstępnie ładowane
 - focus wraca na miniaturę, od której zaczęto
 - osobny wariant 1600px pod powiększenie (miniatury mają maks. 1200)
+- pod zdjęciem tylko numer („7 z 68"); opis jest ukryty wizualnie, ale zostaje
+  w `alt` obrazu i w obszarze `aria-live`, żeby czytnik ekranu mówił, co się
+  zmieniło przy przeskakiwaniu strzałkami
 - skrypt waży ~2.5 KB i **ładuje się wyłącznie na stronie galerii** —
   strona główna zostaje przy 810 B
 
