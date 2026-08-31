@@ -16,6 +16,8 @@ export const club = {
       Szukanie po samym adresie trafialo w TASIS Portugal International School. */
   mapsEmbed: 'https://maps.google.com/maps?q=Kendo+Club+Sintra,+Sintra,+Portugal&z=16&output=embed',
   facebook: 'https://www.facebook.com/people/TASIS-Kendo-Club/61565495708778',
+  /** Adres strony w formacie, ktory przyjmuje wtyczka Page Plugin. */
+  facebookPluginHref: 'https://www.facebook.com/profile.php?id=61565495708778',
   instagram: 'https://www.instagram.com/kendoclubsintra',
   /**
    * Link do formularza zapisu w Google Forms (krotki https://forms.gle/...).

@@ -1,9 +1,9 @@
 ---
 import { Image } from 'astro:assets';
-import { getCollection } from 'astro:content';
 import Hero from './Hero.astro';
 import ContactBand from './ContactBand.astro';
 import Icon from './Icon.astro';
+import FacebookFeed from './FacebookFeed.astro';
 import facingOff from '../assets/photos/aip-42.jpg';
 import strike from '../assets/photos/aip-30.jpg';
 import sparring from '../assets/photos/aip-50.jpg';
@@ -15,9 +15,6 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 const locale = lang === 'pt' ? 'pt-PT' : 'en-GB';
 
-const news = (await getCollection('news', (e) => e.id.startsWith(`${lang}/`)))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 2);
 
 const courseDate = new Date(club.course.startISO)
   .toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric' }).toUpperCase();
@@ -77,29 +74,17 @@ const facts = [
   ))}
 </div>
 
-<section class="px-6 py-20 md:px-16">
-  <div class="mx-auto max-w-[1440px]">
-    <div class="mb-9 flex flex-wrap items-center justify-between gap-4">
+<section class="border-t border-n-100 bg-n-050 px-6 py-20 md:px-16">
+  <div class="mx-auto grid max-w-[1440px] items-start gap-12 lg:grid-cols-[1fr_500px]">
+    <div class="flex flex-col gap-5">
       <h2 class="display text-46">{t('news.title')}</h2>
-      <a href={localePath(lang, 'news')} class="tap gap-2 text-14 font-bold uppercase tracking-[0.1em] text-red">
-        {t('cta.all-news')} <Icon name="arrow" size={16} />
+      <p class="max-w-[46ch] text-19 leading-relaxed text-n-700">{t('news.fb')}</p>
+      <a href={club.facebook} target="_blank" rel="noopener"
+         class="tap self-start items-center gap-3 bg-navy px-7 py-4 text-16 font-bold text-white hover:bg-red">
+        <Icon name="facebook" size={18} />Facebook
       </a>
     </div>
-    <div class="grid gap-8 md:grid-cols-2">
-      {news.map((item) => (
-        <article class="flex flex-col gap-3 border-t-4 border-red pt-6">
-          <p class="text-14 font-bold uppercase tracking-[0.1em] text-n-500">
-            <time datetime={item.data.date.toISOString()}>
-              {item.data.date.toLocaleDateString(locale, { month: 'long', year: 'numeric' })}
-            </time>{item.data.category && ` · ${item.data.category}`}
-          </p>
-          <h3 class="text-25 font-bold leading-snug">
-            <a href={localePath(lang, `news/${item.id.split('/').pop()}`)} class="text-navy hover:text-red">{item.data.title}</a>
-          </h3>
-          <p class="text-16 leading-relaxed text-n-700">{item.data.description}</p>
-        </article>
-      ))}
-    </div>
+    <FacebookFeed lang={lang} height={620} />
   </div>
 </section>
 

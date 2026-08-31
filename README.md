@@ -202,6 +202,28 @@ zaawansowani dołączają o 19:30, koniec 21:00.
 `endDate` jest wyliczana z podanych „trzech miesięcy" — arytmetyka na
 deklarowanym fakcie, nie zmyślenie.
 
+## Aktualności — feed z Facebooka
+
+`src/components/FacebookFeed.astro`. Sekcja na stronie głównej i cała strona
+`/news` pokazują wtyczkę Page Plugin z Waszego profilu.
+
+Wtyczka ma **twardy limit 500 px szerokości** i nie przepływa sama, dlatego
+skrypt mierzy kontener i buduje `src` z policzoną szerokością (180–500),
+przeliczając ją przy zmianie rozmiaru okna. Stąd też układ dwukolumnowy:
+kontekst po lewej, feed po prawej — inaczej na desktopie zostawałaby wąska
+kolumna w pustce.
+
+Bez JavaScriptu widać link do profilu; wtyczka i tak nie zadziała bez skryptu.
+
+**Czym za to płacicie:** treść w iframe **nie jest indeksowana jako Wasza**.
+Wpisy o Konotori Cup i egzaminach 1. kyu były wcześniej treścią na własnej
+domenie i budowały jej pozycję — teraz są własnością Facebooka. Dochodzi
+zależność od Meta, która w przeszłości wycofywała funkcje tej wtyczki.
+
+Poprzednia wersja (Markdown w `src/content/news/`, własne trasy `/news/[slug]`,
+pełna kontrola nad wyglądem i SEO) jest do odtworzenia z historii gita —
+commit `ca6f8f2`.
+
 ## Galeria i powiększanie
 
 `src/components/GalleryGrid.astro` — siatka plus powiększenie na natywnym

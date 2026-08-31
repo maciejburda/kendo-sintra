@@ -12,14 +12,5 @@ const pages = defineCollection({
   }),
 });
 
-const news = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/news' }),
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    date: z.coerce.date(),
-    category: z.string().optional(),
-  }),
-});
 
-export const collections = { pages, news };
+export const collections = { pages };
