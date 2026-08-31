@@ -14,10 +14,15 @@ const locale = lang === 'pt' ? 'pt_PT' : 'en_GB';
       przeplywa sam; iframe rozciagniety na sztywno zostawialby puste pole. */}
   <div id="fb-feed" class="min-h-[120px]"
        data-href={club.facebookPluginHref} data-locale={locale} data-height={String(height)}>
-    <a href={club.facebook} target="_blank" rel="noopener"
-       class="tap items-center gap-3 bg-navy px-6 py-4 text-16 font-bold text-white hover:bg-red">
-      <Icon name="facebook" size={18} />{t('news.fb.fallback')}
-    </a>
+    <div class="flex flex-col items-start gap-3 border border-n-100 bg-n-050 px-6 py-6">
+      <p class="text-14 leading-relaxed text-n-700">{t('consent.blocked.fb')}</p>
+      <button type="button" data-load
+              class="tap bg-navy px-6 py-3 text-14 font-bold uppercase tracking-[0.06em] text-white hover:bg-red">{t('consent.load')}</button>
+      <a href={club.facebook} target="_blank" rel="noopener"
+         class="tap items-center gap-3 text-14 font-bold text-red underline underline-offset-4">
+        <Icon name="facebook" size={16} />{t('news.fb.fallback')}
+      </a>
+    </div>
   </div>
   <p class="text-14 leading-relaxed text-n-500">{t('news.fb.note')}</p>
 </div>
@@ -48,7 +53,10 @@ const locale = lang === 'pt' ? 'pt_PT' : 'en_GB';
       f.style.cssText = 'border:0;overflow:hidden;display:block;max-width:100%';
       slot.appendChild(f);
     }
-    render();
+    slot.addEventListener('click', function (e) {
+      if (e.target.closest('[data-load]')) { current = 0; render(); }
+    });
+    KCS.onGrant(render);
     var tid;
     addEventListener('resize', function () { clearTimeout(tid); tid = setTimeout(render, 250); });
   })();

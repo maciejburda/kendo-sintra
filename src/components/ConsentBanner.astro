@@ -1,0 +1,44 @@
+---
+import { useTranslations, localePath, type Lang } from '../i18n/ui';
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+<div id="consent" hidden class="on-navy fixed inset-x-0 bottom-0 z-50 border-t-4 border-red bg-navy px-6 py-6 text-white shadow-[0_-14px_40px_-20px_rgba(15,20,46,.9)] md:px-16"
+     role="dialog" aria-modal="false" aria-labelledby="consent-t" aria-describedby="consent-d">
+  <div class="mx-auto flex max-w-[1440px] flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+    <div class="flex flex-col gap-2">
+      <p id="consent-t" class="text-19 font-bold">{t('consent.title')}</p>
+      <p id="consent-d" class="max-w-[74ch] text-16 leading-relaxed text-on-navy-100">
+        {t('consent.body')}{' '}
+        <a href={localePath(lang, 'privacy')} class="font-bold text-white underline underline-offset-4">{t('consent.more')}</a>
+      </p>
+    </div>
+    <div class="flex shrink-0 flex-wrap gap-3">
+      <button id="consent-yes" type="button"
+              class="tap bg-red px-8 py-4 text-16 font-bold uppercase tracking-[0.08em] text-white hover:bg-red-hover">{t('consent.accept')}</button>
+      <button id="consent-no" type="button"
+              class="tap border-2 border-white px-8 py-4 text-16 font-bold uppercase tracking-[0.08em] text-white hover:bg-white hover:text-navy">{t('consent.decline')}</button>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var el = document.getElementById('consent');
+    if (!el) return;
+    // Baner pokazujemy tylko, gdy wybor nie zostal jeszcze zapisany.
+    if (!window.KCS || KCS.get() === null) el.hidden = false;
+    function choose(v) { KCS.set(v); el.hidden = true; }
+    document.getElementById('consent-yes').addEventListener('click', function () { choose('granted'); });
+    document.getElementById('consent-no').addEventListener('click', function () { choose('denied'); });
+    // ponowne otwarcie z linku w stopce
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('[data-consent-settings]');
+      if (!a) return;
+      e.preventDefault();
+      el.hidden = false;
+      document.getElementById('consent-yes').focus();
+    });
+  })();
+</script>

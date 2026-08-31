@@ -46,7 +46,10 @@ const year = new Date().getFullYear();
 
     <div class="flex flex-wrap justify-between gap-3 pt-6 text-14 text-on-navy-300">
       <span>© {year} {club.name}. {t('footer.rights')}.</span>
-      <a class="text-on-navy-300 hover:text-white" href={localePath(lang, 'privacy')}>{t('nav.privacy')}</a>
+      <span class="flex gap-6">
+        <a class="text-on-navy-300 hover:text-white" href={localePath(lang, 'privacy')}>{t('nav.privacy')}</a>
+        <a class="text-on-navy-300 hover:text-white" href="#" data-consent-settings>{t('consent.settings')}</a>
+      </span>
     </div>
   </div>
 </footer>

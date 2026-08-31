@@ -78,11 +78,17 @@ const subject = lang === 'pt' ? 'Inscrição — curso para iniciantes' : 'Sign-
       <div class="flex flex-col gap-4">
         <!-- Schemat zastepuje embed: zywy iframe Map ustawia cookies Google
              i przywraca banner zgody. Patrz README, sekcja "Mapa". -->
-        <div class="relative h-[280px] overflow-hidden border border-n-100">
-          <iframe src={club.venue.mapsEmbed} title={t('map.title')} loading="lazy"
-                  referrerpolicy="no-referrer-when-downgrade"
-                  class="absolute inset-0 h-full w-full border-0"></iframe>
+        <div id="map-slot" class="relative flex min-h-[280px] items-center justify-center overflow-hidden border border-n-100 bg-n-050"
+             data-src={club.venue.mapsEmbed} data-title={t('map.title')}>
+          <div class="flex flex-col items-center gap-3 px-6 py-8 text-center">
+            <p class="text-14 leading-relaxed text-n-700">{t('consent.blocked.map')}</p>
+            <button type="button" data-load
+                    class="tap bg-navy px-6 py-3 text-14 font-bold uppercase tracking-[0.06em] text-white hover:bg-red">{t('consent.load')}</button>
+            <a href={club.venue.maps} target="_blank" rel="noopener"
+               class="tap text-14 font-bold text-red underline underline-offset-4">{t('cta.maps')}</a>
+          </div>
         </div>
+
         <address class="not-italic text-16 leading-relaxed">
           <span class="font-bold">{club.venue.name}</span><br />
           <span class="text-n-700">{club.venue.street}</span><br />
@@ -93,3 +99,25 @@ const subject = lang === 'pt' ? 'Inscrição — curso para iniciantes' : 'Sign-
     </div>
   </div>
 </section>
+
+<script is:inline>
+  (function () {
+    var slot = document.getElementById('map-slot');
+    if (!slot) return;
+    function load() {
+      var f = document.createElement('iframe');
+      f.src = slot.dataset.src;
+      f.title = slot.dataset.title;
+      f.loading = 'lazy';
+      f.referrerPolicy = 'no-referrer-when-downgrade';
+      f.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:0';
+      slot.innerHTML = '';
+      slot.appendChild(f);
+    }
+    // "zaladuj mimo to" dotyczy tylko tej wizyty i nie wlacza analityki
+    slot.addEventListener('click', function (e) {
+      if (e.target.closest('[data-load]')) load();
+    });
+    KCS.onGrant(load);
+  })();
+</script>

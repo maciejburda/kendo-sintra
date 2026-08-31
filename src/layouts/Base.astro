@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import ConsentBanner from '../components/ConsentBanner.astro';
 import { localePath, type Lang } from '../i18n/ui';
 import { club } from '../i18n/club';
 import { clubSchema, courseSchema } from '../data/schema';
@@ -38,6 +39,29 @@ const fullTitle = path === '' ? `${club.name} — ${lang === 'pt' ? 'Kendo em Si
 <html lang={lang === 'pt' ? 'pt-PT' : 'en-GB'}>
   <head>
     <meta charset="utf-8" />
+    <script is:inline>
+      /* Zgoda przechowywana w localStorage, nie w cookie — samo zapamietanie
+         wyboru nie wymaga zgody. Skrypty mapy, feedu i GA pytaja KCS.ok()
+         i nasluchuja zdarzenia "kcs-consent". */
+      window.KCS = (function () {
+        var K = 'kcs-consent';
+        function get() { try { return localStorage.getItem(K); } catch (e) { return null; } }
+        return {
+          get: get,
+          ok: function () { return get() === 'granted'; },
+          set: function (v) {
+            try { localStorage.setItem(K, v); } catch (e) {}
+            document.dispatchEvent(new CustomEvent('kcs-consent', { detail: v }));
+          },
+          onGrant: function (fn) {
+            if (this.ok()) { fn(); return; }
+            document.addEventListener('kcs-consent', function h(e) {
+              if (e.detail === 'granted') { document.removeEventListener('kcs-consent', h); fn(); }
+            });
+          },
+        };
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
@@ -61,10 +85,14 @@ const fullTitle = path === '' ? `${club.name} — ${lang === 'pt' ? 'Kendo em Si
     <link rel="icon" href={asset("favicon.svg")} type="image/svg+xml" />
     <link rel="sitemap" href={asset("sitemap-index.xml")} />
     {club.ga4 && !isPreview && (
-      <>
-        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${club.ga4}`}></script>
-        <script is:inline set:html={`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${club.ga4}');`}></script>
-      </>
+      <script is:inline set:html={`KCS.onGrant(function(){
+        var s=document.createElement('script');
+        s.async=1; s.src='https://www.googletagmanager.com/gtag/js?id=${club.ga4}';
+        document.head.appendChild(s);
+        window.dataLayer=window.dataLayer||[];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js',new Date()); gtag('config','${club.ga4}');
+      });`} />
     )}
     {localBusiness && <script type="application/ld+json" set:html={JSON.stringify(clubSchema(site))} />}
     {course && <script type="application/ld+json" set:html={JSON.stringify(courseSchema(lang, site, localePath(lang, 'beginner-course')))} />}
@@ -73,5 +101,6 @@ const fullTitle = path === '' ? `${club.name} — ${lang === 'pt' ? 'Kendo em Si
     <Header lang={lang} path={path} />
     <main id="main"><slot /></main>
     <Footer lang={lang} />
+    <ConsentBanner lang={lang} />
   </body>
 </html>
