@@ -104,17 +104,11 @@ z historii gita (commit `contact-band-form-map`).
 
 ### 2. Mapa
 
-Osadzona mapa Google (`club.mapsEmbed`, embed bez klucza API), **ładowana
-od razu** przy wejściu na stronę główną i `/contact`. Celuje we **własną
-wizytówkę klubu** w Mapach — szukanie po samym adresie trafiało w TASIS
-Portugal International School.
+Osadzona mapa Google (`club.venue.mapsEmbed`, embed bez klucza API) na stronie
+głównej i `/contact`. Celuje we **własną wizytówkę klubu** w Mapach — szukanie
+po samym adresie trafiało w cudzą placówkę.
 
-To decyzja klubu, podjęta świadomie. Konsekwencja: iframe Map ustawia cookies
-Google przy każdym wejściu, więc strona nie jest już wolna od cookies — patrz
-niżej.
-
-Wersję click-to-load (schemat + przycisk, cookies dopiero po kliknięciu) można
-odtworzyć z historii gita, commit `37d230b`.
+Ładuje się **dopiero po zgodzie** — patrz [Cookies i zgoda](#cookies-i-zgoda).
 
 ### 3. Analityka
 
@@ -122,7 +116,40 @@ odtworzyć z historii gita, commit `37d230b`.
 Wstrzykiwane tylko w buildzie produkcyjnym; na adresie podglądowym jest
 wyłączone, żeby nie zaśmiecać statystyk ruchem testowym.
 
-GA **ustawia cookies** (`_ga`, `_ga_*`). Puste `club.ga4` wyłącza analitykę.
+GA **ustawia cookies** (`_ga`, `_ga_*`), więc uruchamia się **dopiero po
+zgodzie** — patrz niżej. Puste `club.ga4` wyłącza analitykę całkowicie.
+
+## Cookies i zgoda
+
+Strona nie ustawia własnych cookies, ale ładuje **trzy rzeczy od innych firm**:
+
+| Źródło | Gdzie |
+|---|---|
+| Google Analytics 4 | wszystkie strony (tylko produkcja) |
+| Mapa Google | strona główna, `/contact` |
+| Feed z Facebooka | strona główna, `/news` |
+
+**Wszystkie trzy są zablokowane do czasu zgody.** Banner:
+`src/components/ConsentBanner.astro`, API zgody w `<head>` w `Base.astro`.
+
+### Jak to działa
+
+- `window.KCS` — `get()`, `ok()`, `set(v)`, `onGrant(fn)`. Wybór trzymany
+  w **localStorage**, nie w cookie: samo zapamiętanie decyzji nie wymaga zgody.
+- GA, mapa i feed rejestrują się przez `KCS.onGrant()` i nie robią nic, dopóki
+  nie ma zgody. W HTML-u nie ma wtedy **ani jednego `<iframe>`** — zweryfikowane.
+- Przy odmowie mapa i feed pokazują wyjaśnienie i przycisk **„załaduj mimo to"**,
+  który wczytuje *tylko ten jeden element na tę wizytę* i **nie** włącza
+  analityki. Inaczej kliknięcie mapy po cichu zgadzałoby się na GA.
+- Link **„Cookie settings"** w stopce otwiera banner ponownie.
+- Akceptacja i odmowa mają jednakową wagę wizualną — bez ciemnych wzorców.
+
+Napisany od zera (~2 KB) zamiast Klaro (~30 KB), żeby pasował do reszty
+serwisu: bez zależności, w tokenach projektu, dwujęzyczny.
+
+**To nie zastępuje przeglądu prawnego.** Mechanizm jest gotowy; treść zgody
+i to, czy jedna kategoria wystarczy zamiast rozdzielenia analityki od treści
+zewnętrznych, powinna potwierdzić osoba odpowiedzialna za RODO.
 
 ## Zdjęcia
 
