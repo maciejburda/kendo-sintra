@@ -133,13 +133,29 @@ ujawnia — ale dochodzą dwie rzeczy, których w v1 nie było:
 2. RODO wymaga zgody rodziców na publikację wizerunku nieletniego. Nie wiem,
    czy klub takie zgody zebrał.
 
-Przełącznik jest w `src/pages/gallery.astro`:
+Przełącznik jest w `src/components/GalleryGrid.astro`:
 
 ```ts
 const SHOW_IDENTIFIABLE_MINORS = true;   // false ukrywa te 11 zdjęć
 ```
 
 Domyślnie `true`, żeby nie zmieniać stanu zastanego bez Waszej decyzji.
+
+## Galeria i powiększanie
+
+`src/components/GalleryGrid.astro` — siatka plus powiększenie na natywnym
+`<dialog>`. Ten sam wzorzec co menu: **bez JavaScriptu miniatura jest zwykłym
+linkiem do pełnego zdjęcia**, więc galeria działa dalej, tylko bez nakładki.
+
+Co daje `<dialog>` za darmo: pułapkę focusu, Escape, `inert` na tle dla
+czytników ekranu i `::backdrop`. Skrypt dokłada tylko nawigację.
+
+- strzałki ← → na klawiaturze, przyciski, swipe na dotyku
+- zawijanie na obu końcach; sąsiednie zdjęcia są wstępnie ładowane
+- focus wraca na miniaturę, od której zaczęto
+- osobny wariant 1600px pod powiększenie (miniatury mają maks. 1200)
+- skrypt waży ~2.5 KB i **ładuje się wyłącznie na stronie galerii** —
+  strona główna zostaje przy 810 B
 
 ## Obrazek OG
 
