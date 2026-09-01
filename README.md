@@ -11,9 +11,9 @@ the consent banner (784 B) and the map loader (670 B). No external script tags.
 
 ## Requirements
 
-Node **20.3+** (currently built on 20.20.2). CI uses 22 — see
-`.github/workflows/deploy.yml` and the [Astro version](#astro-version--to-decide)
-section.
+Node **22.12+** (`.nvmrc` pins 22; built on 22.23.2). Astro 7 will not run on
+Node 20. CI uses 22 too — see `.github/workflows/deploy.yml` and the
+[Astro version](#astro-version) section.
 
 ```bash
 npm install
@@ -85,12 +85,20 @@ place to change if the link changes.
 While the field is empty, the contact band shows an information card with a
 `mailto:` button and a pre-filled subject — not a dead form.
 
-> **Form status (prototype).** The connected form currently has only a
-> `Full Name` field, Google's built-in email field, and one untitled question
-> with `Option 1`, marked required. It is missing the adult / under-18 split,
-> the guardian contact and the data-processing consent. To be completed before
-> the cutover to the custom domain — the fields are in `docs/google-form.md`.
-> Note: "Collect email addresses" is on, which forces a Google login.
+> **Form status.** The form is for **adults only**, so there is no under-18
+> branch and no guardian contact. It asks for: Full Name, Date of birth, medical
+> conditions or injuries, and where you heard about the club — all required —
+> plus a Google-verified email address.
+>
+> Two things still open before cutover:
+> 1. **No consent checkbox.** The privacy notice claims consent as the legal
+>    basis, which is not yet true. Wording is in `docs/google-form.md`.
+> 2. **Health data.** The medical question collects a special category under
+>    Art. 9 GDPR, which needs *explicit* consent — a higher bar than the rest of
+>    the form. Flagged in `privacy.md` for the GDPR reviewer.
+>
+> Also: email collection is set to "verified", which forces a Google login and
+> will lose some applicants. Deliberate or not, it is worth a look.
 
 **Why an outbound button rather than a form on the page.** A Google Form can
 only be embedded in an iframe. The button opens the form in a new tab, so data
@@ -310,20 +318,22 @@ get stubs with `meta refresh` + `rel=canonical` (GitHub Pages has no server-side
 redirects). They are excluded from the sitemap. Do not delete them — they hold
 rankings and links from Facebook.
 
-## Astro version — to decide
+## Astro version
 
-Built on **Astro 5.18.2**, because your Node is 20.20.2.
+Built on **Astro 7.2.10**, which requires **Node >= 22.12**. `.nvmrc` pins 22 and
+CI uses 22, so local and CI match.
 
-The current major is **Astro 7.2.9 and it requires Node ≥22.12**. Astro 5 has
-eight open advisories (XSS in `define:vars`, spread attributes, view transitions;
-SSRF in the prerendered error page). On a fully static site, with no islands and
-no user-supplied data, **none of them is realistically exploitable here** — but
-that branch will not get fixes any more.
+Upgraded from Astro 5.18.2, which had eight open advisories (XSS in `define:vars`,
+spread attributes, view transitions; SSRF in the prerendered error page). None of
+them was realistically exploitable on a fully static site with no islands and no
+user-supplied data, but that branch no longer receives fixes. `npm audit` now
+reports **0 vulnerabilities**.
 
-Recommendation: `brew install node@22`, then `npm i astro@latest`. The 5→7
-migration is mostly configuration changes; content, components and styles stay.
+The 5 -> 7 migration needed no source changes: same 31 pages, same output, no
+deprecation warnings. Content, components and styles were untouched.
 
-CI already uses Node 22, so the GitHub Actions build is independent of your machine.
+If you need to go back to Node 20 for another project:
+`brew unlink node@22 && brew link node@20` (node@20 is still installed).
 
 ## For the club to fill in
 
