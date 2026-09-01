@@ -63,13 +63,10 @@ the form. You may withdraw it at any time by writing to kendosintra@gmail.com.
 ## How long we keep it
 
 If you train with us, we keep your details for as long as you are training with
-the club.
+the club, and for **12 months** after your last session.
 
-[TODO: this covers members, but not the larger group — people who send the form
-and never start training. Most submissions will be in that group, so they need a
-period of their own: a common choice is deletion 12 months after last contact.
-Also needs deciding what happens once a member stops training: delete at once, or
-keep for a fixed period. Both answers belong in this section before launch.]
+If you send the form but never start training, we delete your details **12
+months** after we last hear from you.
 
 ## Who else sees it
 
