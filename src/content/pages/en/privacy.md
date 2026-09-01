@@ -39,25 +39,18 @@ a third-party embed is added. See README, section "Cookies and consent".]
 
 Sign-ups are handled by a **Google Form**, hosted by Google. If you fill it in,
 you send us your **name**, **date of birth**, **email address** (verified by
-Google, so you need to be signed in), where you heard about us, and **any medical
-conditions or injuries** you tell us about. The course is for adults, so we do not
-collect guardian details.
-
-[TODO: the medical field collects HEALTH DATA, which is a special category under
-Art. 9 GDPR. Ordinary consent is not a sufficient basis for it — Art. 9 requires
-explicit consent, and the form currently has no consent checkbox at all. This
-needs the GDPR reviewer's attention before launch. Wording is in
-`docs/google-form.md`.]
+Google, so you need to be signed in), and where you heard about us. The course
+is for adults, so we do not collect guardian details, and we do not ask for
+health information.
 
 ## Why we use it
 
 To reply to your enquiry and, if you sign up, to organise your participation in
-training. Medical details are used only so instructors can keep you safe in
-practice. The intended legal basis is your consent. You may withdraw it at any
+training. The intended legal basis is your consent. You may withdraw it at any
 time by writing to kendosintra@gmail.com.
 
 [TODO: the form has no consent checkbox yet, so this claim is not yet true.
-Either add one or change the stated basis.]
+The one-line wording to add is in `docs/google-form.md`.]
 
 ## How long we keep it
 
