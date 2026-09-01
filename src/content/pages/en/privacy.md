@@ -15,7 +15,13 @@ draft: true
 Kendo Club Sintra, Estrada Nacional No 9, Quinta da Beloura II, 2710-697 Sintra, Portugal.
 Email: kendosintra@gmail.com
 
-[TODO: full legal name of the entity and its NIF, if the club is a registered association]
+NIF: **518413403**
+
+[TODO: the exact registered legal name. The NIF is a collective-person number, so
+the club is a registered entity — but the federation lists it as "Kendo Clube de
+Sintra" while this site uses "Kendo Club Sintra". The controller must be named
+exactly as registered. Also confirm the address above is the registered seat:
+training is temporarily at CAISL, but this should be the seat, not the venue.]
 
 ## What we collect
 
@@ -34,8 +40,13 @@ from the "Cookie settings" link in the footer.
 
 We do not control those cookies and we cannot read them.
 
-[TODO: confirm this list is complete before launch — it must be re-checked whenever
-a third-party embed is added. See README, section "Cookies and consent".]
+This list was verified against the built site. Google Analytics and the Google
+Map are the only two third parties any page requests. Everything else pointing
+outward is either a link you have to click before anything is sent (Facebook,
+Instagram, the signup form, directions in Google Maps) or a namespace address
+that is never fetched. Fonts are served from this site, not from Google.
+
+[TODO (maintenance): re-check whenever a third-party embed is added.]
 
 Sign-ups are handled by a **Google Form**, hosted by Google. If you fill it in,
 you send us your **name**, **date of birth**, **email address** (verified by
@@ -51,7 +62,14 @@ the form. You may withdraw it at any time by writing to kendosintra@gmail.com.
 
 ## How long we keep it
 
-[TODO: retention period. Typically: up to 12 months from last contact, if you do not become a club member.]
+If you train with us, we keep your details for as long as you are training with
+the club.
+
+[TODO: this covers members, but not the larger group — people who send the form
+and never start training. Most submissions will be in that group, so they need a
+period of their own: a common choice is deletion 12 months after last contact.
+Also needs deciding what happens once a member stops training: delete at once, or
+keep for a fixed period. Both answers belong in this section before launch.]
 
 ## Who else sees it
 
