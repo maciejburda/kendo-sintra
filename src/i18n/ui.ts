@@ -47,7 +47,7 @@ export const ui = {
     'consent.load': 'Load it anyway',
     'nav.menu': 'Menu',
 
-    'hero.tagline': 'Kendo is a traditional Japanese martial art. We train twice a week in Sintra, led by a 6th dan sensei.',
+    'hero.tagline': 'Kendo is a traditional Japanese martial art. No experience needed to start — and your first class is free.',
     'hero.next-course': 'Next beginner course',
     'cta.signup': 'Sign up',
     'cta.watch': 'Come and watch',
@@ -119,7 +119,7 @@ export const ui = {
     'consent.load': 'Carregar mesmo assim',
     'nav.menu': 'Menu',
 
-    'hero.tagline': 'O Kendo é uma arte marcial japonesa tradicional. Treinamos duas vezes por semana em Sintra, com um sensei 6º dan.',
+    'hero.tagline': 'O Kendo é uma arte marcial japonesa tradicional. Não é preciso experiência para começar — e a primeira aula é gratuita.',
     'hero.next-course': 'Próximo curso para iniciantes',
     'cta.signup': 'Inscrever-me',
     'cta.watch': 'Venha assistir',
