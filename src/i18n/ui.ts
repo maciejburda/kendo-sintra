@@ -60,7 +60,9 @@ export const ui = {
     'course.duration.value': '3 months · Wednesdays 19:00',
     'course.shinai': 'Shinai',
     'course.shinai.value': 'Included, yours to keep',
-    'course.lead': 'Three months, Wednesdays from 19:00, for adults with no experience. Taught in English with Japanese commands, translated to Portuguese.',
+    'course.trial': 'Trial',
+    'course.trial.value': 'First class free',
+    'course.lead': 'For adults with no previous experience. Taught in English, with Japanese commands and Portuguese translation.',
 
     'facts.sensei': 'Dan sensei',
     'facts.sensei.note': 'Rogier van Bijnen, former Dutch national team',
@@ -132,7 +134,9 @@ export const ui = {
     'course.duration.value': '3 meses · quartas-feiras 19:00',
     'course.shinai': 'Shinai',
     'course.shinai.value': 'Incluído, fica para si',
-    'course.lead': 'Três meses, às quartas-feiras a partir das 19:00, para adultos sem experiência. Aulas em inglês com comandos em japonês e tradução para português.',
+    'course.trial': 'Aula experimental',
+    'course.trial.value': 'Primeira aula grátis',
+    'course.lead': 'Para adultos sem experiência prévia. Aulas em inglês, com comandos em japonês e tradução para português.',
 
     'facts.sensei': 'Sensei, dan',
     'facts.sensei.note': 'Rogier van Bijnen, ex-selecção nacional dos Países Baixos',

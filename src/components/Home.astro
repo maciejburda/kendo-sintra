@@ -61,7 +61,13 @@ const facts = [
       <div class="flex items-baseline justify-between border-b border-n-100 px-8 py-6">
         <dt class="text-16 font-bold">{t('course.shinai')}</dt><dd class="text-19">{t('course.shinai.value')}</dd>
       </div>
-      <a href={localePath(lang, 'beginner-course')}
+      <div class="flex items-baseline justify-between border-b border-n-100 px-8 py-6">
+        <dt class="text-16 font-bold">{t('course.trial')}</dt><dd class="text-19">{t('course.trial.value')}</dd>
+      </div>
+      {/* Same destination as the hero and the contact band: the form itself.
+          Falls back to the course page while club.signupForm is empty. */}
+      <a href={club.signupForm || localePath(lang, 'beginner-course')}
+         target={club.signupForm ? '_blank' : undefined} rel={club.signupForm ? 'noopener' : undefined}
          class="tap w-full justify-center bg-navy px-6 py-6 text-16 font-bold uppercase tracking-[0.08em] text-white hover:bg-red-hover">{t('cta.signup')}</a>
     </dl>
   </div>
