@@ -2,8 +2,13 @@
 import { useTranslations, localePath, type Lang } from '../i18n/ui';
 import { club } from '../i18n/club';
 
-interface Props { lang: Lang; }
-const { lang } = Astro.props;
+interface Props {
+  lang: Lang;
+  /** Course facts table. Off on the home page, where the red band already
+      carries them — two copies of the same figures drift apart. */
+  showCourseFacts?: boolean;
+}
+const { lang, showCourseFacts = true } = Astro.props;
 const t = useTranslations(lang);
 const signup = club.signupForm;
 const subject = lang === 'pt' ? 'Inscrição — curso para iniciantes' : 'Sign-up — beginner course';
@@ -18,20 +23,26 @@ const subject = lang === 'pt' ? 'Inscrição — curso para iniciantes' : 'Sign-
         <p class="text-16 leading-relaxed text-n-700">{t('signup.lead')}</p>
       </div>
 
-      <dl class="grid gap-px border border-n-100 bg-n-100 sm:grid-cols-3">
-        <div class="flex flex-col gap-1 bg-white px-5 py-4">
-          <dt class="text-12 font-bold uppercase tracking-[0.1em] text-n-500">{t('course.total')}</dt>
-          <dd class="display text-25">{club.course.total} {club.fees.currency}</dd>
-        </div>
-        <div class="flex flex-col gap-1 bg-white px-5 py-4">
-          <dt class="text-12 font-bold uppercase tracking-[0.1em] text-n-500">{t('course.duration')}</dt>
-          <dd class="text-16 font-bold">{t('course.duration.value')}</dd>
-        </div>
-        <div class="flex flex-col gap-1 bg-white px-5 py-4">
-          <dt class="text-12 font-bold uppercase tracking-[0.1em] text-n-500">{t('course.shinai')}</dt>
-          <dd class="text-16 font-bold">{t('course.shinai.value')}</dd>
-        </div>
-      </dl>
+      {showCourseFacts && (
+        <dl class="grid gap-px border border-n-100 bg-n-100 sm:grid-cols-2">
+          <div class="flex flex-col gap-1 bg-white px-5 py-4">
+            <dt class="text-12 font-bold uppercase tracking-[0.1em] text-n-500">{t('course.total')}</dt>
+            <dd class="display text-25">{club.course.total} {club.fees.currency}</dd>
+          </div>
+          <div class="flex flex-col gap-1 bg-white px-5 py-4">
+            <dt class="text-12 font-bold uppercase tracking-[0.1em] text-n-500">{t('course.duration')}</dt>
+            <dd class="text-16 font-bold">{t('course.duration.value')}</dd>
+          </div>
+          <div class="flex flex-col gap-1 bg-white px-5 py-4">
+            <dt class="text-12 font-bold uppercase tracking-[0.1em] text-n-500">{t('course.shinai')}</dt>
+            <dd class="text-16 font-bold">{t('course.shinai.value')}</dd>
+          </div>
+          <div class="flex flex-col gap-1 bg-white px-5 py-4">
+            <dt class="text-12 font-bold uppercase tracking-[0.1em] text-n-500">{t('course.trial')}</dt>
+            <dd class="text-16 font-bold">{t('course.trial.value')}</dd>
+          </div>
+        </dl>
+      )}
 
       {signup ? (
         <div class="flex flex-col gap-3">

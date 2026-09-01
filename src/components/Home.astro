@@ -28,9 +28,10 @@ const strip = [
   { img: sparring, alt: lang === 'pt' ? 'Combate com armadura' : 'Sparring in bogu' },
 ];
 
+// The sensei's grade is deliberately not a headline figure here — same reason it
+// came out of the hero. It stays on /about for anyone looking for it.
 const facts = [
-  { n: '6', label: t('facts.sensei'), note: t('facts.sensei.note') },
-  { n: '2×', label: t('facts.week'), note: t('facts.week.note') },
+  { n: '2', label: t('facts.week'), note: t('facts.week.note') },
   { n: String(club.fees.adults), label: t('facts.fee'), note: t('facts.fee.note') },
   { n: 'EN', label: t('facts.lang'), note: t('facts.lang.note') },
 ];
@@ -73,7 +74,7 @@ const facts = [
   </div>
 </section>
 
-<div class="grid gap-px bg-n-100 sm:grid-cols-2 lg:grid-cols-4">
+<div class="grid gap-px bg-n-100 sm:grid-cols-3">
   {facts.map((f) => (
     <div class="flex flex-col gap-2.5 bg-white px-8 py-12">
       <p class="display text-46 leading-none text-red">{f.n}</p>
@@ -109,4 +110,4 @@ const facts = [
   </div>
 </section>
 
-<ContactBand lang={lang} />
+<ContactBand lang={lang} showCourseFacts={false} />
