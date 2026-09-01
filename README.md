@@ -345,9 +345,7 @@ Search for `TODO (club)` in `src/content/`:
 - [ ] Minimum age for children, trial-session rules (`faq.md`)
 - [ ] Calendar of seminars, competitions and gradings (`schedule.md`)
 - [ ] Christmas and summer breaks (`schedule.md`)
-- [ ] **Privacy notice** (`privacy.md`) — this is a skeleton, not a legal
-      document. It needs review by whoever is responsible for GDPR. Separate
-      gap: likeness consents for the children whose photos you publish.
+- [ ] PT privacy notice — translated, `draft: true`, wants a native-speaker pass
 - [ ] Exact dojo coordinates (`src/i18n/club.ts`, `geo` field)
 - [ ] Logo with the wordmark in outlines — we only have the symbol. The header
       sets the name in type, so this is not blocking, but it will be needed for
