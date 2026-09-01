@@ -16,9 +16,16 @@ const signup = club.signupForm;
 const subject = lang === 'pt' ? 'Inscrição — curso para iniciantes' : 'Sign-up — beginner course';
 ---
 <section class="border-t border-n-100 bg-n-050 px-6 py-20 md:px-16">
-  {/* Without the signup column the remaining one would stretch the full 1440px,
-      leaving the hours rows as a name at one edge and a time at the other. */}
-  <div class:list={['mx-auto grid gap-16', showSignup ? 'max-w-[1440px] lg:grid-cols-2' : 'max-w-[900px]']}>
+  <div class="mx-auto flex max-w-[1440px] flex-col gap-10">
+
+    {!showSignup && (
+      <div class="flex flex-col gap-3">
+        <p class="text-14 font-bold uppercase tracking-[0.18em] text-red">{t('contact.reach')}</p>
+        <h2 class="display text-46">{t('contact.visit')}</h2>
+      </div>
+    )}
+
+    <div class:list={['grid gap-16', showSignup && 'lg:grid-cols-2']}>
 
     {showSignup && (
     <div class="flex flex-col gap-7">
@@ -73,12 +80,43 @@ const subject = lang === 'pt' ? 'Inscrição — curso para iniciantes' : 'Sign-
     </div>
     )}
 
-    <div class="flex flex-col gap-9">
+    {/* Beside the signup pitch this stacks. As the whole section it splits in two,
+        so the blocks do not run down one half of an empty row. */}
+    <div class:list={['gap-9', showSignup ? 'flex flex-col' : 'grid items-start gap-x-12 lg:grid-cols-2']}>
       <div class="flex flex-col gap-3 border-l-4 border-red bg-white px-6 py-5">
         <p class="text-16 font-bold text-navy">{t('venue.temp')}</p>
         <p class="text-16 leading-relaxed text-n-700">{t('venue.temp.body')}</p>
         <p class="text-14 leading-relaxed text-n-500">{t('venue.temp.after')}</p>
       </div>
+
+      {/* Phone, email and address also sit in the footer. Repeating them here is
+          deliberate: this is the section someone scrolls to when they want to
+          reach the club, and making them hunt in the footer for it is worse than
+          the duplication. */}
+      <dl class="grid gap-px border border-n-100 bg-n-100 sm:grid-cols-2">
+        <div class="flex flex-col gap-1 bg-white px-5 py-4">
+          <dt class="text-12 font-bold uppercase tracking-[0.1em] text-n-500">{t('contact.phone')}</dt>
+          <dd class="text-16 font-bold">
+            <a href={`tel:${club.phoneHref}`} class="tap text-navy hover:text-red">{club.phone}</a>
+          </dd>
+        </div>
+        <div class="flex flex-col gap-1 bg-white px-5 py-4">
+          <dt class="text-12 font-bold uppercase tracking-[0.1em] text-n-500">{t('contact.email')}</dt>
+          <dd class="text-16 font-bold">
+            <a href={`mailto:${club.email}`} class="tap break-all text-navy hover:text-red">{club.email}</a>
+          </dd>
+        </div>
+        <div class="flex flex-col gap-1 bg-white px-5 py-4 sm:col-span-2">
+          <dt class="text-12 font-bold uppercase tracking-[0.1em] text-n-500">{t('contact.address')}</dt>
+          <dd>
+            <address class="not-italic text-16 leading-relaxed">
+              <span class="font-bold">{club.venue.name}</span><br />
+              <span class="text-n-700">{club.venue.street}</span><br />
+              <span class="text-n-700">{club.venue.postalCode} {club.venue.city}, {club.countryName}</span>
+            </address>
+          </dd>
+        </div>
+      </dl>
 
       <div class="flex flex-col gap-4">
         <h2 class="text-14 font-bold uppercase tracking-[0.18em] text-red">{t('contact.hours')}</h2>
@@ -108,12 +146,9 @@ const subject = lang === 'pt' ? 'Inscrição — curso para iniciantes' : 'Sign-
           </div>
         </div>
 
-        <address class="not-italic text-16 leading-relaxed">
-          <span class="font-bold">{club.venue.name}</span><br />
-          <span class="text-n-700">{club.venue.street}</span><br />
-          <span class="text-n-700">{club.venue.postalCode} {club.venue.city}, {club.countryName}</span>
-        </address>
       </div>
+
+    </div>
 
     </div>
   </div>
