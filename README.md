@@ -101,7 +101,8 @@ Fields for building the form: **`docs/google-form.md`**.
 
 If you ever prefer a form natively on the page, that needs a backend such as
 Formspree — at which point the `<form>` version comes back, and it can be
-recovered from git history (commit `contact-band-form-map`).
+recovered from git history (the commit "Signup card with a button through to
+Google Forms" removed it).
 
 ### 2. Map
 
@@ -219,7 +220,8 @@ home page, the full set at `/news`, and each has its own page `/news/<slug>`.
 A new post is a new file with `title`, `description`, `date` frontmatter and an
 optional `category`. Sorted by date, descending.
 
-**We tried the Facebook plugin and withdrew it** (commit `701e6a3` and back).
+**We tried the Facebook plugin and withdrew it** (see the commits "News as a
+Facebook feed" and "Withdraw the Facebook feed, back to Markdown posts").
 Reasons: it looks like a foreign element, because an iframe cannot be styled; its
 fixed height left a large gap under the heading; content inside an iframe is not
 indexed as yours, so posts stopped building the domain's standing. On top of that
