@@ -47,7 +47,7 @@ export const ui = {
     'consent.load': 'Load it anyway',
     'nav.menu': 'Menu',
 
-    'hero.tagline': 'Kendo is a traditional Japanese martial art — bamboo swords, armour, and a great deal of noise. We teach it from the beginning.',
+    'hero.tagline': 'Kendo is a traditional Japanese martial art. Bamboo swords, armour, and a great deal of noise.',
     'hero.next-course': 'Next beginner course',
     'cta.signup': 'Sign up',
     'cta.watch': 'Come and watch',
@@ -119,7 +119,7 @@ export const ui = {
     'consent.load': 'Carregar mesmo assim',
     'nav.menu': 'Menu',
 
-    'hero.tagline': 'O Kendo é uma arte marcial japonesa tradicional — espadas de bambu, armadura e muito barulho. Ensinamos desde o início.',
+    'hero.tagline': 'O Kendo é uma arte marcial japonesa tradicional. Espadas de bambu, armadura e muito barulho.',
     'hero.next-course': 'Próximo curso para iniciantes',
     'cta.signup': 'Inscrever-me',
     'cta.watch': 'Venha assistir',
