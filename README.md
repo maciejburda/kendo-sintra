@@ -178,7 +178,10 @@ same names.
 Alt text lives in `src/data/gallery.ts`, written by hand and bilingually. It is
 not generated from filenames — a screen reader would then read out "aip 09".
 
-### Likeness and minors — for the club to decide
+### Likeness and minors — resolved
+
+The club holds consent from everyone shown, and from a parent or guardian where
+the subject is under 18. The switch below therefore stays `true`.
 
 **10 of the 68 photos show identifiable faces of minors outside the mask.**
 They are marked `faces: true` in `src/data/gallery.ts`:
@@ -188,13 +191,11 @@ dojo-2103, dojo-2103-1, dojo-2105-3, dojo-2110-2, dojo-2111,
 dojo-2111-1, dojo-2115, dojo-2116, dojo-2118-1, dojo-2119
 ```
 
-These photos **are already public on kendosintra.pt**, so v2 exposes nothing new
-— but two things are added that v1 did not have:
-
-1. The repository is public, and **git history is permanent**. Removing a photo
-   from the site is easy; purging it from commit history is not.
-2. GDPR requires parental consent to publish a minor's likeness. I do not know
-   whether the club has collected those consents.
+These photos **are already public on kendosintra.pt**, so v2 exposes nothing new.
+One thing to keep in mind that v1 did not have: the repository is public and
+**git history is permanent**. Removing a photo from the site is easy; purging it
+from commit history is not. If a consent is ever withdrawn, deleting the file in
+a new commit will not remove it from history.
 
 The switch is in `src/components/GalleryGrid.astro`:
 

@@ -90,4 +90,6 @@ You may ask us for a copy of your data, ask us to correct or delete it, or objec
 
 Photographs of training and competitions appear on this site and on our social media.
 
-[TODO: rules on likeness consent, especially for children. This is a real gap — the club photographs minors and publishes the images. It needs separate parental consent.]
+We publish a photograph only with the consent of the person shown, or of their
+parent or guardian where that person is under 18. To have a photograph of
+yourself or your child removed, write to kendosintra@gmail.com.
