@@ -46,11 +46,8 @@ health information.
 ## Why we use it
 
 To reply to your enquiry and, if you sign up, to organise your participation in
-training. The intended legal basis is your consent. You may withdraw it at any
-time by writing to kendosintra@gmail.com.
-
-[TODO: the form has no consent checkbox yet, so this claim is not yet true.
-The one-line wording to add is in `docs/google-form.md`.]
+training. The legal basis is your consent, which you give by ticking the box on
+the form. You may withdraw it at any time by writing to kendosintra@gmail.com.
 
 ## How long we keep it
 
