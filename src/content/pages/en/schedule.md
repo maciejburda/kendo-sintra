@@ -20,10 +20,10 @@ Beginners are welcome to come and watch any training evening — you do not need
 National competitions and gradings are organised by the
 [Federação Portuguesa de Kendo, Iaido e Jodo](https://kendo.pt/).
 
-<!-- TODO (klub): ktore z tych wydarzen klub faktycznie obsadza i kiedy sa
-     wewnetrzne seminaria. Kalendarz federacji jest publiczny, ale wybor
-     klubu juz nie — tego nie zgadne. -->
+<!-- TODO (club): which of these events the club actually enters, and when the
+     internal seminars are. The federation calendar is public, but the club's
+     choices are not — that cannot be guessed. -->
 
 ## Closures
 
-<!-- TODO (klub): przerwy swiateczne i wakacyjne. -->
+<!-- TODO (club): Christmas and summer breaks. -->

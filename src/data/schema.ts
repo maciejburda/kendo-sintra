@@ -9,7 +9,7 @@ const address = {
   addressCountry: club.country,
 } as const;
 
-/** Klub jako miejsce aktywnosci sportowej — strona glowna i kontakt. */
+/** The club as a sports activity location — home page and contact. */
 export function clubSchema(site: URL) {
   return {
     '@context': 'https://schema.org',
@@ -30,13 +30,13 @@ export function clubSchema(site: URL) {
 }
 
 /**
- * Kurs dla poczatkujacych. Pozwala Google pokazac date i cene w wynikach.
+ * The beginners' course. Lets Google show the date and price in search results.
  *
- * Dzien i godziny potwierdzone przez klub: sroda, poczatkujacy od 19:00,
- * zaawansowani dolaczaja o 19:30, koniec 21:00.
+ * Day and times confirmed by the club: Wednesday, beginners from 19:00,
+ * advanced join at 19:30, finish at 21:00.
  *
- * endDate jest wyliczana z podanych "trzech miesiecy" — to arytmetyka
- * na deklarowanym fakcie, nie zmyslenie.
+ * endDate is derived from the stated "three months" — arithmetic on a fact the
+ * club gave us, not an invention.
  */
 export function courseSchema(lang: Lang, site: URL, coursePath: string) {
   const start = new Date(club.course.startISO);

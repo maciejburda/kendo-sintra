@@ -9,7 +9,7 @@ draft: true
 
 As nossas aulas são conduzidas por Rogier van Bijnen, sensei 6º dan dos Países Baixos e antigo membro da equipa nacional de Kendo da Holanda. Ensina em inglês, com comandos e nomes de técnicas em japonês, e tradução para português para que todos possam acompanhar.
 
-<!-- TODO (klub): patrz wersja EN — ta sama biografia do uzupelnienia. -->
+<!-- TODO (club): see the EN version — the same bio still to be filled in. -->
 
 ## O dojo
 
@@ -21,7 +21,7 @@ Somos clube filiado na **Federação Portuguesa de Kendo, Iaido e Jodo (FPKIJ)**
 o organismo nacional que representa o kendo em Portugal, por sua vez reconhecido
 pela European Kendo Federation. A federação lista-nos em [kendo.pt](https://kendo.pt/clubes/).
 
-<!-- TODO (klub): ano de fundação e número de membros — patrz wersja EN. -->
+<!-- TODO (club): founding year and member count — see the EN version. -->
 
 ## Graduações e competição
 

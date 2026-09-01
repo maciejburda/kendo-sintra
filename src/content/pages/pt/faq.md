@@ -27,8 +27,8 @@ Em inglês, com comandos, nomes de técnicas e contagem em japonês. Há traduç
 
 ## A partir de que idade podem treinar crianças?
 
-<!-- TODO (klub): patrz wersja EN. -->
+<!-- TODO (club): see the EN version. -->
 
 ## Existe um período experimental?
 
-<!-- TODO (klub): patrz wersja EN. -->
+<!-- TODO (club): see the EN version. -->

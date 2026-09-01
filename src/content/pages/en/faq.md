@@ -27,8 +27,8 @@ English, with Japanese commands, technique names and counting. Portuguese transl
 
 ## From what age can children train?
 
-<!-- TODO (klub): minimalny wiek dla dzieci. Nie zgaduje. -->
+<!-- TODO (club): minimum age for children. Not guessing. -->
 
 ## Is there a trial period before I commit?
 
-<!-- TODO (klub): czy jest darmowy trening probny i ile ich przysluguje. -->
+<!-- TODO (club): whether there is a free trial session, and how many are allowed. -->

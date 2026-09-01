@@ -1,47 +1,47 @@
-# Formularz zapisu — pola do Google Forms
+# Signup form — fields for Google Forms
 
-Tytuł: **Kendo Club Sintra — Beginner Course / Curso para Iniciantes**
-Opis: `Beginner course starts 16 September 2026 · 60 EUR for three months, shinai included.`
+Title: **Kendo Club Sintra — Beginner Course / Curso para Iniciantes**
+Description: `Beginner course starts 16 September 2026 · 60 EUR for three months, shinai included.`
 
-Ustaw **dwujęzycznie** (EN / PT w jednym polu), bo strona jest dwujęzyczna,
-a jeden formularz jest łatwiejszy w obsłudze niż dwa.
+Set it up **bilingually** (EN / PT in the same field), because the site is
+bilingual and one form is easier to run than two.
 
 ---
 
-## Pola wymagane
+## Required fields
 
-| # | Pole | Typ | Uwagi |
+| # | Field | Type | Notes |
 |---|---|---|---|
-| 1 | Name / Nome | krótka odpowiedź | wymagane |
-| 2 | Email | krótka odpowiedź | wymagane, włącz walidację e-mail |
-| 3 | I am interested in / Tenho interesse em | jednokrotny wybór | wymagane. Opcje: `Beginner course (16 Sept 2026)` · `Adult classes` · `Kids classes` · `Visiting from another club` |
-| 4 | Age / Idade | jednokrotny wybór | wymagane. Opcje: `Adult (18+)` · `Under 18`. **Kurs jest opisany jako dla dorosłych — to pole rozdziela zgłoszenia na właściwe zajęcia** |
-| 5 | Zgoda na kontakt | pole wyboru | wymagane, treść niżej |
+| 1 | Name / Nome | short answer | required |
+| 2 | Email | short answer | required, turn on email validation |
+| 3 | I am interested in / Tenho interesse em | multiple choice | required. Options: `Beginner course (16 Sept 2026)` · `Adult classes` · `Kids classes` · `Visiting from another club` |
+| 4 | Age / Idade | multiple choice | required. Options: `Adult (18+)` · `Under 18`. **The course is described as being for adults — this field routes applicants to the right classes** |
+| 5 | Consent to be contacted | checkbox | required, wording below |
 
-## Pola opcjonalne
+## Optional fields
 
-| # | Pole | Typ | Po co |
+| # | Field | Type | Why |
 |---|---|---|---|
-| 6 | Phone / Telefone | krótka odpowiedź | sporo osób woli telefon; masz go wyeksponowanego na stronie |
-| 7 | Previous martial arts experience | krótka odpowiedź | pomaga sensei rozplanować grupę |
-| 8 | How did you hear about us? | jednokrotny wybór | `Website` · `Facebook` · `Instagram` · `Friend` · `Other`. Powie Wam, czy strona w ogóle działa |
-| 9 | Anything we should know? | długa odpowiedź | miejsce na pytania i kontuzje |
+| 6 | Phone / Telefone | short answer | plenty of people prefer the phone; it is prominent on the site |
+| 7 | Previous martial arts experience | short answer | helps the sensei plan the group |
+| 8 | How did you hear about us? | multiple choice | `Website` · `Facebook` · `Instagram` · `Friend` · `Other`. Tells you whether the site is working at all |
+| 9 | Anything we should know? | long answer | room for questions and injuries |
 
-## Sekcja warunkowa — jeśli w polu 4 wybrano „Under 18"
+## Conditional section — if field 4 is "Under 18"
 
-Włącz **„Przejdź do sekcji w zależności od odpowiedzi"**:
+Turn on **"Go to section based on answer"**:
 
-| # | Pole | Typ |
+| # | Field | Type |
 |---|---|---|
-| 10 | Parent or guardian name | krótka odpowiedź, wymagane |
-| 11 | Parent or guardian phone | krótka odpowiedź, wymagane |
+| 10 | Parent or guardian name | short answer, required |
+| 11 | Parent or guardian phone | short answer, required |
 
-> Bez tego zbieracie dane nieletnich bez kontaktu do opiekuna. Przy zajęciach
-> dla dzieci to nie jest formalność.
+> Without this you are collecting data about minors with no way to reach a
+> guardian. For children's classes that is not a formality.
 
 ---
 
-## Treść zgody (pole 5)
+## Consent wording (field 5)
 
 > I agree to Kendo Club Sintra storing the details in this form in order to
 > reply to me and organise my participation in training. I can withdraw this
@@ -51,21 +51,21 @@ Włącz **„Przejdź do sekcji w zależności od odpowiedzi"**:
 > responder e organizar a minha participação nos treinos. Posso retirar esta
 > autorização a qualquer momento escrevendo para kendosintra@gmail.com.
 
-**To jest szkic, nie porada prawna.** Musi przejrzeć osoba odpowiedzialna
-w klubie za RODO — patrz `src/content/pages/en/privacy.md`.
+**This is a draft, not legal advice.** It has to be reviewed by whoever is
+responsible for GDPR at the club — see `src/content/pages/en/privacy.md`.
 
 ---
 
-## Ustawienia formularza
+## Form settings
 
-- **Zbieraj adresy e-mail:** wyłącz. Pole 2 już to robi, a włączenie wymusza
-  logowanie do Google i odetnie część chętnych.
-- **Ogranicz do 1 odpowiedzi:** wyłącz, z tego samego powodu.
-- **Powiadomienia mailowe o nowych odpowiedziach:** włącz. Bez tego ktoś musi
-  pamiętać, żeby zaglądać do arkusza.
-- **Odpowiedzi → Połącz z Arkuszami:** włącz, żeby klub widział zgłoszenia
-  bez Twojego udziału.
+- **Collect email addresses:** off. Field 2 already does this, and turning it on
+  forces a Google login, which will cut off some applicants.
+- **Limit to 1 response:** off, for the same reason.
+- **Email notifications for new responses:** on. Otherwise someone has to
+  remember to check the spreadsheet.
+- **Responses → Link to Sheets:** on, so the club can see signups without
+  going through you.
 
-## Czego potrzebuję
+## What I need
 
-Link **„Wyślij → ikona ogniwa"**, czyli krótki `https://forms.gle/...`.
+The **"Send → link icon"** URL, i.e. the short `https://forms.gle/...`.

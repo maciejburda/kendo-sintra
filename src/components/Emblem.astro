@@ -1,9 +1,9 @@
 ---
 /**
- * Godlo klubu. Zrodlowy SVG ma viewBox 250x250, ale rysunek zajmuje tylko
- * srodkowe 150x150 — 40% pliku to pusty margines. Domyslnie przycinamy do
- * tresci, inaczej przy width=60 realne kolko ma 36px.
- * `bleed` przywraca oryginalny kadr, gdyby margines byl gdzies potrzebny.
+ * Club emblem. The source SVG has a 250x250 viewBox, but the artwork only occupies
+ * the middle 150x150 — 40% of the file is empty margin. By default we crop to the
+ * content, otherwise at width=60 the actual roundel is only 36px.
+ * `bleed` restores the original framing, should the margin ever be needed.
  */
 interface Props { size?: number; bleed?: boolean; title?: string; class?: string; variant?: 'color' | 'white'; }
 const { size = 76, bleed = false, title, class: klass, variant = 'color' } = Astro.props;

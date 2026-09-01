@@ -31,8 +31,8 @@ const other: Lang = lang === 'en' ? 'pt' : 'en';
       </span>
     </a>
 
-    <!-- Przycisk istnieje tylko gdy JS wlaczony (dodaje go skrypt na dole).
-         Bez JS nawigacja zostaje rozwinieta i dziala normalnie. -->
+    <!-- The button only exists when JS is on (the script at the bottom enables it).
+         Without JS the nav stays expanded and works normally. -->
     <button id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu"
             aria-label={t('nav.menu')}
             class="hidden h-[54px] w-[54px] shrink-0 items-center justify-center border border-n-300 text-navy hover:border-navy hover:bg-navy hover:text-white">
@@ -41,34 +41,34 @@ const other: Lang = lang === 'en' ? 'pt' : 'en';
         <g class="icon-burger" stroke-width="2">
           <path d="M2.5 5h19" /><path d="M2.5 12h19" /><path d="M2.5 19h19" />
         </g>
-        <!-- Shinai rysowane jako WYPELNIENIA, nie kreski: przy grubej kresce
-             z okraglymi koncami rekojesc czyta sie jak pioro wiosla, a tsuba
-             ginie pod nia. Jeden ksztalt zdefiniowany pionowo, dwa obroty. -->
-        <!-- Skrzyzowane shinai. Kat 40 st. dobrany rachunkiem, nie na oko:
-             AABB sumy obu mieczy wychodzi 20.28 x 20.54, czyli proporcja 0.99 —
-             ikona wypelnia kwadratowy kadr rowno. Przy 32 st. bylo 17.9 x 21.7
-             (0.82), czyli waska i wysoka.
-             Rozstaw srodkow tsuby = 2*6.5*sin(40) = 8.36 przy szerokosci elipsy
-             5.5, wiec zostaje 2.9 przeswitu i tarcze sie nie zlewaja.
-             Srodek obrotu y=10.9, bo bryla jest niesymetryczna wzgledem punktu
-             skrzyzowania (rekojesc dluzsza od sztychu). -->
+        <!-- Shinai drawn as FILLS, not strokes: with a thick round-capped stroke
+             the handle reads like an oar blade and the tsuba disappears beneath it.
+             One shape defined vertically, then rotated twice. -->
+        <!-- Crossed shinai. The 40 deg angle was computed, not eyeballed:
+             the combined AABB of both swords is 20.28 x 20.54, a ratio of 0.99 —
+             the icon fills its square frame evenly. At 32 deg it was 17.9 x 21.7
+             (0.82), i.e. narrow and tall.
+             Tsuba centre separation = 2*6.5*sin(40) = 8.36 against an ellipse width
+             of 5.5, leaving 2.9 of clearance so the discs do not merge.
+             Rotation centre y=10.9 because the shape is asymmetric about the
+             crossing point (the handle is longer than the tip). -->
         <g class="icon-shinai" fill="currentColor" stroke="none">
           <g transform="translate(12 10.9) rotate(-40)">
-            <!-- sakigawa: skorzana nasadka na sztychu -->
+            <!-- sakigawa: the leather cap on the tip -->
             <rect x="-1.25" y="-9.7" width="2.5" height="2.6" rx="1.2" />
-            <!-- trzon: rowna grubosc, bo shinai to bambus, nie zwezane ostrze -->
+            <!-- shaft: even thickness, because a shinai is bamboo, not a tapered blade -->
             <rect x="-1.05" y="-8.4" width="2.1" height="14.4" rx="1" />
-            <!-- tsuba: elipsa, czyli tarcza widziana pod katem -->
+            <!-- tsuba: an ellipse, i.e. the guard seen at an angle -->
             <ellipse cx="0" cy="6.5" rx="2.75" ry="1.65" />
             <!-- tsuka -->
             <rect x="-1.4" y="7.7" width="2.8" height="4.8" rx=".55" />
           </g>
           <g transform="translate(12 10.9) rotate(40)">
-            <!-- sakigawa: skorzana nasadka na sztychu -->
+            <!-- sakigawa: the leather cap on the tip -->
             <rect x="-1.25" y="-9.7" width="2.5" height="2.6" rx="1.2" />
-            <!-- trzon: rowna grubosc, bo shinai to bambus, nie zwezane ostrze -->
+            <!-- shaft: even thickness, because a shinai is bamboo, not a tapered blade -->
             <rect x="-1.05" y="-8.4" width="2.1" height="14.4" rx="1" />
-            <!-- tsuba: elipsa, czyli tarcza widziana pod katem -->
+            <!-- tsuba: an ellipse, i.e. the guard seen at an angle -->
             <ellipse cx="0" cy="6.5" rx="2.75" ry="1.65" />
             <!-- tsuka -->
             <rect x="-1.4" y="7.7" width="2.8" height="4.8" rx=".55" />
@@ -98,19 +98,20 @@ const other: Lang = lang === 'en' ? 'pt' : 'en';
 </header>
 
 <style>
-  /* Zachowanie zwijane wlacza sie DOPIERO gdy skrypt oznaczy dokument jako js.
-     Bez JS obowiazuje tylko ukladanie w wiersz od lg w gore. */
+  /* Collapsible behaviour only kicks in ONCE the script marks the document as js.
+     Without JS, only the lg-and-up row layout applies. */
   :global(html.js) #nav-toggle { display: inline-flex; }
   :global(html.js) #nav-menu[data-open='false'] { display: none; }
   @media (min-width: 1024px) {
     :global(html.js) #nav-toggle { display: none; }
     :global(html.js) #nav-menu[data-open='false'] { display: block; }
   }
-  /* Dwie grupy leza na sobie w tym samym viewBoxie; przelaczamy je kryciem
-     i obrotem, bo display nie da sie animowac. */
-  /* TYLKO dwie grupy nadrzedne. W SVG2 atrybut transform mapuje sie na wlasnosc
-     CSS transform, wiec selektor bez '>' lapal tez zagniezdzone grupy mieczy
-     i psul im srodek obrotu — miecze rozjezdzaly sie po skosie poza kadr. */
+  /* The two groups sit on top of each other in the same viewBox; we swap them with
+     opacity and rotation, because display cannot be animated. */
+  /* TOP-LEVEL groups ONLY. In SVG2 the transform attribute maps onto the CSS
+     transform property, so a selector without '>' also caught the nested sword
+     groups and broke their rotation centre — the swords drifted off diagonally
+     and out of frame. */
   #nav-toggle svg > g {
     transition: opacity .22s ease, transform .22s cubic-bezier(.2,.8,.3,1);
     transform-origin: 12px 12px;

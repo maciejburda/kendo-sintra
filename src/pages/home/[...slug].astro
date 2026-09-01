@@ -1,9 +1,9 @@
 ---
 /**
- * Zaslepki pod stare URL-e z v1 (kreator One.com uzywal prefiksu /home/).
- * GitHub Pages nie ma przekierowan serwerowych, wiec robimy to meta-refreshem
- * plus rel=canonical — Google traktuje to jak przekierowanie 301, tylko wolniej.
- * Wylaczone z sitemapy w astro.config.mjs.
+ * Stubs for the old v1 URLs (the One.com site builder used a /home/ prefix).
+ * GitHub Pages has no server-side redirects, so we do it with a meta refresh
+ * plus rel=canonical — Google treats that like a 301, just more slowly.
+ * Excluded from the sitemap in astro.config.mjs.
  */
 export async function getStaticPaths() {
   const map: Record<string, string> = {
@@ -15,7 +15,7 @@ export async function getStaticPaths() {
   return Object.entries(map).map(([slug, to]) => ({ params: { slug }, props: { to } }));
 }
 const { to } = Astro.props;
-// Prefiks wdrozenia, zeby zaslepka dzialala takze pod adresem podgladowym.
+// Deployment prefix, so the stub also works on the preview URL.
 const href = `${import.meta.env.BASE_URL}${to.replace(/^\//, '')}`.replace(/\/{2,}/g, '/');
 const target = new URL(to, Astro.site ?? 'https://kendosintra.pt').href;
 ---

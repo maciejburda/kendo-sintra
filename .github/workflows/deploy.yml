@@ -6,13 +6,13 @@ on:
   workflow_dispatch:
 
 # ---------------------------------------------------------------------------
-# PRZEŁĄCZNIK CUTOVERU
+# CUTOVER SWITCH
 #
-# 'false' — buduje pod adres podglądowy maciejburda.github.io/kendo-sintra.
-#           Strony mają noindex, żeby nie konkurowały z kendosintra.pt.
+# 'false' — builds for the preview URL maciejburda.github.io/kendo-sintra.
+#           Pages carry noindex so they do not compete with kendosintra.pt.
 #
-# 'true'  — buduje pod własną domenę: dokłada plik CNAME i zdejmuje prefiks.
-#           Przełącz DOPIERO gdy rekordy A wskazują na GitHuba (patrz README).
+# 'true'  — builds for the custom domain: adds the CNAME file and drops the prefix.
+#           Only flip this ONCE the A records point at GitHub (see README).
 # ---------------------------------------------------------------------------
 env:
   PRODUCTION: 'false'
@@ -37,15 +37,15 @@ jobs:
           cache: npm
       - run: npm ci
 
-      - name: Ustaw tryb budowania
+      - name: Set build mode
         run: |
           if [ "$PRODUCTION" = "true" ]; then
             cp deploy/CNAME public/CNAME
             echo "ASTRO_BASE=/" >> "$GITHUB_ENV"
-            echo "::notice::Build produkcyjny — domena $(cat deploy/CNAME)"
+            echo "::notice::Production build — domain $(cat deploy/CNAME)"
           else
             echo "ASTRO_BASE=/${GITHUB_REPOSITORY#*/}/" >> "$GITHUB_ENV"
-            echo "::notice::Build podglądowy — prefiks /${GITHUB_REPOSITORY#*/}/, strony z noindex"
+            echo "::notice::Preview build — prefix /${GITHUB_REPOSITORY#*/}/, pages set to noindex"
           fi
 
       - run: npm run build

@@ -9,8 +9,8 @@ draft: true
 
 Our classes are led by Rogier van Bijnen, a 6th dan sensei from the Netherlands and a former member of the Dutch national Kendo team. He teaches in English, using Japanese commands and technique names, with Portuguese translation available so that everyone can follow.
 
-<!-- TODO (klub): kilka zdan od sensei — od kiedy trenuje, gdzie studiowal kendo,
-     co go przywiodlo do Portugalii. Nie wymyslam biografii. -->
+<!-- TODO (club): a few sentences from the sensei — how long they have trained,
+     where they studied kendo, what brought them to Portugal. Not inventing a bio. -->
 
 ## The dojo
 
@@ -22,9 +22,9 @@ We are a member club of the **Federação Portuguesa de Kendo, Iaido e Jodo (FPK
 the national body representing kendo in Portugal, which is in turn recognised by the
 European Kendo Federation. The federation lists us at [kendo.pt](https://kendo.pt/clubes/).
 
-<!-- TODO (klub): rok zalozenia i liczba czlonkow — tego nie ma nigdzie publicznie.
-     Uwaga: federacja wpisala klub jako "Kendo Clube de Sintra", a strona uzywa
-     "Kendo Club Sintra". Warto ujednolicic albo swiadomie zostawic roznice. -->
+<!-- TODO (club): founding year and member count — neither is public anywhere.
+     Note: the federation lists the club as "Kendo Clube de Sintra", while the site
+     uses "Kendo Club Sintra". Worth unifying, or deliberately keeping the difference. -->
 
 ## Grades and competition
 

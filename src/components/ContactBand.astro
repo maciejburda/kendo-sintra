@@ -39,8 +39,8 @@ const subject = lang === 'pt' ? 'Inscrição — curso para iniciantes' : 'Sign-
              class="tap self-start bg-red px-10 py-5 text-16 font-bold uppercase tracking-[0.08em] text-white hover:bg-red-hover">
             {t('signup.cta')}
           </a>
-          {/* Formularz otwiera sie u Google, wiec mowimy to wprost — strona sama
-              nie ustawia zadnych cookies i nie chcemy tego zacierac. */}
+          {/* The form opens on Google's side, so we say so plainly — the site itself
+              sets no cookies and we do not want to blur that. */}
           <p class="text-14 text-n-500">{t('signup.newtab')}</p>
         </div>
       ) : (
@@ -76,8 +76,10 @@ const subject = lang === 'pt' ? 'Inscrição — curso para iniciantes' : 'Sign-
       </div>
 
       <div class="flex flex-col gap-4">
-        <!-- Schemat zastepuje embed: zywy iframe Map ustawia cookies Google
-             i przywraca banner zgody. Patrz README, sekcja "Mapa". -->
+        <!-- The live Maps iframe sets Google cookies, so it is only injected once
+             consent is granted (or the visitor clicks "load anyway"). Until then this
+             slot renders a placeholder plus a plain link out to Google Maps.
+             See README, section "Map". -->
         <div id="map-slot" class="relative flex min-h-[280px] items-center justify-center overflow-hidden border border-n-100 bg-n-050"
              data-src={club.venue.mapsEmbed} data-title={t('map.title')}>
           <div class="flex flex-col items-center gap-3 px-6 py-8 text-center">
@@ -114,7 +116,7 @@ const subject = lang === 'pt' ? 'Inscrição — curso para iniciantes' : 'Sign-
       slot.innerHTML = '';
       slot.appendChild(f);
     }
-    // "zaladuj mimo to" dotyczy tylko tej wizyty i nie wlacza analityki
+    // "load anyway" applies to this visit only and does not enable analytics
     slot.addEventListener('click', function (e) {
       if (e.target.closest('[data-load]')) load();
     });

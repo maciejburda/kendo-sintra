@@ -2,17 +2,17 @@ export const languages = { en: 'English', pt: 'Português' } as const;
 export type Lang = keyof typeof languages;
 export const defaultLang: Lang = 'en';
 
-/** Prefiks wdrozenia: '' na wlasnej domenie, '/kendo-sintra' na adresie podgladowym. */
+/** Deployment prefix: '' on the custom domain, '/kendo-sintra' on the preview URL. */
 const SITE_BASE = (import.meta.env.BASE_URL ?? '/').replace(/\/+$/, '');
 
-/** Sciezka do tej samej strony w danym jezyku. EN siedzi na /, PT na /pt/. */
+/** Path to the same page in a given language. EN lives at /, PT at /pt/. */
 export function localePath(lang: Lang, path = ''): string {
   const clean = path.replace(/^\/+|\/+$/g, '');
   const langSeg = lang === defaultLang ? '' : `/${lang}`;
   return `${SITE_BASE}${langSeg}${clean ? `/${clean}` : ''}` || '/';
 }
 
-/** Slugi tras — te same w obu jezykach, zeby przelacznik jezyka byl 1:1. */
+/** Route slugs — identical in both languages, so the language switch is 1:1. */
 export const routes = [
   'what-is-kendo',
   'beginner-course',

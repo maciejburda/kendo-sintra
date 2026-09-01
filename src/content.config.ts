@@ -7,7 +7,7 @@ const pages = defineCollection({
     title: z.string(),
     description: z.string(),
     eyebrow: z.string().optional(),
-    /** true = tresc wymaga jeszcze zatwierdzenia przez klub, patrz README */
+    /** true = the copy still needs sign-off from the club, see README */
     draft: z.boolean().default(false),
   }),
 });

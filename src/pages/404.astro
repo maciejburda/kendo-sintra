@@ -3,10 +3,10 @@ import Base from '../layouts/Base.astro';
 import { ui, localePath } from '../i18n/ui';
 
 /**
- * GitHub Pages serwuje jeden 404.html dla calej domeny, wiec strona musi
- * obsluzyc oba jezyki naraz. Bez JS widac obie wersje jedna pod druga;
- * skrypt chowa nieodpowiednia na podstawie sciezki. Ten sam wzorzec
- * progressive enhancement co menu, galeria i mapa.
+ * GitHub Pages serves a single 404.html for the whole domain, so this page has to
+ * handle both languages at once. Without JS both versions show one after the other;
+ * the script hides the wrong one based on the path. Same progressive-enhancement
+ * pattern as the menu, gallery and map.
  */
 const langs = [
   { code: 'en' as const, lang: 'en-GB' },

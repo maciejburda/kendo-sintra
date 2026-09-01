@@ -1,13 +1,13 @@
 /**
- * Opisy zdjec galerii. Alt-teksty pisane recznie — generowane z nazw plikow
- * nie sa dostepnoscia, czytnik ekranu odczytalby "aip 09".
+ * Gallery photo descriptions. Alt text is written by hand — text generated from
+ * filenames is not accessibility; a screen reader would read out "aip 09".
  *
- * `faces: true` = widac rozpoznawalna twarz osoby nieletniej poza maska (men).
- * Patrz README, sekcja "Wizerunek".
+ * `faces: true` = an identifiable face of a minor is visible outside the men (mask).
+ * See README, section "Likeness and minors".
  */
 export type Photo = { file: string; en: string; pt: string; faces?: true };
 
-/** Sesja AiP Photography, 10.12.2025 — wszyscy w bogu, twarze za maskami. */
+/** AiP Photography shoot, 2025-12-10 — everyone in bogu, faces behind masks. */
 const aip: Photo[] = [
   { file: 'aip-09.jpg', en: 'Two kendoka sparring, one lunging forward with raised shinai', pt: 'Dois kendoka em combate, um avançando com o shinai erguido' },
   { file: 'aip-10.jpg', en: 'Two kendoka in bogu facing each other, seen from behind', pt: 'Dois kendoka de bogu frente a frente, vistos por trás' },
@@ -35,7 +35,7 @@ const aip: Photo[] = [
   { file: 'aip-79.jpg', en: 'A kendoka in men seen from behind, others training beyond', pt: 'Um kendoka de men visto por trás, outros a treinar ao fundo' },
 ];
 
-/** Zawody, kwiecien 2025 — dzieci i dorosli. */
+/** Competition, April 2025 — children and adults. */
 const dojo: Photo[] = [
   { file: 'dojo-2103-1.jpg', en: 'Club group photo, kendoka seated and kneeling together', pt: 'Fotografia de grupo do clube, kendoka sentados e ajoelhados', faces: true },
   { file: 'dojo-2103.jpg', en: 'Club group photo, young kendoka standing in bogu', pt: 'Fotografia de grupo, jovens kendoka de bogu', faces: true },

@@ -27,12 +27,12 @@ const t = useTranslations(lang);
   (function () {
     var el = document.getElementById('consent');
     if (!el) return;
-    // Baner pokazujemy tylko, gdy wybor nie zostal jeszcze zapisany.
+    // Only show the banner when no choice has been stored yet.
     if (!window.KCS || KCS.get() === null) el.hidden = false;
     function choose(v) { KCS.set(v); el.hidden = true; }
     document.getElementById('consent-yes').addEventListener('click', function () { choose('granted'); });
     document.getElementById('consent-no').addEventListener('click', function () { choose('denied'); });
-    // ponowne otwarcie z linku w stopce
+    // reopened from the footer link
     document.addEventListener('click', function (e) {
       var a = e.target.closest('[data-consent-settings]');
       if (!a) return;

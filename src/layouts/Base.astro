@@ -11,21 +11,21 @@ interface Props {
   lang: Lang;
   title: string;
   description: string;
-  /** slug bez prefiksu jezyka, np. "fees" — steruje hreflang i stanem aktywnym w menu */
+  /** slug without the language prefix, e.g. "fees" — drives hreflang and the active nav state */
   path?: string;
-  /** JSON-LD LocalBusiness — strona glowna i kontakt */
+  /** JSON-LD LocalBusiness — home page and contact */
   localBusiness?: boolean;
-  /** JSON-LD Course — strona glowna i strona kursu. Pozwala Google pokazac
-      date i cene kursu w wynikach wyszukiwania. */
+  /** JSON-LD Course — home page and course page. Lets Google show the course
+      date and price in search results. */
   course?: boolean;
 }
 const { lang, title, description, path = '', localBusiness = false, course = false } = Astro.props;
 
 const site = Astro.site ?? new URL('https://kendosintra.pt');
-// Podglad na *.github.io ma prefiks w BASE_URL. Nie wolno go zaindeksowac,
-// bo konkurowalby w wynikach z docelowa domena jako duplikat.
+// The *.github.io preview carries a prefix in BASE_URL. It must not be indexed,
+// or it would compete with the production domain as a duplicate.
 const isPreview = (import.meta.env.BASE_URL ?? '/') !== '/';
-/** Sciezka do pliku z public/ — swiadoma prefiksu wdrozenia. */
+/** Path to a file in public/ — deployment-prefix aware. */
 const asset = (f: string) => `${import.meta.env.BASE_URL}${f}`.replace(/\/{2,}/g, '/');
 const canonical = new URL(localePath(lang, path), site).href;
 const alternates = (['en', 'pt'] as Lang[]).map((l) => ({
@@ -40,9 +40,9 @@ const fullTitle = path === '' ? `${club.name} — ${lang === 'pt' ? 'Kendo em Si
   <head>
     <meta charset="utf-8" />
     <script is:inline>
-      /* Zgoda przechowywana w localStorage, nie w cookie — samo zapamietanie
-         wyboru nie wymaga zgody. Skrypty mapy, feedu i GA pytaja KCS.ok()
-         i nasluchuja zdarzenia "kcs-consent". */
+      /* Consent is stored in localStorage, not in a cookie — remembering the
+         choice itself does not require consent. The map and GA scripts call
+         KCS.ok() and listen for the "kcs-consent" event. */
       window.KCS = (function () {
         var K = 'kcs-consent';
         function get() { try { return localStorage.getItem(K); } catch (e) { return null; } }

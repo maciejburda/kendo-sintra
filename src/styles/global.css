@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
-/* Fonty self-hostowane — zero zapytan do Google, zero transferu IP odwiedzajacego */
+/* Self-hosted fonts — no requests to Google, no transfer of the visitor's IP */
 @import "@fontsource/anton/400.css";
 @import "@fontsource-variable/archivo/index.css";
 
-/* Zen Kaku Gothic New sluzy WYLACZNIE do czterech znakow katakany "シントラ".
-   Pelna paczka to 121 subsetow i 3.25 MB — bierzemy jeden subset, jedna grubosc
-   i domykamy unicode-range do bloku katakany, zeby przegladarka nigdy nie siegnela
-   po ten plik przy lacince. Licencja: SIL OFL, patrz src/assets/fonts/. */
+/* Zen Kaku Gothic New is used ONLY for the four katakana "シントラ".
+   The full package is 121 subsets and 3.25 MB — we take one subset, one weight,
+   and pin unicode-range to the katakana block, so the browser will never
+   reach for this file for Latin text. Licence: SIL OFL, see src/assets/fonts/. */
 @font-face {
   font-family: "Zen Kaku Gothic New";
   font-style: normal;
@@ -18,32 +18,32 @@
 }
 
 @theme {
-  /* --- Marka --- */
+  /* --- Brand --- */
   --color-navy: #212B60;
   --color-red: #C9202F;
   --color-red-hover: #9A1824;
-  /* Ta sama czerwien rozjasniona. WYLACZNIE typografia i ikony na granacie (3.52:1).
-     Czysta --color-red daje tam 2.36:1 i nie przechodzi WCAG AA. */
+  /* The same red, lightened. ONLY for type and icons on navy (3.52:1).
+     Plain --color-red gives 2.36:1 there and fails WCAG AA. */
   --color-red-on-navy: #E84B52;
 
-  /* --- Rampa neutralna na bieli (kontrast liczony wzgledem #FFFFFF) --- */
-  --color-n-050: #F5F6FA;  /* tlo sekcji                      */
-  --color-n-100: #E4E6EF;  /* linie dekoracyjne               */
-  --color-n-300: #8B93B2;  /* ramki kontrolek        3.04:1   */
-  --color-n-500: #656D90;  /* tekst wyciszony        5.07:1   */
-  --color-n-700: #4E5679;  /* tekst zasadniczy       7.16:1   */
+  /* --- Neutral ramp on white (contrast measured against #FFFFFF) --- */
+  --color-n-050: #F5F6FA;  /* section background              */
+  --color-n-100: #E4E6EF;  /* decorative rules                */
+  --color-n-300: #8B93B2;  /* control borders        3.04:1   */
+  --color-n-500: #656D90;  /* muted text             5.07:1   */
+  --color-n-700: #4E5679;  /* body text              7.16:1   */
 
-  /* --- Rampa neutralna na granacie --- */
-  --color-on-navy-100: #B9BFDA;  /* tekst jasny      7.30:1   */
-  --color-on-navy-300: #8F97BC;  /* tekst wyciszony  4.64:1   */
-  --color-on-navy-line: #3B4477; /* linie                     */
+  /* --- Neutral ramp on navy --- */
+  --color-on-navy-100: #B9BFDA;  /* light text       7.30:1   */
+  --color-on-navy-300: #8F97BC;  /* muted text       4.64:1   */
+  --color-on-navy-line: #3B4477; /* rules                     */
 
-  /* --- Kroje: kazdy z jednym zadaniem --- */
+  /* --- Typefaces: one job each --- */
   --font-display: "Anton", "Arial Black", sans-serif;
   --font-sans: "Archivo Variable", "Archivo", "Helvetica Neue", Helvetica, sans-serif;
   --font-jp: "Zen Kaku Gothic New", "Hiragino Sans", sans-serif;
 
-  /* --- Skala pisma: 10 stopni --- */
+  /* --- Type scale: 10 steps --- */
   --text-12: 12px;   --text-14: 14px;  --text-16: 16px;  --text-19: 19px;
   --text-25: 25px;   --text-34: 34px;  --text-46: 46px;  --text-62: 62px;
   --text-82: 82px;   --text-128: 128px;
@@ -58,7 +58,7 @@
   }
   a { color: var(--color-red); text-decoration: none; }
   a:hover { color: var(--color-red-hover); }
-  /* Widoczny focus — na obu podlozach */
+  /* Visible focus — on both grounds */
   :where(a, button, input, select, textarea, [tabindex]):focus-visible {
     outline: 3px solid var(--color-red);
     outline-offset: 3px;
@@ -71,6 +71,6 @@
 @layer utilities {
   .jp { font-family: var(--font-jp); }
   .display { font-family: var(--font-display); text-transform: uppercase; line-height: 1; }
-  /* Kazdy cel dotykowy min. 44px — regula z przegladu UX */
+  /* Every touch target at least 44px — rule from the UX review */
   .tap { min-height: 44px; display: inline-flex; align-items: center; }
 }

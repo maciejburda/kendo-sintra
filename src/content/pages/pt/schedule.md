@@ -21,11 +21,11 @@ Os iniciantes são bem-vindos a assistir a qualquer noite de treino — não é 
 As competições nacionais e os exames de graduação são organizados pela
 [Federação Portuguesa de Kendo, Iaido e Jodo](https://kendo.pt/).
 
-<!-- TODO (klub): patrz wersja EN. -->
+<!-- TODO (club): see the EN version. -->
 
 ## Interrupções
 
 As competições nacionais e os exames de graduação são organizados pela
 [Federação Portuguesa de Kendo, Iaido e Jodo](https://kendo.pt/).
 
-<!-- TODO (klub): patrz wersja EN. -->
+<!-- TODO (club): see the EN version. -->

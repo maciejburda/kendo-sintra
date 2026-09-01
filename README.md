@@ -1,341 +1,345 @@
 # kendosintra.pt — v2
 
-Statyczna strona Kendo Club Sintra. Astro + Tailwind, budowana do czystego HTML
-i hostowana na GitHub Pages.
+Static site for Kendo Club Sintra. Astro + Tailwind, built to plain HTML and
+hosted on GitHub Pages.
 
-> ⚠️ **Strona osadza mapę Google, więc ustawia cookies Google** na stronie
-> głównej i na `/contact`. Skutek: prawdopodobnie potrzebny jest banner zgody —
-> patrz sekcja [Cookies i zgoda](#cookies-i-zgoda).
-Jedyny JavaScript to ~810 B inline na zwijane menu — i to jako progressive
-enhancement: bez JS nawigacja pozostaje rozwinięta i w pełni działa.
+All JavaScript is inline and the site is built as progressive enhancement:
+without JS the nav stays expanded, gallery thumbnails are plain links to the
+full image, and every page still works. The home page ships ~3.2 KB of inline
+JS in four scripts — the consent API (953 B), the collapsible menu (810 B),
+the consent banner (784 B) and the map loader (670 B). No external script tags.
 
-## Wymagania
+## Requirements
 
-Node **20.3+** (obecnie zbudowane na 20.20.2). W CI używamy 22 — patrz
-`.github/workflows/deploy.yml` i sekcję [Wersja Astro](#wersja-astro-do-decyzji).
+Node **20.3+** (currently built on 20.20.2). CI uses 22 — see
+`.github/workflows/deploy.yml` and the [Astro version](#astro-version--to-decide)
+section.
 
 ```bash
 npm install
 npm run dev      # http://localhost:4321
 npm run build    # -> dist/
-npm run preview  # podgląd zbudowanej wersji
+npm run preview  # preview the built site
 ```
 
-## Struktura
+## Structure
 
 ```
 src/
-  content/pages/{en,pt}/*.md   treść stron — TU SIĘ EDYTUJE
-  content/news/{en,pt}/*.md    aktualności
-  assets/photos/*.jpg          galeria (każdy plik trafia do niej automatycznie)
-  assets/fonts/                subset katakany, SIL OFL
-  i18n/ui.ts                   wszystkie teksty interfejsu, EN + PT
-  i18n/club.ts                 adres, telefon, godziny, cennik — JEDNO źródło prawdy
-  styles/global.css            tokeny koloru i skala pisma
+  content/pages/{en,pt}/*.md   page copy — EDIT HERE
+  content/news/{en,pt}/*.md    news posts
+  assets/photos/*.jpg          gallery (every file is picked up automatically)
+  assets/fonts/                katakana subset, SIL OFL
+  i18n/ui.ts                   all interface strings, EN + PT
+  i18n/club.ts                 address, phone, hours, prices — SINGLE source of truth
+  styles/global.css            colour tokens and type scale
   components/                  Header, Footer, Hero, ContactBand, Emblem, Icon
-  pages/                       trasy (EN na /, PT na /pt/)
+  pages/                       routes (EN at /, PT at /pt/)
 ```
 
-**Zmiana godzin, cennika czy telefonu:** wyłącznie `src/i18n/club.ts`. Wartości
-lecą stamtąd do stopki, pasa kontaktowego, siatki faktów i danych JSON-LD dla
-Google. Nie ma ich nigdzie indziej.
+**To change hours, prices or the phone number:** `src/i18n/club.ts` only. The
+values flow from there into the footer, the contact band, the facts grid and the
+JSON-LD for Google. They exist nowhere else.
 
-## System wizualny
+## Visual system
 
-Wynika z logo klubu i z przeglądu dostępności. Nie zmieniaj wartości bez
-sprawdzenia kontrastu — powody są zapisane niżej.
+Derived from the club logo and from an accessibility review. Do not change the
+values without re-checking contrast — the reasoning is recorded below.
 
-### Kolory
+### Colours
 
-| Token | Hex | Do czego |
+| Token | Hex | Used for |
 |---|---|---|
-| `navy` | `#212B60` | granat marki, nagłówki, ciemne sekcje |
-| `red` | `#C9202F` | czerwień marki: na bieli i jako plama z białym tekstem |
-| `red-on-navy` | `#E84B52` | **wyłącznie** typografia i ikony na granacie |
-| `n-050 … n-700` | `#F5F6FA` `#E4E6EF` `#8B93B2` `#656D90` `#4E5679` | rampa na bieli |
-| `on-navy-100/300/line` | `#B9BFDA` `#8F97BC` `#3B4477` | rampa na granacie |
+| `navy` | `#212B60` | brand navy, headings, dark sections |
+| `red` | `#C9202F` | brand red: on white, and as a block with white text |
+| `red-on-navy` | `#E84B52` | **only** type and icons on navy |
+| `n-050 … n-700` | `#F5F6FA` `#E4E6EF` `#8B93B2` `#656D90` `#4E5679` | ramp on white |
+| `on-navy-100/300/line` | `#B9BFDA` `#8F97BC` `#3B4477` | ramp on navy |
 
-**Dlaczego dwie czerwienie.** `#C9202F` na granacie daje kontrast 2.36:1 i nie
-przechodzi WCAG AA nawet w rozmiarze display. `#E84B52` to ta sama czerwień
-rozjaśniona do 3.52:1. Nigdy nie używaj `red` jako tekstu na granacie.
+**Why two reds.** `#C9202F` on navy gives 2.36:1 contrast and fails WCAG AA even
+at display size. `#E84B52` is the same red lightened to 3.52:1. Never use `red`
+as text on navy.
 
-**Dlaczego `n-300` i `on-navy-300` wyglądają podobnie.** Bo są skalibrowane pod
-różne podłoża. `#8B93B2` na granacie daje 4.38:1, czyli tuż pod progiem — dlatego
-istnieją obie. To nie jest duplikat do posprzątania.
+**Why `n-300` and `on-navy-300` look alike.** Because they are calibrated for
+different grounds. `#8B93B2` on navy gives 4.38:1, just under the threshold —
+which is why both exist. This is not a duplicate to tidy up.
 
-### Typografia
+### Typography
 
-Skala: `12 14 16 19 25 34 46 62 82 128` — klasy `text-12` … `text-128`.
+Scale: `12 14 16 19 25 34 46 62 82 128` — classes `text-12` … `text-128`.
 
-- **Anton** — wyłącznie display (klasa `.display`)
-- **Archivo** — interfejs i cały tekst ciągły
-- **Zen Kaku Gothic New** — wyłącznie katakana シントラ (klasa `.jp`)
+- **Anton** — display only (class `.display`)
+- **Archivo** — interface and all running text
+- **Zen Kaku Gothic New** — the katakana シントラ only (class `.jp`)
 
-Fonty są self-hostowane. Zen Kaku ograniczyliśmy do jednego subsetu i jednej
-grubości — pełna paczka to 121 subsetów i 3.25 MB dla czterech znaków.
+Fonts are self-hosted. Zen Kaku is trimmed to one subset and one weight — the
+full package is 121 subsets and 3.25 MB for four characters.
 
-## Trzy rzeczy do podłączenia
+## Three things to wire up
 
-### 1. Formularz zapisu
+### 1. Signup form
 
-`src/i18n/club.ts` → `signupForm`. Podpięty, zapisy działają. To jedyne
-miejsce do zmiany, gdyby link się zmienił.
+`src/i18n/club.ts` → `signupForm`. Connected, signups work. This is the only
+place to change if the link changes.
 
-Dopóki pole jest puste, w pasie kontaktowym pokazuje się karta z informacją
-i przyciskiem `mailto:` z gotowym tematem — nie martwy formularz.
+While the field is empty, the contact band shows an information card with a
+`mailto:` button and a pre-filled subject — not a dead form.
 
-> **Stan formularza (prototyp).** Podpięty formularz ma na razie tylko pole
-> `Full Name`, wbudowane pole e-mail Google i jedno nieopisane pytanie z opcją
-> `Option 1` oznaczone jako wymagane. Brakuje rozdzielenia dorośli / poniżej
-> 18 lat, kontaktu do opiekuna i zgody na przetwarzanie danych. Do uzupełnienia
-> przed cutoverem na własną domenę — pola są w `docs/google-form.md`.
-> Uwaga: „Zbieraj adresy e-mail" jest włączone, co wymusza logowanie do Google.
+> **Form status (prototype).** The connected form currently has only a
+> `Full Name` field, Google's built-in email field, and one untitled question
+> with `Option 1`, marked required. It is missing the adult / under-18 split,
+> the guardian contact and the data-processing consent. To be completed before
+> the cutover to the custom domain — the fields are in `docs/google-form.md`.
+> Note: "Collect email addresses" is on, which forces a Google login.
 
-**Dlaczego przycisk wychodzący, a nie formularz na stronie.** Google Form da
-się osadzić wyłącznie w iframe. Przycisk otwiera formularz w nowej karcie,
-więc dane trafiają do Google dopiero wtedy, gdy ktoś świadomie klika. Pod
-przyciskiem jest to napisane wprost.
+**Why an outbound button rather than a form on the page.** A Google Form can
+only be embedded in an iframe. The button opens the form in a new tab, so data
+reaches Google only when someone deliberately clicks. That is stated plainly
+under the button.
 
-Pola do założenia formularza: **`docs/google-form.md`**.
+Fields for building the form: **`docs/google-form.md`**.
 
-Gdybyście kiedyś woleli formularz natywnie na stronie, wymaga to backendu
-w rodzaju Formspree — wtedy wraca wersja z `<form>`, którą można odtworzyć
-z historii gita (commit `contact-band-form-map`).
+If you ever prefer a form natively on the page, that needs a backend such as
+Formspree — at which point the `<form>` version comes back, and it can be
+recovered from git history (commit `contact-band-form-map`).
 
-### 2. Mapa
+### 2. Map
 
-Osadzona mapa Google (`club.venue.mapsEmbed`, embed bez klucza API) na stronie
-głównej i `/contact`. Celuje we **własną wizytówkę klubu** w Mapach — szukanie
-po samym adresie trafiało w cudzą placówkę.
+An embedded Google Map (`club.venue.mapsEmbed`, keyless embed) on the home page
+and `/contact`. It targets the **club's own Maps listing** — searching by address
+alone landed on someone else's premises.
 
-Ładuje się **dopiero po zgodzie** — patrz [Cookies i zgoda](#cookies-i-zgoda).
+It loads **only after consent** — see [Cookies and consent](#cookies-and-consent).
 
-### 3. Analityka
+### 3. Analytics
 
-**Google Analytics 4, `G-PWJYVVVPNS`** — przeniesione z v1, `club.ga4`.
-Wstrzykiwane tylko w buildzie produkcyjnym; na adresie podglądowym jest
-wyłączone, żeby nie zaśmiecać statystyk ruchem testowym.
+**Google Analytics 4, `G-PWJYVVVPNS`** — carried over from v1, `club.ga4`.
+Injected only in the production build; disabled on the preview URL so test
+traffic does not pollute the stats.
 
-GA **ustawia cookies** (`_ga`, `_ga_*`), więc uruchamia się **dopiero po
-zgodzie** — patrz niżej. Puste `club.ga4` wyłącza analitykę całkowicie.
+GA **sets cookies** (`_ga`, `_ga_*`), so it starts **only after consent** — see
+below. An empty `club.ga4` disables analytics entirely.
 
-## Cookies i zgoda
+## Cookies and consent
 
-Strona nie ustawia własnych cookies, ale ładuje **trzy rzeczy od innych firm**:
+The site sets no cookies of its own, but it loads **two things from other
+companies**:
 
-| Źródło | Gdzie |
+| Source | Where |
 |---|---|
-| Google Analytics 4 | wszystkie strony (tylko produkcja) |
-| Mapa Google | strona główna, `/contact` |
-| Feed z Facebooka | strona główna, `/news` |
+| Google Analytics 4 | all pages (production only) |
+| Google Map | home page, `/contact` |
 
-**Wszystkie trzy są zablokowane do czasu zgody.** Banner:
-`src/components/ConsentBanner.astro`, API zgody w `<head>` w `Base.astro`.
+**Both are blocked until consent is given.** Banner:
+`src/components/ConsentBanner.astro`; the consent API lives in `<head>` in
+`Base.astro`.
 
-### Jak to działa
+### How it works
 
-- `window.KCS` — `get()`, `ok()`, `set(v)`, `onGrant(fn)`. Wybór trzymany
-  w **localStorage**, nie w cookie: samo zapamiętanie decyzji nie wymaga zgody.
-- GA, mapa i feed rejestrują się przez `KCS.onGrant()` i nie robią nic, dopóki
-  nie ma zgody. W HTML-u nie ma wtedy **ani jednego `<iframe>`** — zweryfikowane.
-- Przy odmowie mapa i feed pokazują wyjaśnienie i przycisk **„załaduj mimo to"**,
-  który wczytuje *tylko ten jeden element na tę wizytę* i **nie** włącza
-  analityki. Inaczej kliknięcie mapy po cichu zgadzałoby się na GA.
-- Link **„Cookie settings"** w stopce otwiera banner ponownie.
-- Akceptacja i odmowa mają jednakową wagę wizualną — bez ciemnych wzorców.
+- `window.KCS` — `get()`, `ok()`, `set(v)`, `onGrant(fn)`. The choice is kept in
+  **localStorage**, not a cookie: merely remembering the decision does not
+  require consent.
+- GA and the map register through `KCS.onGrant()` and do nothing until consent
+  exists. Until then the HTML contains **not a single `<iframe>`** — verified.
+- On refusal the map shows an explanation and a **"load anyway"** button, which
+  loads *only that one element for that visit* and does **not** enable analytics.
+  Otherwise clicking the map would silently opt you into GA.
+- The **"Cookie settings"** link in the footer reopens the banner.
+- Accept and decline carry equal visual weight — no dark patterns.
 
-Napisany od zera (~2 KB) zamiast Klaro (~30 KB), żeby pasował do reszty
-serwisu: bez zależności, w tokenach projektu, dwujęzyczny.
+Written from scratch (~2 KB) instead of Klaro (~30 KB), so it matches the rest of
+the site: no dependencies, uses the project tokens, bilingual.
 
-**To nie zastępuje przeglądu prawnego.** Mechanizm jest gotowy; treść zgody
-i to, czy jedna kategoria wystarczy zamiast rozdzielenia analityki od treści
-zewnętrznych, powinna potwierdzić osoba odpowiedzialna za RODO.
+**This does not replace a legal review.** The mechanism is done; the consent
+wording, and whether one category is enough rather than splitting analytics from
+external content, should be confirmed by whoever is responsible for GDPR.
 
-## Zdjęcia
+## Photographs
 
-`src/assets/photos/` zawiera **68 zdjęć** ściągniętych z CDN-u v1 w 2000px:
+`src/assets/photos/` holds **68 photos** pulled from the v1 CDN at 2000px:
 
-- **24** z sesji AiP Photography (10.12.2025) — wszyscy w bogu, twarze za maskami
-- **44** z zawodów (kwiecień 2025) — dzieci i dorośli
+- **24** from the AiP Photography shoot (2025-12-10) — everyone in bogu, faces behind masks
+- **44** from the competition (April 2025) — children and adults
 
-To **nie są oryginały** — file manager one.com wymaga logowania, więc pobrałem
-najwyższą rozdzielczość, jaką CDN oddaje bez upscalingu. Jeśli masz dostęp do
-oryginałów, podmiana to skopiowanie plików pod tymi samymi nazwami.
+These are **not the originals** — the one.com file manager requires a login, so
+I downloaded the highest resolution the CDN serves without upscaling. If you have
+access to the originals, swapping them in is a matter of copying files over the
+same names.
 
-Alt-teksty są w `src/data/gallery.ts`, pisane ręcznie i dwujęzycznie. Nie są
-generowane z nazw plików — czytnik ekranu odczytałby wtedy „aip 09".
+Alt text lives in `src/data/gallery.ts`, written by hand and bilingually. It is
+not generated from filenames — a screen reader would then read out "aip 09".
 
-### Wizerunek — do decyzji klubu
+### Likeness and minors — for the club to decide
 
-**11 z 68 zdjęć pokazuje rozpoznawalne twarze osób nieletnich poza maską.**
-Są oznaczone `faces: true` w `src/data/gallery.ts`:
+**10 of the 68 photos show identifiable faces of minors outside the mask.**
+They are marked `faces: true` in `src/data/gallery.ts`:
 
 ```
 dojo-2103, dojo-2103-1, dojo-2105-3, dojo-2110-2, dojo-2111,
 dojo-2111-1, dojo-2115, dojo-2116, dojo-2118-1, dojo-2119
 ```
 
-Te zdjęcia **są już publiczne na kendosintra.pt**, więc v2 niczego nowego nie
-ujawnia — ale dochodzą dwie rzeczy, których w v1 nie było:
+These photos **are already public on kendosintra.pt**, so v2 exposes nothing new
+— but two things are added that v1 did not have:
 
-1. Repozytorium jest publiczne, a **historia gita jest trwała**. Usunięcie
-   zdjęcia ze strony jest łatwe; wyczyszczenie go z historii commitów nie.
-2. RODO wymaga zgody rodziców na publikację wizerunku nieletniego. Nie wiem,
-   czy klub takie zgody zebrał.
+1. The repository is public, and **git history is permanent**. Removing a photo
+   from the site is easy; purging it from commit history is not.
+2. GDPR requires parental consent to publish a minor's likeness. I do not know
+   whether the club has collected those consents.
 
-Przełącznik jest w `src/components/GalleryGrid.astro`:
+The switch is in `src/components/GalleryGrid.astro`:
 
 ```ts
-const SHOW_IDENTIFIABLE_MINORS = true;   // false ukrywa te 11 zdjęć
+const SHOW_IDENTIFIABLE_MINORS = true;   // false hides those 10 photos
 ```
 
-Domyślnie `true`, żeby nie zmieniać stanu zastanego bez Waszej decyzji.
+Defaults to `true`, so as not to change the status quo without your decision.
 
-## Dane strukturalne
+## Structured data
 
-`src/data/schema.ts` — dwa schematy JSON-LD:
+`src/data/schema.ts` — two JSON-LD schemas:
 
-- **SportsActivityLocation** (strona główna, kontakt) — adres, godziny, geo, socjale
-- **Course** (strona główna, strona kursu) — data startu, cena, instruktor,
-  link do zapisów, harmonogram tygodniowy w środy
+- **SportsActivityLocation** (home, contact) — address, hours, geo, socials
+- **Course** (home, course page) — start date, price, instructor, signup link,
+  weekly Wednesday schedule
 
-Dzięki temu Google może pokazać datę i cenę kursu bezpośrednio w wynikach.
+This lets Google show the course date and price directly in search results.
 
-Dzień i godziny są potwierdzone przez klub: środa, początkujący od 19:00,
-zaawansowani dołączają o 19:30, koniec 21:00.
+The day and times are confirmed by the club: Wednesday, beginners from 19:00,
+advanced join at 19:30, finish at 21:00.
 
-`endDate` jest wyliczana z podanych „trzech miesięcy" — arytmetyka na
-deklarowanym fakcie, nie zmyślenie.
+`endDate` is derived from the stated "three months" — arithmetic on a fact the
+club gave us, not an invention.
 
-## Aktualności
+## News
 
-Wpisy w `src/content/news/{en,pt}/*.md`. Dwie najnowsze na stronie głównej,
-komplet na `/news`, każdy ma własną stronę `/news/<slug>`.
+Posts live in `src/content/news/{en,pt}/*.md`. The two most recent appear on the
+home page, the full set at `/news`, and each has its own page `/news/<slug>`.
 
-Nowy wpis to nowy plik z frontmatterem `title`, `description`, `date`
-i opcjonalnym `category`. Sortowanie po dacie, malejąco.
+A new post is a new file with `title`, `description`, `date` frontmatter and an
+optional `category`. Sorted by date, descending.
 
-**Próbowaliśmy wtyczki Facebooka i wycofaliśmy się z niej** (commity `701e6a3`
-i wstecz). Powody: wygląda jak obcy element, bo iframe'a nie da się zestylować;
-zostawiała dużą pustkę pod nagłówkiem przez sztywną wysokość; treść w iframe
-nie jest indeksowana jako Wasza, więc wpisy przestawały budować pozycję domeny.
-Do tego dochodziła zależność od Meta i trzecie źródło cookies.
+**We tried the Facebook plugin and withdrew it** (commit `701e6a3` and back).
+Reasons: it looks like a foreign element, because an iframe cannot be styled; its
+fixed height left a large gap under the heading; content inside an iframe is not
+indexed as yours, so posts stopped building the domain's standing. On top of that
+came a dependency on Meta and a third cookie source.
 
-Wersja w Markdown jest wolniejsza w obsłudze — wpis trzeba napisać, a nie tylko
-wrzucić na FB — ale jest szybka, w typografii serwisu, indeksowana i niczyja
-poza Waszą.
+The Markdown version is slower to run — a post has to be written, not just
+dropped on Facebook — but it is fast, in the site's typography, indexed, and
+nobody's but yours.
 
-## Galeria i powiększanie
+## Gallery and lightbox
 
-`src/components/GalleryGrid.astro` — siatka plus powiększenie na natywnym
-`<dialog>`. Ten sam wzorzec co menu: **bez JavaScriptu miniatura jest zwykłym
-linkiem do pełnego zdjęcia**, więc galeria działa dalej, tylko bez nakładki.
+`src/components/GalleryGrid.astro` — a grid plus a lightbox built on the native
+`<dialog>`. Same pattern as the menu: **without JavaScript a thumbnail is a plain
+link to the full image**, so the gallery still works, just without the overlay.
 
-Co daje `<dialog>` za darmo: pułapkę focusu, Escape, `inert` na tle dla
-czytników ekranu i `::backdrop`. Skrypt dokłada tylko nawigację.
+What `<dialog>` gives for free: a focus trap, Escape, `inert` on the background
+for screen readers, and `::backdrop`. The script only adds navigation.
 
-- strzałki ← → na klawiaturze, przyciski, swipe na dotyku
-- zawijanie na obu końcach; sąsiednie zdjęcia są wstępnie ładowane
-- focus wraca na miniaturę, od której zaczęto
-- osobny wariant 1600px pod powiększenie (miniatury mają maks. 1200)
-- pod zdjęciem tylko numer („7 z 68"); opis jest ukryty wizualnie, ale zostaje
-  w `alt` obrazu i w obszarze `aria-live`, żeby czytnik ekranu mówił, co się
-  zmieniło przy przeskakiwaniu strzałkami
-- skrypt waży ~2.5 KB i **ładuje się wyłącznie na stronie galerii** —
-  strona główna zostaje przy 810 B
+- ← → arrow keys, buttons, swipe on touch
+- wraps at both ends; neighbouring photos are preloaded
+- focus returns to the thumbnail you started from
+- a separate 1600px variant for the lightbox (thumbnails cap at 1200)
+- only a counter under the photo ("7 of 68"); the description is visually hidden
+  but stays in the image's `alt` and in an `aria-live` region, so a screen reader
+  announces what changed when arrowing through
+- the script weighs ~2.5 KB and **loads only on the gallery page**
 
-## Obrazek OG
+## OG image
 
-`public/og.jpg` (1200×630) to karta pokazywana przy udostępnieniu strony na
-Facebooku i w innych social mediach. Bez niego link pokazuje pustą kartę, a
-Facebook jest głównym kanałem klubu.
+`public/og.jpg` (1200×630) is the card shown when the site is shared on Facebook
+and other social media. Without it the link shows an empty card, and Facebook is
+the club's main channel.
 
-Generator: `tools/og-generator.html` — instrukcja przegenerowania jest
-w komentarzu na górze pliku. Rysuje na canvasie w przeglądarce, bo sharp
-składa SVG przez librsvg, który czyta wyłącznie fonty systemowe; woff2
-z `@fontsource` by się nie załadował i typografia marki by się nie odtworzyła.
+Generator: `tools/og-generator.html` — the regeneration steps are in the comment
+at the top of the file. It draws onto a canvas in the browser, because sharp
+rasterises SVG through librsvg, which only reads system fonts; the woff2 files
+from `@fontsource` would not load and the brand typography would not survive.
 
-**Przegeneruj po zmianie daty kursu** — data jest wypalona w obrazku.
+**Regenerate after changing the course date** — the date is baked into the image.
 
 ## Deploy
 
-Repo: **https://github.com/maciejburda/kendo-sintra** (publiczne — Pages z repo
-prywatnego wymaga płatnego planu). Push na `main` uruchamia
+Repo: **https://github.com/maciejburda/kendo-sintra** (public — Pages from a
+private repo requires a paid plan). Pushing to `main` triggers
 `.github/workflows/deploy.yml`.
 
-### Dwa tryby budowania
+### Two build modes
 
-Workflow ma na górze przełącznik `PRODUCTION`:
+The workflow has a `PRODUCTION` switch at the top:
 
-| `PRODUCTION` | Adres | Zachowanie |
+| `PRODUCTION` | URL | Behaviour |
 |---|---|---|
-| `'false'` (teraz) | `maciejburda.github.io/kendo-sintra/` | prefiks `/kendo-sintra/`, wszystkie strony z `noindex` |
-| `'true'` | `kendosintra.pt` | dokłada `CNAME`, zdejmuje prefiks, indeksowanie włączone |
+| `'false'` (now) | `maciejburda.github.io/kendo-sintra/` | prefix `/kendo-sintra/`, all pages `noindex` |
+| `'true'` | `kendosintra.pt` | adds `CNAME`, drops the prefix, indexing on |
 
-Podgląd ma `noindex` celowo — bez tego konkurowałby w Google z docelową domeną
-jako duplikat treści.
+The preview carries `noindex` deliberately — without it, it would compete with
+the production domain in Google as duplicate content.
 
-Strona jest świadoma prefiksu: `localePath()` i helper `asset()` doklejają
-`import.meta.env.BASE_URL`, więc działa pod dowolnym katalogiem bez zmian w kodzie.
+The site is prefix-aware: `localePath()` and the `asset()` helper prepend
+`import.meta.env.BASE_URL`, so it works under any directory with no code changes.
 
-### Cutover na własną domenę
+### Cutover to the custom domain
 
-1. W one.com ustaw rekordy DNS:
+1. In one.com, set the DNS records:
 
-   | Typ | Nazwa | Wartość |
+   | Type | Name | Value |
    |---|---|---|
    | A | `@` | `185.199.108.153` `185.199.109.153` `185.199.110.153` `185.199.111.153` |
    | CNAME | `www` | `maciejburda.github.io` |
 
-2. Poczekaj na propagację (`dig kendosintra.pt +short`).
-3. W `.github/workflows/deploy.yml` zmień `PRODUCTION: 'false'` na `'true'`, wypchnij.
-4. Settings → Pages → włącz **Enforce HTTPS** (certyfikat bywa wystawiany do 24 h).
-5. Search Console: zgłoś `https://kendosintra.pt/sitemap-index.xml`.
-6. Hosting one.com anuluj **dopiero** po potwierdzeniu, że wszystko działa.
+2. Wait for propagation (`dig kendosintra.pt +short`).
+3. In `.github/workflows/deploy.yml` change `PRODUCTION: 'false'` to `'true'`, push.
+4. Settings → Pages → enable **Enforce HTTPS** (the certificate can take up to 24 h).
+5. Search Console: submit `https://kendosintra.pt/sitemap-index.xml`.
+6. Cancel the one.com hosting **only** after confirming everything works.
 
-Plik `deploy/CNAME` leży poza `public/` celowo — trafia tam dopiero przy
-budowie produkcyjnej. Gdyby siedział w `public/`, GitHub przekierowałby adres
-podglądowy na domenę, na którą DNS jeszcze nie wskazuje, i strona zniknęłaby
-przed cutoverem.
+`deploy/CNAME` sits outside `public/` deliberately — it is copied in only for a
+production build. If it lived in `public/`, GitHub would redirect the preview URL
+to a domain that DNS does not yet point at, and the site would vanish before
+cutover.
 
-### Stare URL-e
+### Old URLs
 
 `/home/gallery`, `/home/fees`, `/home/beginner-s-course`, `/home/what-is-kendo`
-dostają zaślepki z `meta refresh` + `rel=canonical` (GitHub Pages nie ma
-przekierowań serwerowych). Są wyłączone z sitemapy. Nie kasuj ich — trzymają
-pozycje i linki z Facebooka.
+get stubs with `meta refresh` + `rel=canonical` (GitHub Pages has no server-side
+redirects). They are excluded from the sitemap. Do not delete them — they hold
+rankings and links from Facebook.
 
-## Wersja Astro — do decyzji
+## Astro version — to decide
 
-Zbudowane na **Astro 5.18.2**, bo Twój Node to 20.20.2.
+Built on **Astro 5.18.2**, because your Node is 20.20.2.
 
-Aktualny major to **Astro 7.2.9 i wymaga Node ≥22.12**. Astro 5 ma osiem otwartych
-advisory (XSS w `define:vars`, spread attributes, view transitions; SSRF w
-prerenderowanej stronie błędu). Przy stronie w pełni statycznej, bez wysp
-i bez danych od użytkownika, **żadne z nich nie jest tu realnie eksploatowalne** —
-ale ta gałąź nie dostanie już poprawek.
+The current major is **Astro 7.2.9 and it requires Node ≥22.12**. Astro 5 has
+eight open advisories (XSS in `define:vars`, spread attributes, view transitions;
+SSRF in the prerendered error page). On a fully static site, with no islands and
+no user-supplied data, **none of them is realistically exploitable here** — but
+that branch will not get fixes any more.
 
-Rekomendacja: `brew install node@22`, potem `npm i astro@latest`. Migracja 5→7
-to głównie zmiany w konfiguracji; treść, komponenty i style zostają.
+Recommendation: `brew install node@22`, then `npm i astro@latest`. The 5→7
+migration is mostly configuration changes; content, components and styles stay.
 
-CI już używa Node 22, więc build w GitHub Actions jest niezależny od Twojej maszyny.
+CI already uses Node 22, so the GitHub Actions build is independent of your machine.
 
-## Do uzupełnienia przez klub
+## For the club to fill in
 
-Szukaj `TODO (klub)` w `src/content/`:
+Search for `TODO (club)` in `src/content/`:
 
-- [ ] Biografia sensei Rogiera van Bijnena (`about.md`)
-- [ ] Rok założenia, federacja, liczba członków (`about.md`)
-- [ ] Minimalny wiek dzieci, zasady treningu próbnego (`faq.md`)
-- [ ] Kalendarz seminariów, zawodów i egzaminów (`schedule.md`)
-- [ ] Przerwy świąteczne i wakacyjne (`schedule.md`)
-- [ ] **Polityka prywatności** (`privacy.md`) — to jest szkielet, nie dokument
-      prawny. Wymaga przejrzenia przez osobę odpowiedzialną za RODO. Osobna
-      luka: zgody na wizerunek dzieci, których zdjęcia publikujecie.
-- [ ] Dokładne współrzędne dojo (`src/i18n/club.ts`, pole `geo`)
-- [ ] Logo z wordmarkiem w krzywych — mamy tylko symbol. Nagłówek składa nazwę
-      typografią, więc to nie blokuje, ale przyda się do materiałów drukowanych.
+- [ ] Bio of sensei Rogier van Bijnen (`about.md`)
+- [ ] Founding year, federation, member count (`about.md`)
+- [ ] Minimum age for children, trial-session rules (`faq.md`)
+- [ ] Calendar of seminars, competitions and gradings (`schedule.md`)
+- [ ] Christmas and summer breaks (`schedule.md`)
+- [ ] **Privacy notice** (`privacy.md`) — this is a skeleton, not a legal
+      document. It needs review by whoever is responsible for GDPR. Separate
+      gap: likeness consents for the children whose photos you publish.
+- [ ] Exact dojo coordinates (`src/i18n/club.ts`, `geo` field)
+- [ ] Logo with the wordmark in outlines — we only have the symbol. The header
+      sets the name in type, so this is not blocking, but it will be needed for
+      print material.
 
-Strony PT mają `draft: true` tam, gdzie tłumaczenie jest moje, a nie klubu —
-do przejrzenia przez native speakera. Wyjątek: `beginner-course.md`, którego
-wersja portugalska pochodzi wprost z v1.
+PT pages carry `draft: true` wherever the translation is mine rather than the
+club's — to be reviewed by a native speaker. Exception: `beginner-course.md`,
+whose Portuguese version comes straight from v1.

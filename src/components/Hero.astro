@@ -12,19 +12,20 @@ const courseDate = new Date(club.course.startISO).toLocaleDateString(
   lang === 'pt' ? 'pt-PT' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 ---
 <section class="on-navy relative h-[790px] max-h-[88vh] min-h-[560px] overflow-hidden bg-navy">
-  <!-- Duotone: zdjecie sprowadzone do szarosci i przefarbowane tlem, zeby czytalo sie
-       jak czesc plaszczyzny, a nie jak podkladka pod tekst. -->
+  <!-- Duotone: the photo is desaturated and tinted with the background colour so it
+       reads as part of the surface, not as a plate sitting behind the text. -->
   <Image src={heroHall} alt="" aria-hidden="true" role="presentation" widths={[900, 1400, 1920]} sizes="100vw" loading="eager" fetchpriority="high"
          class="absolute inset-0 h-full w-full object-cover object-[center_45%] opacity-55 [filter:grayscale(1)_contrast(1.16)_brightness(0.55)]" />
   <div class="absolute inset-0" style="background:linear-gradient(100deg,#212B60 0%,rgba(33,43,96,.96) 26%,rgba(33,43,96,.74) 52%,rgba(33,43,96,.52) 78%,rgba(33,43,96,.66) 100%)"></div>
   <div class="absolute inset-0" style="background:linear-gradient(to bottom,rgba(33,43,96,.38) 0%,rgba(33,43,96,0) 22%,rgba(33,43,96,0) 72%,rgba(33,43,96,.9) 100%)"></div>
 
-  <!-- Godlo wchodzi za prawa krawedz. Granatowy pierscien rowna sie tlu sekcji,
-       wiec krest unosi sie bez twardej obwodki. -->
-  <!-- Godlo w wersji bialej, jako znak wodny. Wersja kolorowa miala jaskrawy
-       bialy dysk, ktory lezal na tle jak naklejka i zaslanial zdjecie. Szerokosc zalezna od okna, bo staly rozmiar na wezszym
-       ekranie zajmowal proporcjonalnie wiecej. Gestosc maski przesunieta
-       w prawo, zeby krawedz od strony tekstu rozplywala sie pierwsza. -->
+  <!-- The emblem runs off the right edge. Its navy ring matches the section
+       background, so the crest lifts off without a hard outline. -->
+  <!-- White variant, used as a watermark. The colour version had a bright white
+       disc that sat on the background like a sticker and hid the photo. The width
+       is viewport-relative, because a fixed size took up proportionally more room
+       on a narrower screen. The mask is weighted to the right, so the edge nearest
+       the text dissolves first. -->
   <div class="pointer-events-none absolute right-[-4%] top-1/2 hidden w-[clamp(300px,30vw,500px)] -translate-y-1/2 lg:block"
        style="opacity:.22;
               -webkit-mask-image:radial-gradient(ellipse 76% 76% at 62% 50%, #000 34%, rgba(0,0,0,.5) 64%, transparent 92%);
