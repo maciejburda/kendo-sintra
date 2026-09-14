@@ -18,9 +18,12 @@ const picAlt = image ? photos.find((p) => p.file === image)?.[lang] ?? '' : '';
       {eyebrow && <p class="text-14 font-bold uppercase tracking-[0.18em] text-red">{eyebrow}</p>}
       <h1 class="display text-46 md:text-62">{title}</h1>
     </header>
+    {/* Sits just under the title, so it is the LCP candidate on these pages:
+        eager, not Astro's lazy default. */}
     {pic && (
       <Image src={pic} alt={picAlt} widths={[720, 1200, 1600]}
-             sizes="(max-width:768px) 100vw, 1200px"
+             sizes="(max-width:768px) 100vw, 700px"
+             loading="eager" fetchpriority="high"
              class="mb-10 aspect-[16/9] w-full max-w-[var(--measure)] object-cover object-[center_28%]" />
     )}
     <Prose><slot /></Prose>

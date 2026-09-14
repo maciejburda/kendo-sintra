@@ -3,6 +3,7 @@ title: Sobre o clube
 description: O Kendo Club Sintra treina duas vezes por semana na Quinta da Beloura, com o Sensei Rogier van Bijnen, 6º dan, antigo membro da selecção nacional dos Países Baixos.
 eyebrow: Quem somos
 draft: true
+image: dojo-2119.jpg
 ---
 
 ## Sensei Rogier van Bijnen, 6º dan

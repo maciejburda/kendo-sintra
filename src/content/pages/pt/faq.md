@@ -3,6 +3,7 @@ title: Perguntas frequentes
 description: O que trazer, o que vestir, se dói, e o que acontece na sua primeira aula de Kendo em Sintra.
 eyebrow: Antes da primeira aula
 draft: true
+image: aip-31.jpg
 ---
 
 ## Preciso de equipamento para começar?

@@ -3,6 +3,7 @@ title: Frequently asked questions
 description: What to bring, what to wear, whether Kendo hurts, and what happens at your first Kendo class in Sintra.
 eyebrow: Before your first class
 draft: true
+image: aip-31.jpg
 ---
 
 ## Do I need any equipment to start?

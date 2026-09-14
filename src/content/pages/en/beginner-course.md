@@ -2,6 +2,7 @@
 title: Try Kendo
 description: Come and watch a practice, or join one of the beginner courses Kendo Club Sintra runs a few times a year in Sintra.
 eyebrow: Your first step
+image: aip-64.jpg
 ---
 
 We organise beginner courses a few times per year, and it is always possible to

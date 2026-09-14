@@ -2,6 +2,7 @@
 title: Fees
 description: Monthly training fees at Kendo Club Sintra — 20 EUR for adults, 10 EUR for children and members of other Portuguese Kendo clubs.
 eyebrow: Monthly membership
+image: aip-54.jpg
 ---
 
 | | Per month |
