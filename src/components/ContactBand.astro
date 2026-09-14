@@ -57,12 +57,14 @@ const t = useTranslations(lang);
         </dl>
       </div>
 
-      <div class="flex flex-col gap-4">
+      <div class="flex flex-col gap-4 lg:col-span-2">
         <!-- The live Maps iframe sets Google cookies, so it is only injected once
              consent is granted (or the visitor clicks "load anyway"). Until then this
              slot renders a placeholder plus a plain link out to Google Maps.
              See README, section "Map". -->
-        <div id="map-slot" class="relative flex min-h-[240px] items-center justify-center overflow-hidden border border-n-100 bg-n-050"
+        <!-- Full width, so it gets height to match: a wide, short map is a strip
+             of street names with no context around the pin. -->
+        <div id="map-slot" class="relative flex min-h-[280px] items-center justify-center overflow-hidden border border-n-100 bg-n-050 md:min-h-[420px]"
              data-src={club.venue.mapsEmbed} data-title={t('map.title')}>
           <div class="flex flex-col items-center gap-3 px-6 py-8 text-center">
             <p class="text-14 leading-relaxed text-n-700">{t('consent.blocked.map')}</p>
