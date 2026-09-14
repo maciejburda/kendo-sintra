@@ -49,9 +49,10 @@ export const ui = {
 
     'hero.tagline': 'Kendo is a traditional Japanese martial art. Bamboo swords, armour, and a great deal of noise.',
     'cta.try': 'Try Kendo',
+    'cta.email': 'Email us',
+    'cta.call': 'Call us',
     'try.title': 'Try Kendo',
     'try.lead': 'We organise beginner courses a few times per year, and it is always possible to come and watch a practice. Just email or call us first to check the schedule.',
-    'cta.watch': 'Come and watch',
     'cta.all-news': 'All news',
     'cta.maps': 'Open in Google Maps',
 
@@ -110,9 +111,10 @@ export const ui = {
 
     'hero.tagline': 'O Kendo é uma arte marcial japonesa tradicional. Espadas de bambu, armadura e muito barulho.',
     'cta.try': 'Experimente Kendo',
+    'cta.email': 'Envie-nos email',
+    'cta.call': 'Telefone-nos',
     'try.title': 'Experimente Kendo',
     'try.lead': 'Organizamos cursos para iniciantes algumas vezes por ano e é sempre possível vir assistir a um treino. Basta contactar-nos primeiro por email ou telefone para confirmar o horário.',
-    'cta.watch': 'Venha assistir',
     'cta.all-news': 'Todas as notícias',
     'cta.maps': 'Abrir no Google Maps',
 

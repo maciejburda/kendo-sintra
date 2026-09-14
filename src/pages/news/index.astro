@@ -26,7 +26,7 @@ const picAlt = (f?: string) => (f ? photos.find((p) => p.file === f)?.[lang] ?? 
               <a href={localePath(lang, `news/${item.id.split('/').pop()}`)} class="block">
                 <Image src={pic(item.data.image)!} alt={picAlt(item.data.image)}
                        widths={[400, 720]} sizes="(max-width:768px) 100vw, 400px"
-                       loading="lazy" class="aspect-[3/2] w-full object-cover" />
+                       loading="lazy" class="aspect-[3/2] w-full object-cover object-[center_28%]" />
               </a>
             )}
             <p class="text-14 font-bold uppercase tracking-[0.1em] text-n-500">

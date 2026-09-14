@@ -36,19 +36,19 @@ const year = new Date().getFullYear();
           <a class="tap flex items-center gap-3 font-semibold text-white hover:text-on-navy-100" href={`mailto:${club.email}`}>
             <Icon name="mail" size={16} class="text-red-on-navy" />{club.email}
           </a>
-          <span class="flex items-center gap-4 pt-1">
-            <a class="tap text-on-navy-100 hover:text-white" href={club.facebook} rel="me noopener" target="_blank" aria-label="Facebook"><Icon name="facebook" size={19} /></a>
-            <a class="tap text-on-navy-100 hover:text-white" href={club.instagram} rel="me noopener" target="_blank" aria-label="Instagram"><Icon name="instagram" size={19} /></a>
+          <span class="-ml-3 flex items-center pt-1">
+            <a class="tap inline-flex h-11 w-11 items-center justify-center text-on-navy-100 hover:text-white" href={club.facebook} rel="me noopener" target="_blank" aria-label="Facebook"><Icon name="facebook" size={19} /></a>
+            <a class="tap inline-flex h-11 w-11 items-center justify-center text-on-navy-100 hover:text-white" href={club.instagram} rel="me noopener" target="_blank" aria-label="Instagram"><Icon name="instagram" size={19} /></a>
           </span>
         </div>
       </div>
     </div>
 
-    <div class="flex flex-wrap justify-between gap-3 pt-6 text-14 text-on-navy-300">
+    <div class="flex flex-wrap items-center justify-between gap-3 pt-6 text-14 text-on-navy-300">
       <span>© {year} {club.name}. {t('footer.rights')}.</span>
-      <span class="flex gap-6">
-        <a class="text-on-navy-300 hover:text-white" href={localePath(lang, 'privacy')}>{t('nav.privacy')}</a>
-        <a class="text-on-navy-300 hover:text-white" href="#" data-consent-settings>{t('consent.settings')}</a>
+      <span class="-my-3 flex gap-2">
+        <a class="tap inline-flex min-h-11 items-center px-3 text-on-navy-300 hover:text-white" href={localePath(lang, 'privacy')}>{t('nav.privacy')}</a>
+        <a class="tap inline-flex min-h-11 items-center px-3 text-on-navy-300 hover:text-white" href="#" data-consent-settings>{t('consent.settings')}</a>
       </span>
     </div>
   </div>

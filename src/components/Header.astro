@@ -23,12 +23,12 @@ const other: Lang = lang === 'en' ? 'pt' : 'en';
 </a>
 
 <header class="sticky top-0 z-40 border-b border-n-100 bg-white">
-  <div class="mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-4 px-6 py-4 md:px-16">
-    <a href={localePath(lang)} class="flex items-center gap-4" aria-label={club.name}>
-      <Emblem size={76} class="block" />
+  <div class="mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-4 px-6 py-3 md:px-16 md:py-4">
+    <a href={localePath(lang)} class="flex min-w-0 items-center gap-3 sm:gap-4" aria-label={club.name}>
+      <Emblem size={76} class="block h-12 w-12 sm:h-[76px] sm:w-[76px]" />
       <span class="flex flex-col gap-1">
-        <span class="jp text-12 font-bold tracking-[0.36em] text-red">{club.katakana}</span>
-        <span class="display text-25 leading-none text-navy">{club.name}</span>
+        <span class="jp text-12 font-bold tracking-[0.28em] text-red sm:tracking-[0.36em]">{club.katakana}</span>
+        <span class="display text-19 leading-none text-navy sm:text-25">{club.name}</span>
       </span>
     </a>
 
@@ -89,9 +89,9 @@ const other: Lang = lang === 'en' ? 'pt' : 'en';
                aria-current={path === item.slug ? 'page' : undefined}>{item.label}</a>
           </li>
         ))}
-        <li class="flex items-center gap-3 pt-3 font-bold lg:border-l lg:border-n-100 lg:pl-5 lg:pt-0">
-          <span class="text-navy" aria-current="true">{lang.toUpperCase()}</span>
-          <a href={localePath(other, path)} class="tap text-n-500 hover:text-red" hreflang={other}>{other.toUpperCase()}</a>
+        <li class="flex items-center gap-1 pt-3 font-bold lg:border-l lg:border-n-100 lg:pl-4 lg:pt-0">
+          <span class="inline-flex min-w-[44px] justify-center px-2 text-navy" aria-current="true">{lang.toUpperCase()}</span>
+          <a href={localePath(other, path)} class="tap inline-flex min-w-[44px] justify-center px-2 text-n-500 hover:text-red" hreflang={other}>{other.toUpperCase()}</a>
         </li>
       </ul>
     </nav>

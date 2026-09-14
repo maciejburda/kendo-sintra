@@ -43,6 +43,11 @@
   --font-sans: "Archivo Variable", "Archivo", "Helvetica Neue", Helvetica, sans-serif;
   --font-jp: "Zen Kaku Gothic New", "Hiragino Sans", sans-serif;
 
+  /* Reading measure: 64 characters at --text-19 in Archivo. Shared by Prose and
+     by any full-width element that has to line up with it, because `ch` resolves
+     against each element's own font-size and would not match. */
+  --measure: 696px;
+
   /* --- Type scale: 10 steps --- */
   --text-12: 12px;   --text-14: 14px;  --text-16: 16px;  --text-19: 19px;
   --text-25: 25px;   --text-34: 34px;  --text-46: 46px;  --text-62: 62px;

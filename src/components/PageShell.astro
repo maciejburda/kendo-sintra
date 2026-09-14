@@ -21,7 +21,7 @@ const picAlt = image ? photos.find((p) => p.file === image)?.[lang] ?? '' : '';
     {pic && (
       <Image src={pic} alt={picAlt} widths={[720, 1200, 1600]}
              sizes="(max-width:768px) 100vw, 1200px"
-             class="mb-10 aspect-[16/9] w-full object-cover" />
+             class="mb-10 aspect-[16/9] w-full max-w-[var(--measure)] object-cover object-[center_28%]" />
     )}
     <Prose><slot /></Prose>
   </div>

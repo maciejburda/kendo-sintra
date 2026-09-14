@@ -6,8 +6,8 @@ interface Props { lang: Lang; }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 ---
-<section class="border-t border-n-100 bg-n-050 px-6 py-20 md:px-16">
-  <div class="mx-auto flex max-w-[1440px] flex-col gap-10">
+<section class="border-t border-n-100 bg-n-050 px-6 py-14 md:px-16 md:py-16">
+  <div class="mx-auto flex max-w-[1440px] flex-col gap-7">
 
     <div class="flex flex-col gap-3">
       <p class="text-14 font-bold uppercase tracking-[0.18em] text-red">{t('contact.reach')}</p>
@@ -15,7 +15,7 @@ const t = useTranslations(lang);
     </div>
 
     {/* Two columns so the blocks do not run down one half of an empty row. */}
-    <div class="grid items-start gap-9 gap-x-12 lg:grid-cols-2">
+    <div class="grid items-start gap-7 gap-x-12 lg:grid-cols-2">
       {/* Phone, email and address also sit in the footer. Repeating them here is
           deliberate: this is the section someone scrolls to when they want to
           reach the club, and making them hunt in the footer for it is worse than
@@ -49,7 +49,7 @@ const t = useTranslations(lang);
         <h2 class="text-14 font-bold uppercase tracking-[0.18em] text-red">{t('contact.hours')}</h2>
         <dl class="border-t border-n-100">
           {club.hours.map((h) => (
-            <div class="flex justify-between border-b border-n-100 py-4 text-16">
+            <div class="flex justify-between border-b border-n-100 py-3 text-16">
               <dt class="font-bold">{t(h.day as any)}</dt>
               <dd class={h.open ? 'text-n-700' : 'text-n-500'}>{h.open ? `${h.open} — ${h.close}` : t('days.closed')}</dd>
             </div>
@@ -62,7 +62,7 @@ const t = useTranslations(lang);
              consent is granted (or the visitor clicks "load anyway"). Until then this
              slot renders a placeholder plus a plain link out to Google Maps.
              See README, section "Map". -->
-        <div id="map-slot" class="relative flex min-h-[280px] items-center justify-center overflow-hidden border border-n-100 bg-n-050"
+        <div id="map-slot" class="relative flex min-h-[240px] items-center justify-center overflow-hidden border border-n-100 bg-n-050"
              data-src={club.venue.mapsEmbed} data-title={t('map.title')}>
           <div class="flex flex-col items-center gap-3 px-6 py-8 text-center">
             <p class="text-14 leading-relaxed text-n-700">{t('consent.blocked.map')}</p>

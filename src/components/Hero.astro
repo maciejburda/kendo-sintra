@@ -8,6 +8,7 @@ import { club } from '../i18n/club';
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
+const subject = lang === 'pt' ? 'Quero experimentar Kendo' : 'I would like to try Kendo';
 ---
 <section class="on-navy relative h-[790px] max-h-[88vh] min-h-[560px] overflow-hidden bg-navy">
   <!-- Duotone: the photo is desaturated and tinted with the background colour so it
@@ -43,10 +44,12 @@ const t = useTranslations(lang);
     <p class="max-w-[480px] text-19 leading-relaxed text-on-navy-100">{t('hero.tagline')}</p>
 
     <div class="flex flex-wrap gap-4 pt-1">
+      {/* Primary CTA opens the mail client directly. Routing it through the Try
+          Kendo page only to be told "email or call us" was a step for nothing. */}
+      <a href={`mailto:${club.email}?subject=${encodeURIComponent(subject)}`}
+         class="tap bg-red px-8 py-4 text-16 font-bold uppercase tracking-[0.08em] text-white hover:bg-red-hover">{t('cta.email')}</a>
       <a href={localePath(lang, 'beginner-course')}
-         class="tap bg-red px-8 py-4 text-16 font-bold uppercase tracking-[0.08em] text-white hover:bg-red-hover">{t('cta.try')}</a>
-      <a href={localePath(lang, 'contact')}
-         class="tap border-2 border-white px-8 py-4 text-16 font-bold uppercase tracking-[0.08em] text-white hover:bg-white hover:text-navy">{t('cta.watch')}</a>
+         class="tap border-2 border-white px-8 py-4 text-16 font-bold uppercase tracking-[0.08em] text-white hover:bg-white hover:text-navy">{t('cta.try')}</a>
     </div>
   </div>
 </section>
