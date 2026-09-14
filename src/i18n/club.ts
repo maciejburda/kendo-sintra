@@ -20,10 +20,12 @@ export const club = {
     street: 'Estrada Nacional No 9, Quinta da Beloura II',
     postalCode: '2710-697',
     city: 'Sintra',
-    maps: 'https://www.google.com/maps/search/?api=1&query=TASIS+Portugal+International+School+Estrada+Nacional+9+Quinta+da+Beloura+2710-697+Sintra',
+    /** The club's own Google listing, not an address search: searching by address
+        alone lands on whichever school occupies the site. */
+    maps: 'https://www.google.com/maps/search/?api=1&query=Kendo+Club+Sintra+Sintra+Portugal',
     /** TODO (club): confirm the exact coordinates of the entrance to the hall. */
     geo: { lat: 38.7565, lon: -9.3389 },
-    mapsEmbed: 'https://maps.google.com/maps?q=TASIS+Portugal+International+School,+Estrada+Nacional+9,+2710-697+Sintra&z=16&output=embed',
+    mapsEmbed: 'https://maps.google.com/maps?q=Kendo+Club+Sintra,+Sintra,+Portugal&z=16&output=embed',
   },
 
   facebook: 'https://www.facebook.com/people/TASIS-Kendo-Club/61565495708778',
