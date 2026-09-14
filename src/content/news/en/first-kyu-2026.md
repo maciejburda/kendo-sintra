@@ -3,6 +3,7 @@ title: Marij and Pedro pass 1st kyu
 description: The first kendoka to reach 1st kyu having started their journey at our dojo from the very beginning.
 date: 2026-05-15
 category: Grading
+image: dojo-2111.jpg
 ---
 
 Huge congratulations to **Marij** and **Pedro**, who both passed their 1st kyu exam today.

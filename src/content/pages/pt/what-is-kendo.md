@@ -3,6 +3,7 @@ title: O que é Kendo?
 description: O Kendo, o Caminho da Espada, é uma arte marcial japonesa tradicional que treina o corpo e a mente. Praticado em Sintra, para adultos e crianças.
 eyebrow: O caminho da espada
 draft: true
+image: aip-22.jpg
 ---
 
 O Kendo, "O Caminho da Espada" (Ken / 剣 = espada, Do / 道 = caminho), é uma arte marcial japonesa tradicional que transforma a esgrima numa disciplina de corpo e mente. Com raízes na tradição samurai, o Kendo evoluiu para uma prática moderna que combina treino físico exigente com o cultivo do carácter, da concentração e do respeito.

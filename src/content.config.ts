@@ -7,6 +7,9 @@ const pages = defineCollection({
     title: z.string(),
     description: z.string(),
     eyebrow: z.string().optional(),
+    /** Filename in src/assets/photos, e.g. "aip-22.jpg". Resolved by glob in
+        PageShell, matching how the gallery loads its images. */
+    image: z.string().optional(),
     /** true = the copy still needs sign-off from the club, see README */
     draft: z.boolean().default(false),
   }),
@@ -19,6 +22,8 @@ const news = defineCollection({
     description: z.string(),
     date: z.coerce.date(),
     category: z.string().optional(),
+    /** Filename in src/assets/photos, e.g. "dojo-2111.jpg". */
+    image: z.string().optional(),
   }),
 });
 

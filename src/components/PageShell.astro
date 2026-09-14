@@ -1,7 +1,16 @@
 ---
+import { Image } from 'astro:assets';
 import Prose from './Prose.astro';
-interface Props { title: string; eyebrow?: string; }
-const { title, eyebrow } = Astro.props;
+import { photos } from '../data/gallery';
+import type { Lang } from '../i18n/ui';
+
+interface Props { title: string; eyebrow?: string; image?: string; lang?: Lang; }
+const { title, eyebrow, image, lang = 'en' } = Astro.props;
+
+const files = import.meta.glob<{ default: ImageMetadata }>('../assets/photos/*.jpg', { eager: true });
+const pic = image ? files[`../assets/photos/${image}`]?.default : undefined;
+// Reuse the gallery's hand-written alt text rather than inventing a second one.
+const picAlt = image ? photos.find((p) => p.file === image)?.[lang] ?? '' : '';
 ---
 <article class="px-6 py-16 md:px-16 md:py-24">
   <div class="mx-auto max-w-[1440px]">
@@ -9,6 +18,11 @@ const { title, eyebrow } = Astro.props;
       {eyebrow && <p class="text-14 font-bold uppercase tracking-[0.18em] text-red">{eyebrow}</p>}
       <h1 class="display text-46 md:text-62">{title}</h1>
     </header>
+    {pic && (
+      <Image src={pic} alt={picAlt} widths={[720, 1200, 1600]}
+             sizes="(max-width:768px) 100vw, 1200px"
+             class="mb-10 aspect-[16/9] w-full object-cover" />
+    )}
     <Prose><slot /></Prose>
   </div>
 </article>

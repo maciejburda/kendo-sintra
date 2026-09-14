@@ -2,93 +2,20 @@
 import { useTranslations, localePath, type Lang } from '../i18n/ui';
 import { club } from '../i18n/club';
 
-interface Props {
-  lang: Lang;
-  /** The signup pitch: heading, lead, course facts and the form button.
-      Off on the home page, where the hero and the red band already carry the
-      call to action and the same figures. On there, this section is only the
-      practical detail — where and when. */
-  showSignup?: boolean;
-}
-const { lang, showSignup = true } = Astro.props;
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
 const t = useTranslations(lang);
-const signup = club.signupForm;
-const subject = lang === 'pt' ? 'Inscrição — curso para iniciantes' : 'Sign-up — beginner course';
 ---
 <section class="border-t border-n-100 bg-n-050 px-6 py-20 md:px-16">
   <div class="mx-auto flex max-w-[1440px] flex-col gap-10">
 
-    {!showSignup && (
-      <div class="flex flex-col gap-3">
-        <p class="text-14 font-bold uppercase tracking-[0.18em] text-red">{t('contact.reach')}</p>
-        <h2 class="display text-46">{t('contact.visit')}</h2>
-      </div>
-    )}
-
-    <div class:list={['grid gap-16', showSignup && 'lg:grid-cols-2']}>
-
-    {showSignup && (
-    <div class="flex flex-col gap-7">
-      <div class="flex flex-col gap-3">
-        <p class="text-14 font-bold uppercase tracking-[0.18em] text-red">{t('contact.eyebrow')}</p>
-        <h2 class="display text-46">{t('contact.title')}</h2>
-        <p class="text-16 leading-relaxed text-n-700">{t('signup.lead')}</p>
-      </div>
-
-      {(
-        <dl class="grid gap-px border border-n-100 bg-n-100 sm:grid-cols-2">
-          <div class="flex flex-col gap-1 bg-white px-5 py-4">
-            <dt class="text-12 font-bold uppercase tracking-[0.1em] text-n-500">{t('course.total')}</dt>
-            <dd class="display text-25">{club.course.total} {club.fees.currency}</dd>
-          </div>
-          <div class="flex flex-col gap-1 bg-white px-5 py-4">
-            <dt class="text-12 font-bold uppercase tracking-[0.1em] text-n-500">{t('course.duration')}</dt>
-            <dd class="text-16 font-bold">{t('course.duration.value')}</dd>
-          </div>
-          <div class="flex flex-col gap-1 bg-white px-5 py-4">
-            <dt class="text-12 font-bold uppercase tracking-[0.1em] text-n-500">{t('course.shinai')}</dt>
-            <dd class="text-16 font-bold">{t('course.shinai.value')}</dd>
-          </div>
-          <div class="flex flex-col gap-1 bg-white px-5 py-4">
-            <dt class="text-12 font-bold uppercase tracking-[0.1em] text-n-500">{t('course.trial')}</dt>
-            <dd class="text-16 font-bold">{t('course.trial.value')}</dd>
-          </div>
-        </dl>
-      )}
-
-      {signup ? (
-        <div class="flex flex-col gap-3">
-          <a href={signup} target="_blank" rel="noopener"
-             class="tap self-start bg-red px-10 py-5 text-16 font-bold uppercase tracking-[0.08em] text-white hover:bg-red-hover">
-            {t('signup.cta')}
-          </a>
-          {/* The form opens on Google's side, so we say so plainly — the site itself
-              sets no cookies and we do not want to blur that. */}
-          <p class="text-14 text-n-500">{t('signup.newtab')}</p>
-        </div>
-      ) : (
-        <div class="flex flex-col gap-3 border-l-4 border-red bg-white px-6 py-5">
-          <p class="text-16 leading-relaxed text-n-700">{t('signup.pending')}</p>
-          <a href={`mailto:${club.email}?subject=${encodeURIComponent(subject)}`}
-             class="tap self-start bg-navy px-8 py-4 text-16 font-bold uppercase tracking-[0.08em] text-white hover:bg-red">
-            {t('signup.write')}
-          </a>
-        </div>
-      )}
-
-      <p class="text-16 leading-relaxed text-n-700">{t('signup.or')}</p>
+    <div class="flex flex-col gap-3">
+      <p class="text-14 font-bold uppercase tracking-[0.18em] text-red">{t('contact.reach')}</p>
+      <h2 class="display text-46">{t('contact.visit')}</h2>
     </div>
-    )}
 
-    {/* Beside the signup pitch this stacks. As the whole section it splits in two,
-        so the blocks do not run down one half of an empty row. */}
-    <div class:list={['gap-9', showSignup ? 'flex flex-col' : 'grid items-start gap-x-12 lg:grid-cols-2']}>
-      <div class="flex flex-col gap-3 border-l-4 border-red bg-white px-6 py-5">
-        <p class="text-16 font-bold text-navy">{t('venue.temp')}</p>
-        <p class="text-16 leading-relaxed text-n-700">{t('venue.temp.body')}</p>
-        <p class="text-14 leading-relaxed text-n-500">{t('venue.temp.after')}</p>
-      </div>
-
+    {/* Two columns so the blocks do not run down one half of an empty row. */}
+    <div class="grid items-start gap-9 gap-x-12 lg:grid-cols-2">
       {/* Phone, email and address also sit in the footer. Repeating them here is
           deliberate: this is the section someone scrolls to when they want to
           reach the club, and making them hunt in the footer for it is worse than
@@ -147,8 +74,6 @@ const subject = lang === 'pt' ? 'Inscrição — curso para iniciantes' : 'Sign-
         </div>
 
       </div>
-
-    </div>
 
     </div>
   </div>

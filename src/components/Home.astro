@@ -11,10 +11,6 @@ import { club } from '../i18n/club';
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
-const locale = lang === 'pt' ? 'pt-PT' : 'en-GB';
-
-const courseDate = new Date(club.course.startISO)
-  .toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric' }).toUpperCase();
 
 const strip = [
   { img: facingOff, alt: lang === 'pt' ? 'Dois kendoka frente a frente' : 'Two kendoka facing each other' },
@@ -39,32 +35,19 @@ const facts = [
 </div>
 
 <section class="bg-red px-6 py-16 text-white md:px-16">
-  <div class="mx-auto grid max-w-[1440px] items-center gap-14 lg:grid-cols-[1.15fr_1fr]">
-    <div class="flex flex-col gap-5">
-      <p class="text-14 font-bold uppercase tracking-[0.24em]">{t('course.title')}</p>
-      <p class="display text-46 leading-[0.94] sm:text-82">{courseDate}</p>
-      <p class="max-w-[500px] text-19 leading-relaxed">{t('course.lead')}</p>
+  <div class="mx-auto flex max-w-[860px] flex-col items-start gap-6">
+    <h2 class="display text-46 leading-[0.94] sm:text-62">{t('try.title')}</h2>
+    <p class="text-19 leading-relaxed">{t('try.lead')}</p>
+    <div class="flex flex-wrap gap-4 pt-1">
+      <a href={`mailto:${club.email}`}
+         class="tap bg-white px-8 py-4 text-16 font-bold uppercase tracking-[0.08em] text-red hover:bg-navy hover:text-white">
+        {club.email}
+      </a>
+      <a href={`tel:${club.phoneHref}`}
+         class="tap border-2 border-white px-8 py-4 text-16 font-bold uppercase tracking-[0.08em] text-white hover:bg-white hover:text-red">
+        {club.phone}
+      </a>
     </div>
-    <dl class="bg-white text-navy">
-      <div class="flex items-baseline justify-between border-b border-n-100 px-8 py-6">
-        <dt class="text-16 font-bold">{t('course.total')}</dt>
-        <dd class="display text-34">{club.course.total} {club.fees.currency}</dd>
-      </div>
-      <div class="flex items-baseline justify-between border-b border-n-100 px-8 py-6">
-        <dt class="text-16 font-bold">{t('course.duration')}</dt><dd class="text-19">{t('course.duration.value')}</dd>
-      </div>
-      <div class="flex items-baseline justify-between border-b border-n-100 px-8 py-6">
-        <dt class="text-16 font-bold">{t('course.shinai')}</dt><dd class="text-19">{t('course.shinai.value')}</dd>
-      </div>
-      <div class="flex items-baseline justify-between border-b border-n-100 px-8 py-6">
-        <dt class="text-16 font-bold">{t('course.trial')}</dt><dd class="text-19">{t('course.trial.value')}</dd>
-      </div>
-      {/* Same destination as the hero and the contact band: the form itself.
-          Falls back to the course page while club.signupForm is empty. */}
-      <a href={club.signupForm || localePath(lang, 'beginner-course')}
-         target={club.signupForm ? '_blank' : undefined} rel={club.signupForm ? 'noopener' : undefined}
-         class="tap w-full justify-center bg-navy px-6 py-6 text-16 font-bold uppercase tracking-[0.08em] text-white hover:bg-red-hover">{t('cta.signup')}</a>
-    </dl>
   </div>
 </section>
 
@@ -78,4 +61,4 @@ const facts = [
   ))}
 </div>
 
-<ContactBand lang={lang} showSignup={false} />
+<ContactBand lang={lang} />

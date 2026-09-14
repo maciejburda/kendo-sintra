@@ -8,11 +8,6 @@ import { club } from '../i18n/club';
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
-const courseDate = new Date(club.course.startISO).toLocaleDateString(
-  lang === 'pt' ? 'pt-PT' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
-// Falls back to the contact page while club.signupForm is empty, so the primary
-// CTA is never a dead link.
-const signup: string = club.signupForm;
 ---
 <section class="on-navy relative h-[790px] max-h-[88vh] min-h-[560px] overflow-hidden bg-navy">
   <!-- Duotone: the photo is desaturated and tinted with the background colour so it
@@ -47,17 +42,9 @@ const signup: string = club.signupForm;
 
     <p class="max-w-[480px] text-19 leading-relaxed text-on-navy-100">{t('hero.tagline')}</p>
 
-    <p class="flex items-center gap-3">
-      <span class="h-[10px] w-[10px] shrink-0 bg-red-on-navy"></span>
-      <span class="text-16 font-semibold uppercase tracking-[0.1em] text-white">
-        {t('hero.next-course')} — {courseDate}
-      </span>
-    </p>
-
     <div class="flex flex-wrap gap-4 pt-1">
-      <a href={signup || localePath(lang, 'contact')}
-         target={signup ? '_blank' : undefined} rel={signup ? 'noopener' : undefined}
-         class="tap bg-red px-8 py-4 text-16 font-bold uppercase tracking-[0.08em] text-white hover:bg-red-hover">{t('cta.signup')}</a>
+      <a href={localePath(lang, 'beginner-course')}
+         class="tap bg-red px-8 py-4 text-16 font-bold uppercase tracking-[0.08em] text-white hover:bg-red-hover">{t('cta.try')}</a>
       <a href={localePath(lang, 'contact')}
          class="tap border-2 border-white px-8 py-4 text-16 font-bold uppercase tracking-[0.08em] text-white hover:bg-white hover:text-navy">{t('cta.watch')}</a>
     </div>

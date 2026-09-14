@@ -1,35 +1,35 @@
 ---
-title: Beginner Course
-description: A three-month beginner Kendo course for adults in Sintra, starting 16 September 2026. 60 EUR total, free shinai, taught in English by a 6th dan sensei.
-eyebrow: Starts 16 September 2026
+title: Try Kendo
+description: Come and watch a practice, or join one of the beginner courses Kendo Club Sintra runs a few times a year in Sintra.
+eyebrow: Your first step
 ---
 
-Are you ready to take your first step into the world of Kendo? Our Beginner Kendo Course is designed specifically for adults who want to learn this traditional Japanese martial art in a safe, supportive environment.
+We organise beginner courses a few times per year, and it is always possible to
+come and watch a practice. Just email or call us first to check the schedule.
 
-## Course details
+## Get in touch
 
-> **We are currently training at CAISL.** Quinta da Beloura II is unavailable
-> until the end of the year, so all sessions take place at
-> **CAISL, Carlucci American International School of Lisbon**,
-> Rua António dos Reis 95, Linhó, 2710-301 Sintra.
+- **Email:** [kendosintra@gmail.com](mailto:kendosintra@gmail.com)
+- **Phone:** [+351 930 581 832](tel:+351930581832)
 
-**When.** Wednesdays, starting at **19:00**. Beginners have the first half hour to themselves; more experienced members join at 19:30 and training runs to 21:00.
+## What a beginner course covers
 
-**Duration & cost.** The course lasts three months, once per week, at a total cost of 60 EUR (20 EUR per month).
+You start with the basics: footwork, posture, and how to hold and swing a
+**shinai**, the bamboo sword. Each participant receives a shinai at the start of
+the course, and if you finish, it is yours to keep.
 
-**Instructor.** Classes are led in English (with Japanese commands) by 6th Dan Sensei Rogier van Bijnen from the Netherlands, a former member of the Dutch national Kendo team. Translation to Portuguese is available to ensure everyone can follow the lessons.
+From there you practise the fundamental techniques, first on your own and then
+with a partner. All commands, technique names, and counting are in Japanese,
+which is how kendo is taught everywhere.
 
-**Free shinai.** Each participant receives a shinai (bamboo sword) at the start of the course. If you finish the course, you can keep the shinai as a reward for your commitment.
+Classes are led in English, with Japanese commands and Portuguese translation
+available, so everyone can follow.
 
-**Training approach.** You'll practice basic Kendo techniques, both statically and in sparring with real partners wearing protective armour (bogu). All commands, technique names, and counting are done in Japanese, giving you an authentic Kendo experience.
+After the beginner course you will be ready to train in full armour, **bogu**.
+We plan to offer armour rental so that the next step does not mean buying a set
+straight away.
 
-**Bogu progression.** After completing the beginner course, you will be ready to start training in full Kendo armour (bogu). To make this transition easier, we plan to offer armour rental plans, so you can continue practicing without worrying about the initial investment.
+## Coming to watch
 
-## Why join?
-
-- Learn Kendo at a comfortable pace, with structured lessons designed for beginners.
-- Build discipline, focus, and physical fitness through regular practice.
-- Join a friendly community of fellow Kendo enthusiasts and enjoy a supportive environment.
-- Experience the unique thrill of Kendo sparring, safely guided by an experienced instructor.
-
-Whether your goal is to develop a new hobby, improve fitness, or immerse yourself in Japanese martial arts culture, our beginner course provides the perfect foundation to start your Kendo journey.
+You do not need to book, bring anything, or have any experience. Email or call
+us, then come along on a training evening and see what a practice looks like.

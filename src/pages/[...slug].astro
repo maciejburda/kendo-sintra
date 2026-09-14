@@ -5,7 +5,7 @@ import PageShell from '../components/PageShell.astro';
 import ContactBand from '../components/ContactBand.astro';
 
 export async function getStaticPaths() {
-  // gallery i news maja wlasne trasy z siatka zdjec / lista wpisow
+  // gallery and news have their own routes: a photo grid and a post list
   const entries = await getCollection('pages', (e) =>
     e.id.startsWith('en/') && !/\/(gallery)$/.test(e.id));
   return entries.map((entry) => ({
@@ -19,9 +19,10 @@ const { Content } = await render(entry);
 const slug = entry.id.split('/').slice(1).join('/');
 ---
 <Base lang="en" path={slug} title={entry.data.title} description={entry.data.description}
-      localBusiness={slug === 'contact'} course={slug === 'beginner-course'}>
-  <PageShell title={entry.data.title} eyebrow={entry.data.eyebrow}>
+      localBusiness={slug === 'contact'}>
+  <PageShell title={entry.data.title} eyebrow={entry.data.eyebrow} image={entry.data.image} lang="en">
     <Content />
   </PageShell>
   {slug === 'contact' && <ContactBand lang="en" />}
+  {slug === 'schedule' && <ContactBand lang="en" />}
 </Base>

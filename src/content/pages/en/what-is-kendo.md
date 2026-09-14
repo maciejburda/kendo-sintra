@@ -2,6 +2,7 @@
 title: What is Kendo?
 description: Kendo, the Way of the Sword, is a traditional Japanese martial art that trains both body and mind. Practised in Sintra for adults and children.
 eyebrow: The way of the sword
+image: aip-22.jpg
 ---
 
 Kendo, "The Way of the Sword" (Ken / 剣 = sword, Do / 道 = way or path), is a traditional Japanese martial art that transforms swordsmanship into a discipline of both body and mind. Rooted in the samurai tradition, Kendo has evolved into a modern practice that blends rigorous physical training with the cultivation of character, focus, and respect.

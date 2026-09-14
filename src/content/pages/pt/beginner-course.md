@@ -1,35 +1,37 @@
 ---
-title: Curso para Iniciantes
-description: Curso de Kendo para iniciantes, três meses, para adultos em Sintra, a começar a 16 de setembro de 2026. 60 EUR no total, shinai grátis, com um sensei 6º dan.
-eyebrow: Começa a 16 de setembro de 2026
+title: Experimente Kendo
+description: Venha assistir a um treino ou inscreva-se num dos cursos para iniciantes que o Kendo Club Sintra organiza algumas vezes por ano.
+eyebrow: O seu primeiro passo
+draft: true
 ---
 
-Está pronto para dar o seu primeiro passo no mundo do Kendo? O nosso Curso de Kendo para Iniciantes é projetado especificamente para adultos que querem aprender esta tradicional arte marcial japonesa num ambiente seguro e de apoio.
+Organizamos cursos para iniciantes algumas vezes por ano e é sempre possível vir
+assistir a um treino. Basta contactar-nos primeiro por email ou telefone para
+confirmar o horário.
 
-## Detalhes do curso
+## Fale connosco
 
-> **Estamos a treinar no CAISL.** A Quinta da Beloura II está indisponível até
-> ao final do ano, pelo que todas as sessões decorrem no
-> **CAISL, Carlucci American International School of Lisbon**,
-> Rua António dos Reis 95, Linhó, 2710-301 Sintra.
+- **Email:** [kendosintra@gmail.com](mailto:kendosintra@gmail.com)
+- **Telefone:** [+351 930 581 832](tel:+351930581832)
 
-**Quando.** Às quartas-feiras, com início às **19:00**. Os iniciantes têm a primeira meia hora só para si; os praticantes mais experientes juntam-se às 19:30 e o treino decorre até às 21:00.
+## O que inclui um curso para iniciantes
 
-**Duração e custo.** O curso tem a duração de três meses, com o custo total de 60 EUR (20 EUR por mês), e decorre uma vez por semana.
+Começa pelas bases: deslocação, postura e como segurar e usar o **shinai**, a
+espada de bambu. Cada participante recebe um shinai no início do curso e, se
+concluir o curso, fica com ele.
 
-**Instrutor.** As aulas são conduzidas pelo Sensei 6º Dan Rogier van Bijnen, dos Países Baixos, antigo membro da equipa nacional de Kendo da Holanda. Tradução para português está disponível para garantir que todos acompanhem as lições.
+A partir daí pratica as técnicas fundamentais, primeiro sozinho e depois com um
+parceiro. Os comandos, os nomes das técnicas e a contagem são em japonês, tal
+como o kendo é ensinado em todo o mundo.
 
-**Shinai gratuito.** Cada participante recebe um shinai (espada de bambu) gratuitamente no início do curso. Se concluir o curso, poderá ficar com o shinai como recompensa pelo seu compromisso.
+As aulas são dadas em inglês, com comandos em japonês e tradução para português,
+para que todos possam acompanhar.
 
-**Método de treino.** Irá praticar as técnicas básicas de Kendo, tanto estaticamente como em combates com parceiros reais usando a armadura de Kendo (bogu). Todos os comandos, nomes de técnicas e contagem são feitos em japonês, proporcionando uma experiência autêntica de Kendo.
+Depois do curso para iniciantes estará pronto para treinar com a armadura
+completa, **bogu**. Planeamos disponibilizar aluguer de armadura, para que o
+passo seguinte não obrigue a comprar um equipamento de imediato.
 
-**Progressão para bogu.** Após concluir o curso de iniciantes, estará pronto para começar a treinar com a armadura completa de Kendo (bogu). Para facilitar esta transição, planeamos oferecer planos de aluguer de armadura, permitindo que continue a treinar sem se preocupar com o custo inicial.
+## Vir assistir
 
-## Porquê participar?
-
-- Aprenda Kendo num ritmo confortável, com aulas estruturadas para iniciantes.
-- Desenvolva disciplina, foco e aptidão física através de prática regular.
-- Junte-se a uma comunidade amigável de entusiastas do Kendo e desfrute de um ambiente de apoio.
-- Experimente a emoção única do combate de Kendo, guiado com segurança por um instrutor experiente.
-
-Seja para desenvolver um novo hobby, melhorar a forma física ou mergulhar na cultura das artes marciais japonesas, o nosso curso de iniciantes fornece a base perfeita para começar a sua jornada no Kendo.
+Não é preciso marcar, trazer nada, nem ter qualquer experiência. Contacte-nos por
+email ou telefone e apareça numa noite de treino para ver como é.

@@ -5,7 +5,7 @@ import Footer from '../components/Footer.astro';
 import ConsentBanner from '../components/ConsentBanner.astro';
 import { localePath, type Lang } from '../i18n/ui';
 import { club } from '../i18n/club';
-import { clubSchema, courseSchema } from '../data/schema';
+import { clubSchema } from '../data/schema';
 
 interface Props {
   lang: Lang;
@@ -15,11 +15,8 @@ interface Props {
   path?: string;
   /** JSON-LD LocalBusiness — home page and contact */
   localBusiness?: boolean;
-  /** JSON-LD Course — home page and course page. Lets Google show the course
-      date and price in search results. */
-  course?: boolean;
 }
-const { lang, title, description, path = '', localBusiness = false, course = false } = Astro.props;
+const { lang, title, description, path = '', localBusiness = false } = Astro.props;
 
 const site = Astro.site ?? new URL('https://kendosintra.pt');
 // The *.github.io preview carries a prefix in BASE_URL. It must not be indexed,
@@ -95,7 +92,6 @@ const fullTitle = path === '' ? `${club.name} — ${lang === 'pt' ? 'Kendo em Si
       });`} />
     )}
     {localBusiness && <script type="application/ld+json" set:html={JSON.stringify(clubSchema(site))} />}
-    {course && <script type="application/ld+json" set:html={JSON.stringify(courseSchema(lang, site, localePath(lang, 'beginner-course')))} />}
   </head>
   <body>
     <Header lang={lang} path={path} />

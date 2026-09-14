@@ -3,6 +3,7 @@ title: Two podiums at the Konotori Cup in The Hague
 description: Mila took 3rd place and Julia received the Fighting Spirit Award at the Konotori Cup.
 date: 2026-06-20
 category: Competition
+image: dojo-2110-2.jpg
 ---
 
 Congratulations to our youth members **Mila** and **Julia** on their great results at the Konotori Cup in The Hague.
