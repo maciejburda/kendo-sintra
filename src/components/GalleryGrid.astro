@@ -26,17 +26,39 @@ const items = await Promise.all(
       // A separate, larger variant for the lightbox. Thumbnails cap at 1200,
       // which is visible at full-window size.
       const full = await getImage({ src: meta!, width: 1600, format: 'webp' });
-      return { meta: meta!, alt: p[lang], full: full.src };
+      return { meta: meta!, alt: p[lang], full: full.src, cat: p.cat };
     })
 );
+
+// Only offer a category that actually has photos, so a filter can never lead to
+// an empty grid.
+const present = [...new Set(items.map((i) => i.cat))];
+const cats = present.length > 1 ? present : [];
 ---
 <div class="px-6 pb-20 md:px-16">
   <div class="mx-auto max-w-[1440px]">
+    {/* Hidden until the script unhides it: without JS every photo is shown and the
+        buttons would do nothing, so the grid is never filtered into emptiness. */}
+    {cats.length > 0 && (
+      <div id="gal-filters" class="mb-6 flex flex-wrap gap-2" hidden>
+        <button type="button" data-cat="all" aria-pressed="true"
+                class="tap border border-n-300 px-5 py-2.5 text-14 font-bold uppercase tracking-[0.08em] text-navy hover:border-navy aria-pressed:border-navy aria-pressed:bg-navy aria-pressed:text-white">
+          {t('gallery.cat.all')}
+        </button>
+        {cats.map((c) => (
+          <button type="button" data-cat={c} aria-pressed="false"
+                  class="tap border border-n-300 px-5 py-2.5 text-14 font-bold uppercase tracking-[0.08em] text-navy hover:border-navy aria-pressed:border-navy aria-pressed:bg-navy aria-pressed:text-white">
+            {t(`gallery.cat.${c}` as any)}
+          </button>
+        ))}
+      </div>
+    )}
+
     <p class="mb-5 text-14 text-n-500">{t('gallery.hint')}</p>
 
     <ul id="gal" class="grid list-none gap-1.5 p-0 sm:grid-cols-2 lg:grid-cols-3">
       {items.map((it, i) => (
-        <li>
+        <li data-cat={it.cat}>
           {/* Without JS this is a plain link to the full image — the gallery still works. */}
           <a href={it.full} data-full={it.full} data-alt={it.alt} data-i={i}
              class="group relative block focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-red"
@@ -117,6 +139,27 @@ const items = await Promise.all(
     if (!gal || !lb || typeof lb.showModal !== 'function') return; // no <dialog> support: the links remain
 
     var links = [].slice.call(gal.querySelectorAll('a[data-full]'));
+
+    // Category filter. The lightbox walks `links`, so filtering rebuilds that
+    // list: arrowing through a filtered gallery must not jump to a hidden photo.
+    var filters = document.getElementById('gal-filters');
+    if (filters) {
+      filters.hidden = false;
+      filters.addEventListener('click', function (e) {
+        var btn = e.target.closest('button[data-cat]');
+        if (!btn) return;
+        var cat = btn.dataset.cat;
+        [].forEach.call(filters.querySelectorAll('button[data-cat]'), function (b) {
+          b.setAttribute('aria-pressed', String(b === btn));
+        });
+        [].forEach.call(gal.querySelectorAll('li[data-cat]'), function (li) {
+          li.hidden = cat !== 'all' && li.dataset.cat !== cat;
+        });
+        links = [].slice.call(gal.querySelectorAll('li:not([hidden]) a[data-full]'));
+        links.forEach(function (a, n) { a.dataset.i = n; });
+        if (count) count.textContent = '';
+      });
+    }
     var img = document.getElementById('lb-img');
     var cap = document.getElementById('lb-cap');
     var count = document.getElementById('lb-count');
