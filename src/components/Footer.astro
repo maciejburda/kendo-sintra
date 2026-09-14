@@ -31,19 +31,19 @@ const year = new Date().getFullYear();
         <div class="flex flex-col gap-3">
           <span class="pb-1 text-12 font-bold uppercase tracking-[0.16em] text-white">{t('footer.contact')}</span>
           <a class="tap flex items-center gap-3 font-semibold text-white hover:text-on-navy-100" href={`tel:${club.phoneHref}`}>
-            <Icon name="phone" size={16} class="text-red-on-navy" />{club.phone}
+            <Icon name="phone" size={16} />{club.phone}
           </a>
           <a class="tap flex items-center gap-3 font-semibold text-white hover:text-on-navy-100" href={`mailto:${club.email}`}>
-            <Icon name="mail" size={16} class="text-red-on-navy" />{club.email}
+            <Icon name="mail" size={16} />{club.email}
           </a>
-          {/* Same shape as the phone and email rows above: red icon at 16px with a
-              visible label. As bare 19px glyphs in the wrong accent they read as a
-              stray pair rather than part of this column. */}
+          {/* Same shape as the phone and email rows above: 16px icon with a visible
+              label. As bare 19px glyphs in a different colour they read as a stray
+              pair rather than part of this column. */}
           <a class="tap flex items-center gap-3 font-semibold text-white hover:text-on-navy-100" href={club.facebook} rel="me noopener" target="_blank">
-            <Icon name="facebook" size={16} class="text-red-on-navy" />Facebook
+            <Icon name="facebook" size={16} />Facebook
           </a>
           <a class="tap flex items-center gap-3 font-semibold text-white hover:text-on-navy-100" href={club.instagram} rel="me noopener" target="_blank">
-            <Icon name="instagram" size={16} class="text-red-on-navy" />Instagram
+            <Icon name="instagram" size={16} />Instagram
           </a>
         </div>
       </div>
