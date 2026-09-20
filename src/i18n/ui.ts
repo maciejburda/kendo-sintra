@@ -34,6 +34,7 @@ export const ui = {
     'nav.menu': 'Menu',
 
     'hero.tagline': 'Kendo is a traditional Japanese martial art. Bamboo swords, armour, and a great deal of noise.',
+    'cta.contact': 'Contact us',
     'cta.try': 'Try Kendo',
     'cta.email': 'Email us',
     'cta.call': 'Call us',
@@ -89,6 +90,7 @@ export const ui = {
     'nav.menu': 'Menu',
 
     'hero.tagline': 'O Kendo é uma arte marcial japonesa tradicional. Espadas de bambu, armadura e muito barulho.',
+    'cta.contact': 'Contacte-nos',
     'cta.try': 'Experimente Kendo',
     'cta.email': 'Envie-nos email',
     'cta.call': 'Telefone-nos',
