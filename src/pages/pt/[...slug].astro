@@ -5,7 +5,7 @@ import PageShell from '../../components/PageShell.astro';
 import ContactBand from '../../components/ContactBand.astro';
 
 export async function getStaticPaths() {
-  // gallery and news have their own routes: a photo grid and a post list
+  // gallery has its own route, with the photo grid
   const entries = await getCollection('pages', (e) =>
     e.id.startsWith('pt/') && !/\/(gallery)$/.test(e.id));
   return entries.map((entry) => ({
