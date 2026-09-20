@@ -12,20 +12,42 @@ const pic = image ? files[`../assets/photos/${image}`]?.default : undefined;
 // Reuse the gallery's hand-written alt text rather than inventing a second one.
 const picAlt = image ? photos.find((p) => p.file === image)?.[lang] ?? '' : '';
 ---
-<article class="px-6 py-16 md:px-16 md:py-24">
-  <div class="mx-auto max-w-[1440px]">
-    <header class="mb-10 flex flex-col gap-3 border-b border-n-100 pb-9">
-      {eyebrow && <p class="text-14 font-bold uppercase tracking-[0.18em] text-red">{eyebrow}</p>}
-      <h1 class="display text-46 md:text-62">{title}</h1>
-    </header>
-    {/* Sits just under the title, so it is the LCP candidate on these pages:
-        eager, not Astro's lazy default. */}
-    {pic && (
-      <Image src={pic} alt={picAlt} widths={[720, 1200, 1600]}
-             sizes="(max-width:768px) 100vw, 700px"
+{/*
+  Page banner in the home hero's language: navy plane, duotone photo, red rule
+  down the left edge, white display title.
+
+  The gradient is weighted so the left stays near-solid navy while the right
+  opens up to the photograph. That is what keeps this safe across seven
+  different images — the title always sits on the dark side, so no page needs
+  its own contrast tuning. The photo keeps some of its colour (grayscale .45
+  rather than 1) so it reads as a photograph rather than texture.
+
+  Pages without an `image` — gallery, privacy — render the same band as flat
+  navy, so they still belong to the set.
+*/}
+<section class="on-navy relative flex min-h-[260px] items-end overflow-hidden bg-navy md:min-h-[340px] lg:min-h-[400px]">
+  {pic && (
+    <>
+      <Image src={pic} alt={picAlt} widths={[900, 1400, 1920]} sizes="100vw"
              loading="eager" fetchpriority="high"
-             class="mb-10 aspect-[16/9] w-full max-w-[var(--measure)] object-cover object-[center_28%]" />
-    )}
+             class="absolute inset-0 h-full w-full object-cover object-[center_35%] opacity-90 [filter:grayscale(0.45)_contrast(1.05)_brightness(0.78)]" />
+      <div class="absolute inset-0"
+           style="background:linear-gradient(100deg,#212B60 0%,rgba(33,43,96,.92) 26%,rgba(33,43,96,.42) 58%,rgba(33,43,96,.12) 100%)"></div>
+    </>
+  )}
+  <div class="absolute left-0 top-0 h-full w-[14px] bg-red"></div>
+
+  <div class="relative mx-auto flex w-full max-w-[1440px] flex-col gap-3 px-6 pb-10 pl-8 pt-16 md:px-16 md:pb-12 md:pl-24 md:pt-20">
+    {/* Not red-on-navy: that token is calibrated for LARGE text (3.52:1), and at
+        14px this needs 4.5:1. on-navy-100 gives 7.30:1. The red rule on the left
+        edge carries the accent instead. */}
+    {eyebrow && <p class="text-14 font-bold uppercase tracking-[0.18em] text-on-navy-100">{eyebrow}</p>}
+    <h1 class="display text-46 leading-[0.92] text-white md:text-62 lg:text-82">{title}</h1>
+  </div>
+</section>
+
+<article class="px-6 py-14 md:px-16 md:py-20">
+  <div class="mx-auto max-w-[1440px]">
     <Prose><slot /></Prose>
   </div>
 </article>
