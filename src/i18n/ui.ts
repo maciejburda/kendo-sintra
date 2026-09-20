@@ -12,23 +12,12 @@ export function localePath(lang: Lang, path = ''): string {
   return `${SITE_BASE}${langSeg}${clean ? `/${clean}` : ''}` || '/';
 }
 
-/** Route slugs — identical in both languages, so the language switch is 1:1. */
-export const routes = [
-  'what-is-kendo',
-  'beginner-course',
-  'schedule',
-  'fees',
-  'gallery',
-  'faq',
-  'contact',
-  'privacy',
-] as const;
 
 export const ui = {
   en: {
     'nav.what-is-kendo': 'What is Kendo',
     'nav.beginner-course': 'Try Kendo',
-    'nav.schedule': 'Schedule',
+    'nav.about': 'About the club',
     'nav.fees': 'Fees',
     'nav.gallery': 'Gallery',
     'nav.contact': 'Contact',
@@ -83,7 +72,7 @@ export const ui = {
   pt: {
     'nav.what-is-kendo': 'O que é Kendo',
     'nav.beginner-course': 'Experimente',
-    'nav.schedule': 'Horário',
+    'nav.about': 'Sobre o clube',
     'nav.fees': 'Preços',
     'nav.gallery': 'Galeria',
     'nav.contact': 'Contacto',

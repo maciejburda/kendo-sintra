@@ -21,7 +21,7 @@ const year = new Date().getFullYear();
       <div class="flex flex-wrap gap-x-16 gap-y-8 text-16">
         <div class="flex flex-col gap-3 text-on-navy-100">
           <span class="pb-1 text-12 font-bold uppercase tracking-[0.16em] text-white">{t('footer.club')}</span>
-          <a class="tap text-on-navy-100 hover:text-white" href={localePath(lang, 'about')}>{lang === 'pt' ? 'Sobre o clube' : 'About the club'}</a>
+          <a class="tap text-on-navy-100 hover:text-white" href={localePath(lang, 'about')}>{t('nav.about')}</a>
           <a class="tap text-on-navy-100 hover:text-white" href={localePath(lang, 'what-is-kendo')}>{t('nav.what-is-kendo')}</a>
           <a class="tap text-on-navy-100 hover:text-white" href={localePath(lang, 'faq')}>{t('nav.faq')}</a>
           <a class="tap text-on-navy-100 hover:text-white" href={localePath(lang, 'contact')}>{t('nav.contact')}</a>

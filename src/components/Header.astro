@@ -10,7 +10,7 @@ const t = useTranslations(lang);
 const nav = [
   { slug: 'what-is-kendo', label: t('nav.what-is-kendo') },
   { slug: 'beginner-course', label: t('nav.beginner-course') },
-  { slug: 'schedule', label: t('nav.schedule') },
+  { slug: 'about', label: t('nav.about') },
   { slug: 'fees', label: t('nav.fees') },
   { slug: 'gallery', label: t('nav.gallery') },
   { slug: 'faq', label: t('nav.faq') },
@@ -82,10 +82,16 @@ const other: Lang = lang === 'en' ? 'pt' : 'en';
          class="absolute left-0 right-0 top-full z-40 border-b border-n-100 bg-white px-6 pb-5 pt-1 shadow-[0_18px_28px_-18px_rgba(33,43,96,.45)]
                 md:px-16 lg:static lg:z-auto lg:w-auto lg:border-0 lg:px-0 lg:pb-0 lg:pt-0 lg:shadow-none">
       <ul class="flex flex-col gap-x-8 gap-y-1 text-16 font-semibold uppercase tracking-[0.115em] lg:flex-row lg:flex-wrap lg:items-center lg:gap-y-2">
+        {/* The active state hangs off aria-current, so the visual indicator and the
+            one a screen reader announces cannot drift apart. A red rule underlines
+            it in the desktop row; stacked on mobile a rule would be lost among the
+            row dividers, so there it is a left bar instead. */}
         {nav.map((item) => (
           <li class="border-b border-n-100 lg:border-0">
             <a href={localePath(lang, item.slug)}
-               class="tap w-full py-1 text-navy hover:text-red lg:w-auto lg:py-0"
+               class="tap w-full border-l-[3px] border-transparent py-1 pl-3 text-navy hover:text-red
+                      aria-[current=page]:border-red aria-[current=page]:text-red
+                      lg:w-auto lg:border-l-0 lg:border-b-[3px] lg:py-0 lg:pb-1.5 lg:pl-0"
                aria-current={path === item.slug ? 'page' : undefined}>{item.label}</a>
           </li>
         ))}
