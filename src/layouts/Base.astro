@@ -3,7 +3,7 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import ConsentBanner from '../components/ConsentBanner.astro';
-import { localePath, type Lang } from '../i18n/ui';
+import { localePath, useTranslations, type Lang } from '../i18n/ui';
 import { club } from '../i18n/club';
 import { clubSchema } from '../data/schema';
 
@@ -29,7 +29,8 @@ const alternates = (['en', 'pt'] as Lang[]).map((l) => ({
   lang: l === 'en' ? 'en-GB' : 'pt-PT',
   href: new URL(localePath(l, path), site).href,
 }));
-const fullTitle = path === '' ? `${club.name} — ${lang === 'pt' ? 'Kendo em Sintra' : 'Kendo in Sintra'}` : `${title} | ${club.name}`;
+const clubName = useTranslations(lang)('club.name');
+const fullTitle = path === '' ? `${clubName} — ${lang === 'pt' ? 'Kendo em Sintra' : 'Kendo in Sintra'}` : `${title} | ${clubName}`;
 
 ---
 <!doctype html>
@@ -68,7 +69,7 @@ const fullTitle = path === '' ? `${club.name} — ${lang === 'pt' ? 'Kendo em Si
     <link rel="alternate" hreflang="x-default" href={new URL(localePath('en', path), site).href} />
 
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content={club.name} />
+    <meta property="og:site_name" content={clubName} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
@@ -76,7 +77,7 @@ const fullTitle = path === '' ? `${club.name} — ${lang === 'pt' ? 'Kendo em Si
     <meta property="og:image" content={new URL(asset('og.jpg'), site).href} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={`${club.name} — ${lang === 'pt' ? 'kendo em Sintra' : 'kendo in Sintra'}`} />
+    <meta property="og:image:alt" content={`${clubName} — ${lang === 'pt' ? 'kendo em Sintra' : 'kendo in Sintra'}`} />
     <meta name="twitter:card" content="summary_large_image" />
 
     <link rel="icon" href={asset("favicon.svg")} type="image/svg+xml" />
@@ -91,7 +92,7 @@ const fullTitle = path === '' ? `${club.name} — ${lang === 'pt' ? 'Kendo em Si
         gtag('js',new Date()); gtag('config','${club.ga4}');
       });`} />
     )}
-    {localBusiness && <script type="application/ld+json" set:html={JSON.stringify(clubSchema(site))} />}
+    {localBusiness && <script type="application/ld+json" set:html={JSON.stringify(clubSchema(site, lang))} />}
   </head>
   <body>
     <Header lang={lang} path={path} />

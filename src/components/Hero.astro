@@ -8,6 +8,13 @@ import { club } from '../i18n/club';
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
+
+/**
+ * The club name broken for the display setting, three lines in both languages.
+ * Not derived from `club.name` by splitting on spaces: Portuguese would give
+ * four lines and leave "de" stranded on one of them.
+ */
+const wordmark = lang === 'pt' ? ['Kendo', 'Clube de', 'Sintra'] : ['Kendo', 'Club', 'Sintra'];
 ---
 <section class="on-navy relative h-[790px] max-h-[88vh] min-h-[560px] overflow-hidden bg-navy">
   <!-- Duotone: the photo is desaturated and tinted with the background colour so it
@@ -37,7 +44,9 @@ const t = useTranslations(lang);
     <span class="jp text-34 font-bold leading-none tracking-[0.3em] text-red-on-navy md:text-62">{club.katakana}</span>
 
     <h1 class="display text-46 leading-[0.88] text-white sm:text-82 lg:text-128">
-      Kendo<br />Club<br />Sintra
+      {wordmark.map((line, i) => (
+        <Fragment>{i > 0 && <br />}{line}</Fragment>
+      ))}
     </h1>
 
     <p class="max-w-[480px] text-19 leading-relaxed text-on-navy-100">{t('hero.tagline')}</p>

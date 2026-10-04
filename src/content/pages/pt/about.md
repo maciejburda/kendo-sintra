@@ -1,6 +1,6 @@
 ---
 title: Sobre o clube
-description: O Kendo Club Sintra treina duas vezes por semana no pavilhão da TASIS Portugal International School, na Quinta da Beloura II, em Sintra. Adultos e crianças.
+description: O Kendo Clube de Sintra treina duas vezes por semana no pavilhão da TASIS Portugal International School, na Quinta da Beloura II, em Sintra. Adultos e crianças.
 eyebrow: Quem somos
 draft: true
 image: dojo-2119.jpg

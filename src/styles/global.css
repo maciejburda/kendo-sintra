@@ -48,6 +48,14 @@
      against each element's own font-size and would not match. */
   --measure: 696px;
 
+  /* Wide-desktop step. Registered as a real breakpoint rather than written
+     inline as min-[1800px]: Tailwind emits arbitrary min-[] queries BEFORE the
+     named ones, so `min-[1800px]:grid-cols-5` lost to `sm:grid-cols-3` on
+     source order and silently did nothing. In rem, not px: Tailwind's own
+     breakpoints are rem, and it sorts a px value ahead of all of them rather
+     than converting — which reintroduces exactly the same bug. 112.5rem = 1800px. */
+  --breakpoint-3xl: 112.5rem;
+
   /* --- Type scale: 10 steps --- */
   --text-12: 12px;   --text-14: 14px;  --text-16: 16px;  --text-19: 19px;
   --text-25: 25px;   --text-34: 34px;  --text-46: 46px;  --text-62: 62px;

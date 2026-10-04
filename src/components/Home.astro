@@ -2,9 +2,7 @@
 import { Image } from 'astro:assets';
 import Hero from './Hero.astro';
 import ContactBand from './ContactBand.astro';
-import facingOff from '../assets/photos/aip-42.jpg';
-import strike from '../assets/photos/aip-30.jpg';
-import sparring from '../assets/photos/aip-50.jpg';
+import { photos } from '../data/gallery';
 import { useTranslations, localePath, type Lang } from '../i18n/ui';
 import { club } from '../i18n/club';
 
@@ -12,11 +10,26 @@ interface Props { lang: Lang; }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-const strip = [
-  { img: facingOff, alt: lang === 'pt' ? 'Dois kendoka frente a frente' : 'Two kendoka facing each other' },
-  { img: strike, alt: lang === 'pt' ? 'Golpe em treino' : 'A strike in training' },
-  { img: sparring, alt: lang === 'pt' ? 'Combate com armadura' : 'Sparring in bogu' },
-];
+/**
+ * The photo strip. The first three show from `sm` up; the last two only once
+ * there is room for five, so a wide screen gets more photographs rather than
+ * three stretched ones. The strip is capped at the 1440 container like every
+ * other block, so at five across each frame is portrait — which suits standing
+ * kendoka better than it sounds.
+ *
+ * Both alt texts and files come from data/gallery.ts, so they are written once.
+ *
+ * The last two are lazy (Astro's default) and `display:none` below 3xl, and a
+ * phone does not fetch them — checked against the BUILT site, where a 375px
+ * viewport requests three strip images, not five. `astro dev` fetches all five,
+ * so this has to be verified with `astro preview`, never with the dev server.
+ */
+const stripFiles = ['aip-42.jpg', 'aip-30.jpg', 'aip-50.jpg', 'aip-16.jpg', 'aip-26.jpg'];
+const files = import.meta.glob<{ default: ImageMetadata }>('../assets/photos/*.jpg', { eager: true });
+const strip = stripFiles.map((file) => ({
+  img: files[`../assets/photos/${file}`].default,
+  alt: photos.find((p) => p.file === file)?.[lang] ?? '',
+}));
 
 // The sensei's grade is deliberately not a headline figure here — same reason it
 // came out of the hero. It stays on /about for anyone looking for it.
@@ -28,12 +41,19 @@ const facts = [
 ---
 <Hero lang={lang} />
 
-{/* Below sm only the first photo shows: three stacked 330px images pushed the
-    first real message more than a viewport down the page. */}
-<div class="mx-auto grid max-w-[1440px] gap-1.5 sm:grid-cols-3">
+{/* One photo below sm — three stacked 330px images pushed the first real
+    message more than a viewport down the page. Three from sm, five from 1800px.
+    1800 rather than Tailwind's 2xl (1536): below that the container still fills
+    most of the window and three reads better than five. */}
+<div class="mx-auto grid max-w-[1440px] gap-1.5 sm:grid-cols-3 3xl:grid-cols-5">
   {strip.map((s, i) => (
-    <Image src={s.img} alt={s.alt} widths={[480, 720]} sizes="(max-width:640px) 100vw, 33vw"
-           class:list={['h-[220px] w-full object-cover sm:h-[330px]', i > 0 && 'hidden sm:block']} />
+    <Image src={s.img} alt={s.alt} widths={[320, 480, 720]}
+           sizes="(max-width:640px) 100vw, (max-width:1799px) 33vw, 288px"
+           class:list={[
+             'h-[220px] w-full object-cover sm:h-[330px]',
+             i > 0 && i < 3 && 'hidden sm:block',
+             i >= 3 && 'hidden 3xl:block',
+           ]} />
   ))}
 </div>
 

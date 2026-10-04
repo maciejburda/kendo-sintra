@@ -1,13 +1,13 @@
 ---
 title: Política de privacidade
-description: Como o Kendo Club Sintra trata os dados pessoais enviados através deste site.
+description: Como o Kendo Clube de Sintra trata os dados pessoais enviados através deste site.
 eyebrow: Os seus dados
 draft: true
 ---
 
 ## Quem é o responsável
 
-Kendo Club Sintra, NIF 518413403.
+Kendo Clube de Sintra, NIF 518413403.
 Estrada Nacional N.º 9, Quinta da Beloura II, 2710-697 Sintra, Portugal.
 Email: kendosintra@gmail.com
 

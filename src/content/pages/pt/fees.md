@@ -1,6 +1,6 @@
 ---
 title: Preços
-description: Mensalidades do Kendo Club Sintra — 20 EUR para adultos, 10 EUR para crianças e para membros de outros clubes portugueses de Kendo.
+description: Mensalidades do Kendo Clube de Sintra — 20 EUR para adultos, 10 EUR para crianças e para membros de outros clubes portugueses de Kendo.
 eyebrow: Mensalidade
 draft: true
 image: aip-54.jpg

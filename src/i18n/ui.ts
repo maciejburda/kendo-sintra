@@ -15,6 +15,7 @@ export function localePath(lang: Lang, path = ''): string {
 
 export const ui = {
   en: {
+    'club.name': 'Kendo Club Sintra',
     'nav.what-is-kendo': 'What is Kendo',
     'nav.beginner-course': 'Try Kendo',
     'nav.about': 'About the club',
@@ -81,6 +82,7 @@ export const ui = {
     '404.home': 'Back to the homepage',
   },
   pt: {
+    'club.name': 'Kendo Clube de Sintra',
     'nav.what-is-kendo': 'O que é Kendo',
     'nav.beginner-course': 'Experimente',
     'nav.about': 'Sobre o clube',

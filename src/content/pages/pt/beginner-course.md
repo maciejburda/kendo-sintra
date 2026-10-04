@@ -1,6 +1,6 @@
 ---
 title: Experimente Kendo
-description: Venha assistir a um treino ou inscreva-se num dos cursos para iniciantes que o Kendo Club Sintra organiza algumas vezes por ano.
+description: Venha assistir a um treino ou inscreva-se num dos cursos para iniciantes que o Kendo Clube de Sintra organiza algumas vezes por ano.
 eyebrow: O seu primeiro passo
 draft: true
 image: aip-64.jpg
