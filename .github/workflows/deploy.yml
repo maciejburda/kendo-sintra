@@ -15,7 +15,7 @@ on:
 #           Only flip this ONCE the A records point at GitHub (see README).
 # ---------------------------------------------------------------------------
 env:
-  PRODUCTION: 'false'
+  PRODUCTION: 'true'
 
 permissions:
   contents: read
