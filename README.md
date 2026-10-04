@@ -276,29 +276,65 @@ The workflow has a `PRODUCTION` switch at the top:
 
 | `PRODUCTION` | URL | Behaviour |
 |---|---|---|
-| `'false'` (now) | `maciejburda.github.io/kendo-sintra/` | prefix `/kendo-sintra/`, all pages `noindex` |
-| `'true'` | `kendosintra.pt` | adds `CNAME`, drops the prefix, indexing on |
+| `'false'` | `maciejburda.github.io/kendo-sintra/` | prefix `/kendo-sintra/`, all pages `noindex`, no GA |
+| `'true'` (now) | `kendosintra.pt` | adds `CNAME`, drops the prefix, indexing and GA on |
 
-The preview carries `noindex` deliberately — without it, it would compete with
-the production domain in Google as duplicate content.
+The preview carried `noindex` deliberately — without it, it would have competed
+with the production domain in Google as duplicate content. Note that the switch
+is read indirectly: `Base.astro` decides from `BASE_URL !== '/'`, which the
+workflow sets from `PRODUCTION`. So `ASTRO_BASE=/ npm run build` locally produces
+exactly what CI produces for production, which is how to check a cutover before
+making it.
 
 The site is prefix-aware: `localePath()` and the `asset()` helper prepend
 `import.meta.env.BASE_URL`, so it works under any directory with no code changes.
 
-### Cutover to the custom domain
+### Cutover to the custom domain — done 2026-10-04
 
-1. In one.com, set the DNS records:
+Kept because the same steps apply to any future move, and because step 4 is not
+in GitHub's own instructions.
+
+1. In one.com, replace the `A` and `AAAA` records on the root and on `www`:
 
    | Type | Name | Value |
    |---|---|---|
-   | A | `@` | `185.199.108.153` `185.199.109.153` `185.199.110.153` `185.199.111.153` |
+   | A ×4 | *(root)* | `185.199.108.153` `185.199.109.153` `185.199.110.153` `185.199.111.153` |
+   | AAAA ×4 | *(root)* | `2606:50c0:8000::153` `8001::153` `8002::153` `8003::153` |
    | CNAME | `www` | `maciejburda.github.io` |
 
-2. Wait for propagation (`dig kendosintra.pt +short`).
+   Leave `MX` and the four `._domainkey` CNAMEs alone — they are email, not web,
+   and deleting them stops mail silently. Do not add a `CAA` record: one that
+   omits GitHub's issuer blocks the certificate.
+
+2. Wait for propagation. Ask the nameserver directly, because a machine's own
+   resolver cache will lie for an hour or more after the change:
+   `dig @ns01.one.com kendosintra.pt +short`.
 3. In `.github/workflows/deploy.yml` change `PRODUCTION: 'false'` to `'true'`, push.
-4. Settings → Pages → enable **Enforce HTTPS** (the certificate can take up to 24 h).
-5. Search Console: submit `https://kendosintra.pt/sitemap-index.xml`.
-6. Cancel the one.com hosting **only** after confirming everything works.
+4. **Set the custom domain on the repository.** This is the step that is easy to
+   miss: with an Actions-based deploy, a `CNAME` file in the uploaded artifact
+   does *not* register the domain, even though the build ships it and the run is
+   green. Until the repo itself carries the domain, GitHub answers every request
+   with "Site not found". Settings → Pages → Custom domain, or
+   `gh api -X PUT repos/<owner>/<repo>/pages -f cname=kendosintra.pt`.
+5. **Deploy once more** (`gh workflow run deploy.yml`). Setting the domain does
+   not republish what is already deployed, so the 404 persists until a run
+   finishes after step 4.
+6. Settings → Pages → enable **Enforce HTTPS**. Setting the domain clears this
+   flag, because no certificate exists yet; GitHub issues one once DNS resolves,
+   which took about a minute here but is documented as up to 24 h.
+7. Search Console: submit `https://kendosintra.pt/sitemap-index.xml`.
+8. Verify the domain under Settings → Pages → *Verified domains*. The repo is
+   public: without verification, anyone could claim the domain on their own
+   Pages site if this one were ever removed while DNS still pointed at GitHub.
+9. Cancel the one.com hosting **only** after confirming everything works —
+   including any `@kendosintra.pt` mailbox, which goes with the subscription.
+
+Steps 3 to 5 take the site down for as long as they take, if DNS has already
+moved. Doing 3 and 4 *before* the DNS change avoids that entirely: GitHub sits
+ready on the domain while one.com is still serving it, and visitors cross over
+as their resolvers expire. The cost is that the preview URL starts redirecting
+to the new domain, so verify the production build locally first with
+`ASTRO_BASE=/ npm run build`.
 
 `deploy/CNAME` sits outside `public/` deliberately — it is copied in only for a
 production build. If it lived in `public/`, GitHub would redirect the preview URL

@@ -43,12 +43,16 @@ const facts = [
 
 {/* One photo below sm — three stacked 330px images pushed the first real
     message more than a viewport down the page. Three from sm, five from 1800px.
-    1800 rather than Tailwind's 2xl (1536): below that the container still fills
-    most of the window and three reads better than five. */}
-<div class="mx-auto grid max-w-[1440px] gap-1.5 sm:grid-cols-3 3xl:grid-cols-5">
+    1800 rather than Tailwind's 2xl (1536): below that, five frames are too
+    narrow to read as photographs.
+
+    The one band on the page that is NOT held to the 1440 container. It earns it
+    by adding frames instead of stretching the ones it has: at 2560 that is five
+    photographs about 512px wide, not three at 853. */}
+<div class="grid gap-1.5 sm:grid-cols-3 3xl:grid-cols-5">
   {strip.map((s, i) => (
-    <Image src={s.img} alt={s.alt} widths={[320, 480, 720]}
-           sizes="(max-width:640px) 100vw, (max-width:1799px) 33vw, 288px"
+    <Image src={s.img} alt={s.alt} widths={[400, 600, 900, 1200]}
+           sizes="(max-width:640px) 100vw, (max-width:1799px) 33vw, 20vw"
            class:list={[
              'h-[220px] w-full object-cover sm:h-[330px]',
              i > 0 && i < 3 && 'hidden sm:block',
