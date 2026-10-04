@@ -18,6 +18,8 @@ Treinamos duas vezes por semana no pavilhão desportivo da TASIS Portugal Intern
 
 As aulas são dadas em inglês e em português, com todos os comandos, nomes de técnicas e contagem em japonês — tal como o kendo é ensinado em todo o mundo.
 
+O katakana do nosso emblema, <span class="jp">シントラ</span>, é a forma de escrever Sintra em japonês: **Shintora**. Dito em voz alta é também **shin tora** — tigre verdadeiro. É daí que vêm os dois tigres dançantes do nosso logótipo, inspirados no trabalho do artista japonês contemporâneo Taguchi Tomoki, que se baseia em livros históricos japoneses de têxteis e padrões.
+
 ## Filiação
 
 Somos clube filiado na **Federação Portuguesa de Kendo, Iaido e Jodo (FPKIJ)**,

@@ -19,6 +19,8 @@ We train twice a week in the sports hall at TASIS Portugal International School,
 
 Classes are run in English and Portuguese, with all commands, technique names and counting in Japanese — as kendo is taught everywhere.
 
+The katakana on our emblem, <span class="jp">シントラ</span>, is how Sintra is written in Japanese: **Shintora**. Said out loud it is also **shin tora** — true tiger. That is where the two dancing tigers in our logo come from, inspired by the work of the contemporary Japanese artist Taguchi Tomoki, who draws on historical Japanese textile and pattern books.
+
 ## Affiliation
 
 We are a member club of the **Federação Portuguesa de Kendo, Iaido e Jodo (FPKIJ)**,
