@@ -27,13 +27,14 @@ npm run preview  # preview the built site
 ```
 src/
   content/pages/{en,pt}/*.md   page copy — EDIT HERE
-  content/news/{en,pt}/*.md    news posts
   assets/photos/*.jpg          gallery (every file is picked up automatically)
   assets/fonts/                katakana subset, SIL OFL
   i18n/ui.ts                   all interface strings, EN + PT
   i18n/club.ts                 address, phone, hours, prices — SINGLE source of truth
   styles/global.css            colour tokens and type scale
-  components/                  Header, Footer, Hero, ContactBand, Emblem, Icon
+  components/                  Header, Footer, Hero, Home, PageShell, Prose,
+                               ContactBand, ContactStrip, FeeCards, GalleryGrid,
+                               ConsentBanner, Emblem, Icon
   pages/                       routes (EN at /, PT at /pt/)
 ```
 
@@ -79,31 +80,24 @@ full package is 121 subsets and 3.25 MB for four characters.
 
 ### 1. Signup form
 
-`src/i18n/club.ts` → `signupForm`. Connected, signups work. This is the only
-place to change if the link changes.
+`src/i18n/club.ts` → `signupForm`. The form exists and works, but **nothing on
+the site links to it**: the club asks people to email or call instead, which is
+what every call to action now says. The field is kept so that putting the form
+back is one edit plus a button.
 
-While the field is empty, the contact band shows an information card with a
-`mailto:` button and a pre-filled subject — not a dead form.
-
-> **Form status.** The form is for **adults only**, so there is no under-18
-> branch and no guardian contact. It asks for: Full Name, Date of birth, medical
-> conditions or injuries, and where you heard about the club — all required —
-> plus a Google-verified email address.
+> **Form status.** Adults only, so there is no under-18 branch and no guardian
+> contact. It asks for: Full Name, Date of birth, and where you heard about the
+> club, plus a Google-verified email address. The health question was removed.
+> Consent is a required single-option checkbox, so refusing and submitting are
+> mutually exclusive — which is what makes consent a usable legal basis in
+> `privacy.md`.
 >
-> Two things still open before cutover:
-> 1. **No consent checkbox.** The privacy notice claims consent as the legal
->    basis, which is not yet true. Wording is in `docs/google-form.md`.
-> 2. **Health data.** The medical question collects a special category under
->    Art. 9 GDPR, which needs *explicit* consent — a higher bar than the rest of
->    the form. Flagged in `privacy.md` for the GDPR reviewer.
->
-> Also: email collection is set to "verified", which forces a Google login and
-> will lose some applicants. Deliberate or not, it is worth a look.
+> Email collection is set to "verified", which forces a Google login and will
+> lose some applicants. Deliberate or not, it is worth a look.
 
-**Why an outbound button rather than a form on the page.** A Google Form can
-only be embedded in an iframe. The button opens the form in a new tab, so data
-reaches Google only when someone deliberately clicks. That is stated plainly
-under the button.
+**Why an outbound button rather than a form on the page**, if it is ever linked
+again. A Google Form can only be embedded in an iframe. A button opens the form
+in a new tab, so data reaches Google only when someone deliberately clicks.
 
 Fields for building the form: **`docs/google-form.md`**.
 
@@ -207,38 +201,37 @@ Defaults to `true`, so as not to change the status quo without your decision.
 
 ## Structured data
 
-`src/data/schema.ts` — two JSON-LD schemas:
+`src/data/schema.ts` — one JSON-LD schema:
 
 - **SportsActivityLocation** (home, contact) — address, hours, geo, socials
-- **Course** (home, course page) — start date, price, instructor, signup link,
-  weekly Wednesday schedule
 
-This lets Google show the course date and price directly in search results.
+A Course schema was dropped along with the fixed course dates: the club runs
+beginner courses "a few times a year" and will not commit to a start date.
 
-The day and times are confirmed by the club: Wednesday, beginners from 19:00,
-advanced join at 19:30, finish at 21:00.
+The hours in the schema come from `club.hours`: Monday and Wednesday, 19:00 to
+21:00, confirmed by the club. On Wednesdays beginners start at 19:00 and the
+more experienced join at 19:30 — a split too fine for `openingHoursSpecification`,
+so it lives in the page copy instead.
 
-`endDate` is derived from the stated "three months" — arithmetic on a fact the
-club gave us, not an invention.
+## News — removed
 
-## News
+There is no news section. It was built twice — Markdown posts, then a Facebook
+plugin — and both are gone, the plugin first (see the commits "News as a
+Facebook feed" and "Withdraw the Facebook feed, back to Markdown posts") and
+then the Markdown version with it ("Remove News, put FAQ in the menu").
 
-Posts live in `src/content/news/{en,pt}/*.md`. The two most recent appear on the
-home page, the full set at `/news`, and each has its own page `/news/<slug>`.
+Why the Facebook plugin went: it looks like a foreign element, because an iframe
+cannot be styled; its fixed height left a large gap under the heading; content
+inside an iframe is not indexed as yours, so posts stopped building the domain's
+standing. On top of that came a dependency on Meta and a third cookie source.
 
-A new post is a new file with `title`, `description`, `date` frontmatter and an
-optional `category`. Sorted by date, descending.
+Why the Markdown version went too: a club that trains twice a week does not
+produce copy on a schedule, and a news section whose newest item is six months
+old reads worse than no news section. The nav slot went to FAQ. Instagram and
+Facebook are linked in the footer and carry the day-to-day.
 
-**We tried the Facebook plugin and withdrew it** (see the commits "News as a
-Facebook feed" and "Withdraw the Facebook feed, back to Markdown posts").
-Reasons: it looks like a foreign element, because an iframe cannot be styled; its
-fixed height left a large gap under the heading; content inside an iframe is not
-indexed as yours, so posts stopped building the domain's standing. On top of that
-came a dependency on Meta and a third cookie source.
-
-The Markdown version is slower to run — a post has to be written, not just
-dropped on Facebook — but it is fast, in the site's typography, indexed, and
-nobody's but yours.
+If it ever comes back, it is a content collection plus two routes — the shape is
+in the history.
 
 ## Gallery and lightbox
 
@@ -330,7 +323,7 @@ them was realistically exploitable on a fully static site with no islands and no
 user-supplied data, but that branch no longer receives fixes. `npm audit` now
 reports **0 vulnerabilities**.
 
-The 5 -> 7 migration needed no source changes: same 31 pages, same output, no
+The 5 -> 7 migration needed no source changes: same pages, same output, no
 deprecation warnings. Content, components and styles were untouched.
 
 If you need to go back to Node 20 for another project:
@@ -338,19 +331,24 @@ If you need to go back to Node 20 for another project:
 
 ## For the club to fill in
 
-Search for `TODO (club)` in `src/content/`:
+Marked in the source with `TODO (club)` — `grep -rn "TODO (club)" src/`:
 
-- [ ] Bio of sensei Rogier van Bijnen (`about.md`)
-- [ ] Founding year, federation, member count (`about.md`)
-- [ ] Minimum age for children, trial-session rules (`faq.md`)
-- [ ] Calendar of seminars, competitions and gradings (`schedule.md`)
-- [ ] Christmas and summer breaks (`schedule.md`)
-- [ ] PT privacy notice — translated, `draft: true`, wants a native-speaker pass
+- [ ] Bio of sensei Rogier van Bijnen (`about.md`, EN and PT)
+- [ ] Founding year and member count (`about.md`, EN and PT)
 - [ ] Exact dojo coordinates (`src/i18n/club.ts`, `geo` field)
+
+Open but not marked, because the copy reads fine without them:
+
+- [ ] Minimum age for children — the question was pulled out of `faq.md` rather
+      than left with an empty answer. Put it back when there is one.
+- [ ] Instructors page — the Word file with the teachers' details never arrived,
+      and nor did the group photograph
 - [ ] Logo with the wordmark in outlines — we only have the symbol. The header
       sets the name in type, so this is not blocking, but it will be needed for
       print material.
 
-PT pages carry `draft: true` wherever the translation is mine rather than the
-club's — to be reviewed by a native speaker. Exception: `beginner-course.md`,
-whose Portuguese version comes straight from v1.
+`draft: true` is documentation, not behaviour — nothing in the build reads it.
+It marks a page whose Portuguese is mine rather than the club's. The translations
+are structurally checked (same headings, same links, same blocks as the English,
+pre-1990 spelling throughout), but structure is not idiom, and a club member
+reading them once would settle it.
