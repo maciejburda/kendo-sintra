@@ -33,4 +33,4 @@ European Kendo Federation. The federation lists us at [kendo.pt](https://kendo.p
 
 Our members grade and compete internationally. In 2026 our youth members took results at the Konotori Cup in The Hague, and Marij and Pedro became the first kendoka to reach 1st kyu having started their journey at our dojo from the very beginning.
 
-Our team also took **bronze at the Portuguese National Club Championships**.
+Also in 2026, our team took **bronze at the Portuguese National Club Championships**.

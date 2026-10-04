@@ -30,4 +30,4 @@ pela European Kendo Federation. A federação lista-nos em [kendo.pt](https://ke
 
 Os nossos membros graduam-se e competem internacionalmente. Em 2026, os nossos jovens obtiveram resultados na Konotori Cup em Haia, e Marij e Pedro tornaram-se os primeiros kendoka a atingir o 1º kyu tendo começado o seu percurso no nosso dojo desde o início.
 
-A nossa equipa conquistou também a **medalha de bronze no Campeonato Nacional de Clubes**.
+Também em 2026, a nossa equipa conquistou a **medalha de bronze no Campeonato Nacional de Clubes**.
