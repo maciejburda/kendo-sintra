@@ -24,12 +24,8 @@ Pode. Apareça numa noite de treino — segunda ou quarta-feira, das 19:00 às 2
 
 ## Em que idioma são as aulas?
 
-Em inglês, com comandos, nomes de técnicas e contagem em japonês. Há tradução para português.
-
-## A partir de que idade podem treinar crianças?
-
-<!-- TODO (club): see the EN version. -->
+Em inglês e em português, com todos os comandos, nomes de técnicas e contagem em japonês — tal como o kendo é ensinado em todo o mundo.
 
 ## Existe um período experimental?
 
-<!-- TODO (club): see the EN version. -->
+Pode fazer uma aula gratuita para experimentar kendo, normalmente integrada no curso de grupo para iniciantes que organizamos algumas vezes por ano. Contacte-nos por email ou telefone e dizemos-lhe quando começa o próximo.

@@ -1,6 +1,6 @@
 ---
 title: Schedule
-description: Kendo Club Sintra trains Monday and Wednesday, 19:00 to 21:00, at Quinta da Beloura II in Sintra.
+description: Kendo Club Sintra trains Monday and Wednesday, 19:00 to 21:00, at the TASIS gym, Quinta da Beloura II in Sintra.
 eyebrow: When we train
 image: aip-53.jpg
 ---

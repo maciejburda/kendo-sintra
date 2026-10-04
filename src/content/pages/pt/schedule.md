@@ -1,6 +1,6 @@
 ---
 title: Horário
-description: O Kendo Club Sintra treina à segunda e à quarta-feira, das 19:00 às 21:00, na Quinta da Beloura II, em Sintra.
+description: O Kendo Club Sintra treina à segunda e à quarta-feira, das 19:00 às 21:00, no pavilhão da TASIS, na Quinta da Beloura II, em Sintra.
 eyebrow: Quando treinamos
 draft: true
 image: aip-53.jpg

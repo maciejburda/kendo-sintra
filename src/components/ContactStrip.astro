@@ -1,0 +1,33 @@
+---
+import Icon from './Icon.astro';
+import { useTranslations, type Lang } from '../i18n/ui';
+import { club } from '../i18n/club';
+
+/**
+ * The two ways to reach the club, as a pair of tiles. Used on /beginner-course,
+ * directly under the banner: that page asks people to email or call, so the
+ * address and the number are the page's purpose, not a footnote to it.
+ *
+ * Deliberately not `.tap`: that utility forces inline-flex + align-items:center,
+ * which would centre the contents of these column tiles. Their padding puts them
+ * far over the 44px target anyway.
+ */
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const ways = [
+  { icon: 'mail' as const, label: t('contact.email'), value: club.email, href: `mailto:${club.email}` },
+  { icon: 'phone' as const, label: t('contact.phone'), value: club.phone, href: `tel:${club.phoneHref}` },
+];
+---
+<section class="grid gap-px bg-n-100 sm:grid-cols-2">
+  {ways.map((w) => (
+    <a href={w.href} class="group flex flex-col gap-2.5 bg-n-050 px-6 py-9 hover:bg-white md:px-16">
+      <span class="flex items-center gap-2 text-12 font-bold uppercase tracking-[0.16em] text-red">
+        <Icon name={w.icon} size={16} />{w.label}
+      </span>
+      <span class="text-25 font-bold leading-tight text-navy group-hover:text-red">{w.value}</span>
+    </a>
+  ))}
+</section>

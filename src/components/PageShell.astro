@@ -11,6 +11,11 @@ const files = import.meta.glob<{ default: ImageMetadata }>('../assets/photos/*.j
 const pic = image ? files[`../assets/photos/${image}`]?.default : undefined;
 // Reuse the gallery's hand-written alt text rather than inventing a second one.
 const picAlt = image ? photos.find((p) => p.file === image)?.[lang] ?? '' : '';
+
+// Rendered up front so a page with an empty markdown body — /contact, which goes
+// straight to the details — does not leave an empty <article> holding 56/80px of
+// vertical padding between the banner and whatever comes next.
+const body = Astro.slots.has('default') ? (await Astro.slots.render('default')).trim() : '';
 ---
 {/*
   Page banner in the home hero's language: navy plane, duotone photo, red rule
@@ -46,8 +51,15 @@ const picAlt = image ? photos.find((p) => p.file === image)?.[lang] ?? '' : '';
   </div>
 </section>
 
-<article class="px-6 py-14 md:px-16 md:py-20">
-  <div class="mx-auto max-w-[1440px]">
-    <Prose><slot /></Prose>
-  </div>
-</article>
+{/* Blocks that belong above the prose — the Try Kendo contact strip, the fee
+    cards — come in through this slot, so they sit directly under the banner
+    rather than being buried below the body copy. */}
+<slot name="after-banner" />
+
+{body && (
+  <article class="px-6 py-14 md:px-16 md:py-20">
+    <div class="mx-auto max-w-[1440px]">
+      <Prose><Fragment set:html={body} /></Prose>
+    </div>
+  </article>
+)}

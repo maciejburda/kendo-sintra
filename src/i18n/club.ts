@@ -15,8 +15,7 @@ export const club = {
    * nobody drives to the wrong place.
    */
   venue: {
-    name: 'Quinta da Beloura II — TASIS Portugal International School',
-    short: 'Quinta da Beloura II',
+    /** Display name is translated — see `venue.name` in i18n/ui.ts. */
     street: 'Estrada Nacional No 9, Quinta da Beloura II',
     postalCode: '2710-697',
     city: 'Sintra',
@@ -48,5 +47,5 @@ export const club = {
     { day: 'days.wed', open: '19:00', close: '21:00' },
     { day: 'days.thu-sun', open: null, close: null },
   ],
-  fees: { adults: 20, kids: 10, visiting: 10, currency: 'EUR' },
+  fees: { adults: 20, kids: 10, visiting: 10, course: 60, currency: 'EUR' },
 } as const;

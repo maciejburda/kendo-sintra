@@ -24,12 +24,8 @@ Yes. Come to a training evening — Monday or Wednesday, 19:00 to 21:00 — and 
 
 ## What language are the classes in?
 
-English, with Japanese commands, technique names and counting. Portuguese translation is available.
-
-## From what age can children train?
-
-<!-- TODO (club): minimum age for children. Not guessing. -->
+English and Portuguese, with all commands, technique names and counting in Japanese — as kendo is taught everywhere.
 
 ## Is there a trial period before I commit?
 
-<!-- TODO (club): whether there is a free trial session, and how many are allowed. -->
+You are welcome to one free class to try kendo, usually as part of the group beginner course we run a few times a year. Email or call us and we will tell you when the next one starts.

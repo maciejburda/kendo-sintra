@@ -13,6 +13,9 @@ Email: kendosintra@gmail.com
 
 ## O que recolhemos
 
+Se nos escrever ou telefonar, guardamos o que nos enviar — normalmente o seu nome
+e o seu email ou número de telefone — para lhe podermos responder.
+
 Se preencher o nosso **formulário de inscrição**, envia-nos o seu nome, data de
 nascimento, endereço de email e como soube de nós. É tudo o que pedimos.
 
@@ -25,7 +28,7 @@ ideias em "Cookie settings", no rodapé.
 ## Porque os usamos
 
 Para lhe responder e organizar os seus treinos. A base legal é o seu
-consentimento, que dá ao assinalar a caixa no formulário. Pode retirá-lo a
+consentimento, que dá ao escrever-nos ou ao assinalar a caixa no formulário. Pode retirá-lo a
 qualquer momento escrevendo para kendosintra@gmail.com.
 
 ## Durante quanto tempo os guardamos

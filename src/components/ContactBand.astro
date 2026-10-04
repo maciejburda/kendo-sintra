@@ -2,17 +2,21 @@
 import { useTranslations, localePath, type Lang } from '../i18n/ui';
 import { club } from '../i18n/club';
 
-interface Props { lang: Lang; }
-const { lang } = Astro.props;
+interface Props { lang: Lang; heading?: boolean; }
+/** heading=false on /contact: the page banner already says "Contact", so a
+    second "Get in touch / Where to find us" above the same details is noise. */
+const { lang, heading = true } = Astro.props;
 const t = useTranslations(lang);
 ---
 <section class="border-t border-n-100 bg-n-050 px-6 py-14 md:px-16 md:py-16">
   <div class="mx-auto flex max-w-[1440px] flex-col gap-7">
 
-    <div class="flex flex-col gap-3">
-      <p class="text-14 font-bold uppercase tracking-[0.18em] text-red">{t('contact.reach')}</p>
-      <h2 class="display text-46">{t('contact.visit')}</h2>
-    </div>
+    {heading && (
+      <div class="flex flex-col gap-3">
+        <p class="text-14 font-bold uppercase tracking-[0.18em] text-red">{t('contact.reach')}</p>
+        <h2 class="display text-46">{t('contact.visit')}</h2>
+      </div>
+    )}
 
     {/* Two columns so the blocks do not run down one half of an empty row. */}
     <div class="grid items-start gap-7 gap-x-12 lg:grid-cols-2">
@@ -37,7 +41,7 @@ const t = useTranslations(lang);
           <dt class="text-12 font-bold uppercase tracking-[0.1em] text-n-500">{t('contact.address')}</dt>
           <dd>
             <address class="not-italic text-16 leading-relaxed">
-              <span class="font-bold">{club.venue.name}</span><br />
+              <span class="font-bold">{t('venue.name')}</span><br />
               <span class="text-n-700">{club.venue.street}</span><br />
               <span class="text-n-700">{club.venue.postalCode} {club.venue.city}, {club.countryName}</span>
             </address>

@@ -1,5 +1,5 @@
 ---
-/** Ikony rysowane wektorowo. Zadnych emoji, zadnego font-icon-a. */
+/** Inline vector icons. No emoji, no icon font. */
 interface Props { name: 'phone' | 'mail' | 'facebook' | 'instagram' | 'arrow'; size?: number; class?: string; }
 const { name, size = 20, class: klass } = Astro.props;
 const stroke = { fill: 'none', 'stroke-width': '1.9', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' } as const;

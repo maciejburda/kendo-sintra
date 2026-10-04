@@ -46,8 +46,8 @@ export const ui = {
     'facts.week.note': 'Monday and Wednesday, 19:00 — 21:00',
     'facts.fee': 'EUR / month',
     'facts.fee.note': 'Membership. Kids and visiting club members 10 EUR',
-    'facts.lang': 'Language',
-    'facts.lang.note': 'English, Japanese commands, PT translation',
+    'facts.lang': 'Languages',
+    'facts.lang.note': 'English and Portuguese, commands in Japanese',
 
     'gallery.open': 'Open larger',
     'gallery.close': 'Close',
@@ -62,6 +62,16 @@ export const ui = {
     'contact.phone': 'Phone',
     'contact.email': 'Email',
     'contact.address': 'Address',
+    /** First line of the address. The street and postcode live in i18n/club.ts. */
+    'venue.name': 'Gym of TASIS Portugal International School',
+
+    'fees.month': 'EUR / month',
+    'fees.adults': 'Adults',
+    'fees.kids': 'Children',
+    'fees.visiting': 'Visiting kendoka',
+    'fees.course': 'Beginner course',
+    'fees.course.note': 'Three months, charged separately. Includes a shinai that is yours to keep on completion.',
+    'fees.total': 'EUR in total',
 
     'days.mon': 'Monday', 'days.tue': 'Tuesday', 'days.wed': 'Wednesday',
     'days.thu-sun': 'Thursday — Sunday', 'days.closed': 'Closed',
@@ -102,8 +112,8 @@ export const ui = {
     'facts.week.note': 'Segunda e quarta-feira, 19:00 — 21:00',
     'facts.fee': 'EUR / mês',
     'facts.fee.note': 'Mensalidade. Crianças e membros de outros clubes 10 EUR',
-    'facts.lang': 'Idioma',
-    'facts.lang.note': 'Inglês, comandos em japonês, tradução PT',
+    'facts.lang': 'Idiomas',
+    'facts.lang.note': 'Inglês e português, comandos em japonês',
 
     'gallery.open': 'Ver maior',
     'gallery.close': 'Fechar',
@@ -118,6 +128,15 @@ export const ui = {
     'contact.phone': 'Telefone',
     'contact.email': 'Email',
     'contact.address': 'Morada',
+    'venue.name': 'Pavilhão da TASIS Portugal International School',
+
+    'fees.month': 'EUR / mês',
+    'fees.adults': 'Adultos',
+    'fees.kids': 'Crianças',
+    'fees.visiting': 'Kendoka visitantes',
+    'fees.course': 'Curso para iniciantes',
+    'fees.course.note': 'Três meses, cobrado à parte. Inclui um shinai que fica para si no final.',
+    'fees.total': 'EUR no total',
 
     'days.mon': 'Segunda-feira', 'days.tue': 'Terça-feira', 'days.wed': 'Quarta-feira',
     'days.thu-sun': 'Quinta-feira — Domingo', 'days.closed': 'Encerrado',

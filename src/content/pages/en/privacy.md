@@ -13,6 +13,9 @@ Email: kendosintra@gmail.com
 
 ## What we collect
 
+If you email or call us, we hold what you send us — usually your name and your
+email address or phone number — so that we can reply.
+
 If you fill in our **sign-up form**, you send us your name, date of birth, email
 address and where you heard about us. That is all we ask for.
 
@@ -25,7 +28,7 @@ your mind from "Cookie settings" in the footer.
 ## Why we use it
 
 To reply to you and to organise your training. The legal basis is your consent,
-which you give by ticking the box on the form. You can withdraw it at any time
+which you give by writing to us or by ticking the box on the form. You can withdraw it at any time
 by writing to kendosintra@gmail.com.
 
 ## How long we keep it

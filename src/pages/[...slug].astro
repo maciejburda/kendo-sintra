@@ -3,6 +3,8 @@ import { getCollection, render } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import PageShell from '../components/PageShell.astro';
 import ContactBand from '../components/ContactBand.astro';
+import ContactStrip from '../components/ContactStrip.astro';
+import FeeCards from '../components/FeeCards.astro';
 
 export async function getStaticPaths() {
   // gallery has its own route, with the photo grid
@@ -21,8 +23,13 @@ const slug = entry.id.split('/').slice(1).join('/');
 <Base lang="en" path={slug} title={entry.data.title} description={entry.data.description}
       localBusiness={slug === 'contact'}>
   <PageShell title={entry.data.title} eyebrow={entry.data.eyebrow} image={entry.data.image} lang="en">
+    {/* Straight under the banner, see the `after-banner` slot in PageShell. */}
+    {slug === 'beginner-course' && <ContactStrip lang="en" slot="after-banner" />}
+    {slug === 'fees' && <FeeCards lang="en" slot="after-banner" />}
     <Content />
   </PageShell>
-  {slug === 'contact' && <ContactBand lang="en" />}
+  {/* /contact drops the "Get in touch / Where to find us" heading: the banner
+      above it already says Contact, so the details come first. */}
+  {slug === 'contact' && <ContactBand lang="en" heading={false} />}
   {slug === 'schedule' && <ContactBand lang="en" />}
 </Base>
