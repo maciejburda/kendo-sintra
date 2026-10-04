@@ -21,7 +21,7 @@ const ways = [
   { icon: 'phone' as const, label: t('contact.phone'), value: club.phone, href: `tel:${club.phoneHref}` },
 ];
 ---
-<section class="grid gap-px bg-n-100 sm:grid-cols-2">
+<section class="mx-auto grid max-w-[1440px] gap-px bg-n-100 sm:grid-cols-2">
   {ways.map((w) => (
     <a href={w.href} class="group flex flex-col gap-2.5 bg-n-050 px-6 py-9 hover:bg-white md:px-16">
       <span class="flex items-center gap-2 text-12 font-bold uppercase tracking-[0.16em] text-red">

@@ -30,32 +30,38 @@ const facts = [
 
 {/* Below sm only the first photo shows: three stacked 330px images pushed the
     first real message more than a viewport down the page. */}
-<div class="grid gap-1.5 sm:grid-cols-3">
+<div class="mx-auto grid max-w-[1440px] gap-1.5 sm:grid-cols-3">
   {strip.map((s, i) => (
     <Image src={s.img} alt={s.alt} widths={[480, 720]} sizes="(max-width:640px) 100vw, 33vw"
            class:list={['h-[220px] w-full object-cover sm:h-[330px]', i > 0 && 'hidden sm:block']} />
   ))}
 </div>
 
+{/* The colour field stays edge to edge; the copy inside lines up with the
+    header, contact band and footer. Without the 1440 wrapper the 860px measure
+    centres itself in the viewport, which on a 27" screen puts it 290px to the
+    right of every other block on the page. */}
 <section class="bg-red px-6 py-16 text-white md:px-16">
-  <div class="mx-auto flex max-w-[860px] flex-col items-start gap-6">
-    <h2 class="display text-46 leading-[0.94] sm:text-62">{t('try.title')}</h2>
-    <p class="text-19 leading-relaxed">{t('try.lead')}</p>
-    <p class="text-16 text-white/85">{club.email} · {club.phone}</p>
-    <div class="flex flex-wrap gap-4">
-      <a href={`mailto:${club.email}`}
-         class="tap bg-white px-8 py-4 text-16 font-bold uppercase tracking-[0.08em] text-red hover:bg-navy hover:text-white">
-        {t('cta.email')}
-      </a>
-      <a href={`tel:${club.phoneHref}`}
-         class="tap border-2 border-white px-8 py-4 text-16 font-bold uppercase tracking-[0.08em] text-white hover:bg-white hover:text-red">
-        {t('cta.call')}
-      </a>
+  <div class="mx-auto w-full max-w-[1440px]">
+    <div class="flex max-w-[860px] flex-col items-start gap-6">
+      <h2 class="display text-46 leading-[0.94] sm:text-62">{t('try.title')}</h2>
+      <p class="text-19 leading-relaxed">{t('try.lead')}</p>
+      <p class="text-16 text-white/85">{club.email} · {club.phone}</p>
+      <div class="flex flex-wrap gap-4">
+        <a href={`mailto:${club.email}`}
+           class="tap bg-white px-8 py-4 text-16 font-bold uppercase tracking-[0.08em] text-red hover:bg-navy hover:text-white">
+          {t('cta.email')}
+        </a>
+        <a href={`tel:${club.phoneHref}`}
+           class="tap border-2 border-white px-8 py-4 text-16 font-bold uppercase tracking-[0.08em] text-white hover:bg-white hover:text-red">
+          {t('cta.call')}
+        </a>
+      </div>
     </div>
   </div>
 </section>
 
-<div class="grid gap-px bg-n-100 sm:grid-cols-3">
+<div class="mx-auto grid max-w-[1440px] gap-px bg-n-100 sm:grid-cols-3">
   {facts.map((f) => (
     <div class="flex flex-col gap-2.5 bg-white px-8 py-12">
       <p class="display text-46 leading-none text-red">{f.n}</p>
