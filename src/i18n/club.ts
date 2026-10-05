@@ -20,29 +20,24 @@ export const club = {
     postalCode: '2710-697',
     city: 'Sintra',
     /**
-     * Map links search for the SCHOOL, not for the club.
+     * The club's own Google listing — "Kendo Club Sintra",
+     * CID 0x79ac4be4dd7efa09 = 8767466020924226057.
+     * Human-readable: https://maps.app.goo.gl/GbHnYofAKWtxs19H7
      *
-     * They used to search for "Kendo Club Sintra", assuming the club had a
-     * Google listing. It has none, so Google resolved nothing and the embed
-     * rendered with no pin at all. The school does have a listing, so querying
-     * it gives a labelled marker on the actual campus. Verified in iOS Safari:
-     * the pin reads "TASIS Portugal International School".
+     * The out-link addresses the listing by CID, which opens the club's place
+     * page. The EMBED cannot use the same handle: neither `cid=` nor a
+     * `q=Kendo Club Sintra` name search renders a marker in the classic embed —
+     * both centre correctly and then draw nothing, which is the bug that was
+     * reported. Only a lat/lon query drops a pin, so the embed uses the
+     * listing's own coordinates with `(Label)` for the info window.
      *
-     * If that listing ever disappears, `q=38.7578125,-9.3869356` is the
-     * fallback — a lat/lon query always drops a marker, just without a label.
+     * All three verified in iOS Safari; the browser pane blocks third-party
+     * frames and cannot show any of this.
      */
-    maps: 'https://www.google.com/maps/search/?api=1&query=TASIS+Portugal+International+School%2C+Sintra',
-    mapsEmbed: 'https://maps.google.com/maps?q=TASIS+Portugal+International+School,+Sintra&z=16&output=embed',
-    /**
-     * Fed to the JSON-LD, so this is what Google is told the club's location is.
-     * TASIS Portugal, Rua do Mato das Cruzadas, Quinta da Beloura II — confirmed
-     * by reverse geocoding, which returns postcode 2710-697, the club's own.
-     * The previous value was 3.9 km away in Rio de Mouro.
-     *
-     * TODO (club): a second TASIS entry sits 227 m north on Avenida de Cascais.
-     * If the gym is reached from that side, move this.
-     */
-    geo: { lat: 38.7578125, lon: -9.3869356 },
+    maps: 'https://maps.google.com/?cid=8767466020924226057',
+    mapsEmbed: 'https://maps.google.com/maps?q=38.7588745,-9.3869149(Kendo+Club+Sintra)&z=16&output=embed',
+    /** From the club's listing, so the JSON-LD, the pin and Google agree. */
+    geo: { lat: 38.7588745, lon: -9.3869149 },
   },
 
   facebook: 'https://www.facebook.com/people/TASIS-Kendo-Club/61565495708778',
