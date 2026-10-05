@@ -19,12 +19,30 @@ export const club = {
     street: 'Estrada Nacional No 9, Quinta da Beloura II',
     postalCode: '2710-697',
     city: 'Sintra',
-    /** The club's own Google listing, not an address search: searching by address
-        alone lands on whichever school occupies the site. */
-    maps: 'https://www.google.com/maps/search/?api=1&query=Kendo+Club+Sintra+Sintra+Portugal',
-    /** TODO (club): confirm the exact coordinates of the entrance to the hall. */
-    geo: { lat: 38.7565, lon: -9.3389 },
-    mapsEmbed: 'https://maps.google.com/maps?q=Kendo+Club+Sintra,+Sintra,+Portugal&z=16&output=embed',
+    /**
+     * Map links search for the SCHOOL, not for the club.
+     *
+     * They used to search for "Kendo Club Sintra", assuming the club had a
+     * Google listing. It has none, so Google resolved nothing and the embed
+     * rendered with no pin at all. The school does have a listing, so querying
+     * it gives a labelled marker on the actual campus. Verified in iOS Safari:
+     * the pin reads "TASIS Portugal International School".
+     *
+     * If that listing ever disappears, `q=38.7578125,-9.3869356` is the
+     * fallback — a lat/lon query always drops a marker, just without a label.
+     */
+    maps: 'https://www.google.com/maps/search/?api=1&query=TASIS+Portugal+International+School%2C+Sintra',
+    mapsEmbed: 'https://maps.google.com/maps?q=TASIS+Portugal+International+School,+Sintra&z=16&output=embed',
+    /**
+     * Fed to the JSON-LD, so this is what Google is told the club's location is.
+     * TASIS Portugal, Rua do Mato das Cruzadas, Quinta da Beloura II — confirmed
+     * by reverse geocoding, which returns postcode 2710-697, the club's own.
+     * The previous value was 3.9 km away in Rio de Mouro.
+     *
+     * TODO (club): a second TASIS entry sits 227 m north on Avenida de Cascais.
+     * If the gym is reached from that side, move this.
+     */
+    geo: { lat: 38.7578125, lon: -9.3869356 },
   },
 
   facebook: 'https://www.facebook.com/people/TASIS-Kendo-Club/61565495708778',
