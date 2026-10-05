@@ -70,7 +70,13 @@ const facts = [
     <div class="flex max-w-[860px] flex-col items-start gap-6">
       <h2 class="display text-46 leading-[0.94] sm:text-62">{t('try.title')}</h2>
       <p class="text-19 leading-relaxed">{t('try.lead')}</p>
-      <p class="text-16 text-white/85">{club.email} · {club.phone}</p>
+      {/* Explicit links, not bare text: a real <a> is never re-detected by iOS,
+          and it is tappable, which is what you want from a number on a phone. */}
+      <p class="text-16">
+        <a href={`mailto:${club.email}`} class="text-white underline underline-offset-4 hover:text-white/75">{club.email}</a>
+        <span class="px-1 text-white/85" aria-hidden="true">·</span>
+        <a href={`tel:${club.phoneHref}`} class="whitespace-nowrap text-white underline underline-offset-4 hover:text-white/75">{club.phone}</a>
+      </p>
       <div class="flex flex-wrap gap-4">
         <a href={`mailto:${club.email}`}
            class="tap bg-white px-8 py-4 text-16 font-bold uppercase tracking-[0.08em] text-red hover:bg-navy hover:text-white">

@@ -37,6 +37,12 @@ const fullTitle = path === '' ? `${clubName} — ${lang === 'pt' ? 'Kendo em Sin
 <html lang={lang === 'pt' ? 'pt-PT' : 'en-GB'}>
   <head>
     <meta charset="utf-8" />
+    {/* iOS Safari auto-detects bare phone numbers and wraps them in its own
+        <a href="tel:">, which then inherits `a { color: var(--color-red) }` from
+        global.css. On the red band that is #C9202F text on a #C9202F ground —
+        invisible, but still tappable, which is a horrible way to find a bug.
+        Every real number on this site is already an explicit, styled link. */}
+    <meta name="format-detection" content="telephone=no" />
     <script is:inline>
       /* Consent is stored in localStorage, not in a cookie — remembering the
          choice itself does not require consent. The map and GA scripts call
