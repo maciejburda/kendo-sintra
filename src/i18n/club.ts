@@ -21,22 +21,32 @@ export const club = {
     city: 'Sintra',
     /**
      * The club's own Google listing — "Kendo Club Sintra",
-     * CID 0x79ac4be4dd7efa09 = 8767466020924226057.
+     * CID 0xd1ec53ab8a61bd3:0x79ac4be4dd7efa09.
      * Human-readable: https://maps.app.goo.gl/GbHnYofAKWtxs19H7
      *
-     * The out-link addresses the listing by CID, which opens the club's place
-     * page. The EMBED cannot use the same handle: neither `cid=` nor a
-     * `q=Kendo Club Sintra` name search renders a marker in the classic embed —
-     * both centre correctly and then draw nothing, which is the bug that was
-     * reported. Only a lat/lon query drops a pin, so the embed uses the
-     * listing's own coordinates with `(Label)` for the info window.
+     * The embed is the code Google's own Share -> Embed a map produces, so it
+     * carries the place itself rather than a query to be matched.
      *
-     * All three verified in iOS Safari; the browser pane blocks third-party
-     * frames and cannot show any of this.
+     * KNOWN ISSUE, 2026-10-05: it renders the right area with NO MARKER. So do
+     * a name query, a CID query, and this. Only a raw `q=<lat>,<lng>` draws a
+     * pin, and that pin is anonymous. Since this is Google's own code for the
+     * club's own listing, the cause is almost certainly that the listing is not
+     * yet served on the map surface — newly created or recently moved, waiting
+     * on Google. Nothing here to fix.
+     *
+     * When it propagates, the marker and the place card appear on their own,
+     * with no change to this file. Worth re-checking after a few days; if it is
+     * still blank, fall back to
+     * `https://maps.google.com/maps?q=38.7588745,-9.3869149(Kendo+Club+Sintra)&z=16&output=embed`,
+     * which pins reliably but shows no name and never a rating.
+     *
+     * The `pb` string is an opaque encoding; do not hand-edit it beyond the
+     * language swap in ContactBand. To regenerate: Google Maps -> the listing
+     * -> Share -> Embed a map.
      */
     maps: 'https://maps.google.com/?cid=8767466020924226057',
-    mapsEmbed: 'https://maps.google.com/maps?q=38.7588745,-9.3869149(Kendo+Club+Sintra)&z=16&output=embed',
-    /** From the club's listing, so the JSON-LD, the pin and Google agree. */
+    mapsEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3111.210554150551!2d-9.38948982345438!3d38.758874471753906!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd1ec53ab8a61bd3%3A0x79ac4be4dd7efa09!2sKendo%20Club%20Sintra!5e0!3m2!1sen!2spt!4v1791231029484!5m2!1sen!2spt',
+    /** From the listing, so the JSON-LD and the pin agree. */
     geo: { lat: 38.7588745, lon: -9.3869149 },
   },
 
