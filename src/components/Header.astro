@@ -1,6 +1,7 @@
 ---
 import Emblem from './Emblem.astro';
-import { useTranslations, localePath, type Lang } from '../i18n/ui';
+import FlagLetters from './FlagLetters.astro';
+import { useTranslations, localePath, languages, type Lang } from '../i18n/ui';
 import { club } from '../i18n/club';
 
 interface Props { lang: Lang; path?: string; }
@@ -95,9 +96,28 @@ const other: Lang = lang === 'en' ? 'pt' : 'en';
                aria-current={path === item.slug ? 'page' : undefined}>{item.label}</a>
           </li>
         ))}
-        <li class="flex items-center gap-1 pt-3 font-bold lg:border-l lg:border-n-100 lg:pl-4 lg:pt-0">
-          <span class="inline-flex min-w-[44px] justify-center px-2 text-navy" aria-current="true">{lang.toUpperCase()}</span>
-          <a href={localePath(other, path)} class="tap inline-flex min-w-[44px] justify-center px-2 text-n-500 hover:text-red" hreflang={other}>{other.toUpperCase()}</a>
+        {/* The switcher sits in the same list as the nav items and takes the same
+            box: left bar when stacked, bottom rule in the desktop row, identical
+            padding. Previously it was centred in a 44px well with its own weight,
+            which left it floating beside the menu rather than part of it.
+            The 44px target is kept via the .tap min-height. */}
+        <li class="border-b border-n-100 lg:border-0">
+          {/* Stacked, the 3px bar and 12px indent live on the WRAPPER, so the
+              letters line up with the nav labels above them rather than being
+              indented twice. In the desktop row that bar becomes the divider and
+              each item takes the nav's own bottom rule, which is what puts them
+              on a shared baseline. */}
+          <div class="flex items-center gap-4 border-l-[3px] border-transparent py-1 pl-3
+                      lg:gap-3 lg:border-l lg:border-n-100 lg:py-0 lg:pl-4">
+            <span class="lang-sw tap items-end lg:border-b-[3px] lg:border-transparent lg:pb-1.5"
+                  aria-current="true">
+              <FlagLetters code={lang} label={languages[lang]} />
+            </span>
+            <a href={localePath(other, path)} hreflang={other}
+               class="lang-sw tap items-end lg:border-b-[3px] lg:border-transparent lg:pb-1.5">
+              <FlagLetters code={other} label={languages[other]} />
+            </a>
+          </div>
         </li>
       </ul>
     </nav>
