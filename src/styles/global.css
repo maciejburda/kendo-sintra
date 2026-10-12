@@ -2,18 +2,48 @@
 
 /* Self-hosted fonts — no requests to Google, no transfer of the visitor's IP */
 @import "@fontsource/anton/400.css";
-@import "@fontsource-variable/archivo/index.css";
+/* Open Sans, latin subset only, declared by hand.
 
-/* Zen Kaku Gothic New is used ONLY for the four katakana "シントラ".
-   The full package is 121 subsets and 3.25 MB — we take one subset, one weight,
-   and pin unicode-range to the katakana block, so the browser will never
-   reach for this file for Latin text. Licence: SIL OFL, see src/assets/fonts/. */
+   The package's index.css pulls in Cyrillic, Greek, Hebrew, Vietnamese, maths
+   and symbols — 13 files and 347 kB of woff2. Every character on this site,
+   Portuguese included, sits inside Latin-1 (checked against the content, not
+   assumed), so the one 47 kB latin file is all that ships. The variable package
+   has no per-subset stylesheet, hence the explicit @font-face.
+   Licence: SIL OFL, see src/assets/fonts/. */
 @font-face {
-  font-family: "Zen Kaku Gothic New";
+  font-family: "Open Sans Variable";
   font-style: normal;
-  font-weight: 700;
   font-display: swap;
-  src: url("../assets/fonts/zen-kaku-katakana-700.woff2") format("woff2");
+  font-weight: 300 800;
+  src: url("../../node_modules/@fontsource-variable/open-sans/files/open-sans-latin-wght-normal.woff2") format("woff2-variations");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+                 U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+                 U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Dela Gothic One, cut down to the four katakana "シントラ" and nothing else.
+   The brandbook sets the logo — Latin AND katakana — in Dela Gothic One, so the
+   katakana now comes from the same family as the wordmark instead of a second
+   Japanese face.
+
+   The published japanese subset is a single 922 kB file, which is absurd for
+   four characters, so this is subsetted to exactly those glyphs: 0.8 kB, five
+   glyphs including .notdef. Regenerate with fonttools:
+
+     pyftsubset node_modules/@fontsource/dela-gothic-one/files/\
+       dela-gothic-one-japanese-400-normal.woff2 \
+       --text="シントラ" --flavor=woff2 --layout-features='' \
+       --no-hinting --desubroutinize \
+       --output-file=src/assets/fonts/dela-gothic-katakana-400.woff2
+
+   unicode-range pins it to the katakana block so the browser never reaches for
+   it for Latin text. Licence: SIL OFL, see src/assets/fonts/. */
+@font-face {
+  font-family: "Dela Gothic Katakana";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/dela-gothic-katakana-400.woff2") format("woff2");
   unicode-range: U+30A0-30FF;
 }
 
@@ -40,12 +70,15 @@
 
   /* --- Typefaces: one job each --- */
   --font-display: "Anton", "Arial Black", sans-serif;
-  --font-sans: "Archivo Variable", "Archivo", "Helvetica Neue", Helvetica, sans-serif;
-  --font-jp: "Zen Kaku Gothic New", "Hiragino Sans", sans-serif;
+  --font-sans: "Open Sans Variable", "Open Sans", "Helvetica Neue", Helvetica, sans-serif;
+  --font-jp: "Dela Gothic Katakana", "Hiragino Sans", sans-serif;
 
-  /* Reading measure: 64 characters at --text-19 in Archivo. Shared by Prose and
-     by any full-width element that has to line up with it, because `ch` resolves
-     against each element's own font-size and would not match. */
+  /* Reading measure: 64 zero-widths at --text-19. Open Sans and Archivo have the
+     same `0` advance (695 vs 696px for 64 of them), so this token survived the
+     swap untouched — though Open Sans sets prose about 7% wider, which takes the
+     real line down to roughly 60 characters. Still well inside the comfortable
+     range. Shared by Prose and by any full-width element that has to line up
+     with it, because `ch` resolves against each element's own font-size. */
   --measure: 696px;
 
   /* Wide-desktop step. Registered as a real breakpoint rather than written
