@@ -1,6 +1,7 @@
 ---
 import Emblem from './Emblem.astro';
 import FlagLetters from './FlagLetters.astro';
+import Wordmark from './Wordmark.astro';
 import { useTranslations, localePath, languages, type Lang } from '../i18n/ui';
 import { club } from '../i18n/club';
 
@@ -28,8 +29,8 @@ const other: Lang = lang === 'en' ? 'pt' : 'en';
     <a href={localePath(lang)} class="flex min-w-0 items-center gap-3 sm:gap-4" aria-label={t('club.name')}>
       <Emblem size={76} class="block h-12 w-12 sm:h-[76px] sm:w-[76px]" />
       <span class="flex flex-col gap-1">
-        <span class="jp text-12 font-bold tracking-[0.28em] text-red sm:tracking-[0.36em]">{club.katakana}</span>
-        <span class="display text-19 leading-none text-navy sm:text-25">{t('club.name')}</span>
+        <span class="jp text-12 font-bold tracking-[0.28em] text-navy sm:tracking-[0.36em]">{club.katakana}</span>
+        <Wordmark lang={lang} class="text-14 sm:text-19" />
       </span>
     </a>
 

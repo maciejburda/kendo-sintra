@@ -1,0 +1,40 @@
+---
+/**
+ * The club name as the brandbook sets it: three lines, Dela Gothic One, with
+ * KENDO and SINTRA in red and CLUB in the ink colour.
+ *
+ * Why three lines and not one. The brandbook's lockup is stacked, and in Dela
+ * Gothic One that is the only arrangement that fits: the face is ~1.9x wider
+ * than the Anton it replaces, so the Portuguese name on one line goes from
+ * 219px to 413px at 25px — 150px more than the header row has spare. Stacked,
+ * the widest line is "CLUBE DE" at 127px, which is narrower than the single
+ * line was. The lockup is both correct and smaller.
+ *
+ * The giveaway the designer flagged is the capital I: Anton draws a plain bar,
+ * Dela Gothic One gives it slab serifs. Compare the SINTRA in the brandbook.
+ */
+import { languages, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  /** 'ink' on white grounds, 'white' on navy — both are sanctioned in the book. */
+  tone?: 'ink' | 'white';
+  class?: string;
+}
+const { lang, tone = 'ink', class: klass } = Astro.props;
+
+/** Not split on spaces: Portuguese would make four lines and strand "de". */
+const lines = lang === 'pt'
+  ? ['Kendo', 'Clube de', 'Sintra']
+  : ['Kendo', 'Club', 'Sintra'];
+
+// On white the book alternates red / navy / red. On navy it uses one flat white,
+// which is the variant that survives a photographic background underneath.
+const accent = tone === 'white' ? 'text-white' : 'text-red';
+const base = tone === 'white' ? 'text-white' : 'text-navy';
+---
+<span class:list={['wordmark flex flex-col', klass]} aria-label={languages[lang]}>
+  {lines.map((line, i) => (
+    <span class={i === 1 ? base : accent} aria-hidden="true">{line}</span>
+  ))}
+</span>

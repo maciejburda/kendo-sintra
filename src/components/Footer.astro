@@ -1,5 +1,6 @@
 ---
 import Icon from './Icon.astro';
+import Wordmark from './Wordmark.astro';
 import { useTranslations, localePath, type Lang } from '../i18n/ui';
 import { club } from '../i18n/club';
 interface Props { lang: Lang; }
@@ -12,7 +13,7 @@ const year = new Date().getFullYear();
     <div class="flex flex-wrap justify-between gap-12 border-b border-on-navy-line pb-10">
       <div class="flex max-w-[380px] flex-col gap-4">
         <span class="jp text-25 font-bold tracking-[0.26em]">{club.katakana}</span>
-        <span class="display text-34">{t('club.name')}</span>
+        <Wordmark lang={lang} tone="white" class="text-34" />
         <address class="not-italic text-16 leading-relaxed text-on-navy-100">
           {t('venue.name')}<br />{club.venue.street}<br />{club.venue.postalCode} {club.venue.city}, {club.countryName}
         </address>

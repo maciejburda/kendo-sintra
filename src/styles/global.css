@@ -2,6 +2,11 @@
 
 /* Self-hosted fonts — no requests to Google, no transfer of the visitor's IP */
 @import "@fontsource/anton/400.css";
+/* Dela Gothic One, latin only — the brandbook face. Currently used for the
+   LOGOTYPE alone (Wordmark.astro); headings are still Anton until the display
+   scale is reworked, because Dela runs ~1.9x wider and every size has to be
+   re-fitted rather than swapped. */
+@import "@fontsource/dela-gothic-one/latin-400.css";
 /* Open Sans, latin subset only, declared by hand.
 
    The package's index.css pulls in Cyrillic, Greek, Hebrew, Vietnamese, maths
@@ -70,6 +75,7 @@
 
   /* --- Typefaces: one job each --- */
   --font-display: "Anton", "Arial Black", sans-serif;
+  --font-wordmark: "Dela Gothic One", "Arial Black", sans-serif;
   --font-sans: "Open Sans Variable", "Open Sans", "Helvetica Neue", Helvetica, sans-serif;
   --font-jp: "Dela Gothic Katakana", "Hiragino Sans", sans-serif;
 
@@ -117,6 +123,7 @@
 @layer utilities {
   .jp { font-family: var(--font-jp); }
   .display { font-family: var(--font-display); text-transform: uppercase; line-height: 1; }
+  .wordmark { font-family: var(--font-wordmark); text-transform: uppercase; line-height: 1.04; }
   /* Every touch target at least 44px — rule from the UX review */
   .tap { min-height: 44px; display: inline-flex; align-items: center; }
 }
